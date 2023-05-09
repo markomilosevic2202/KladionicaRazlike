@@ -1,7 +1,6 @@
 package org.example.definitions;
 
 
-import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.cucumber.java.After;
@@ -10,10 +9,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.object.Trade;
 import org.example.page_factory.*;
 import org.example.test_data_bils.DataFile;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,9 +21,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 
@@ -41,6 +35,8 @@ public class StepDef {
     DataFile dataFile = new DataFile();
 
     Actions actions;
+
+    MaxBet maxBet;
 
 
 
@@ -60,9 +56,11 @@ public class StepDef {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.manage().window().maximize();
-        driver.get(baseUrl);
+       // driver.get(baseUrl);
         actions = new Actions(driver);
         dataFile = readerData();
+
+        maxBet = new MaxBet(driver);
 
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -84,9 +82,9 @@ public class StepDef {
 
 
     @After(order = 0)
-    public void afterClass() throws InterruptedException {
+    public void afterClass()  {
 
-        //  Thread.sleep(4000);
+
         driver.quit();
     }
 
@@ -100,6 +98,35 @@ public class StepDef {
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
         driver.get(address);
+    }
+    @When("choose which period you are watching {string}")
+    public void choose_which_period_you_are_watching(String hours) throws InterruptedException {
+       maxBet.clickSlider(hours);
+       Thread.sleep(1000);
+    }
+    @When("click on the page max-bet button football")
+    public void click_on_the_page_maxbet_button_football() {
+       maxBet.clickFootball();
+    }
+
+    @When("click on the page max-bet button select all")
+    public void click_on_the_page_maxbet_select_all() {
+        maxBet.clickSelectAll();
+    }
+    @When("click on the page max-bet button max bonus")
+    public void click_on_the_page_maxbet_bonus() throws InterruptedException {
+        Thread.sleep(2000);
+        maxBet.clickMaxBonus();
+        Thread.sleep(2000);
+
+    }
+    @When("wait for the whole page to load")
+    public void wait_for_the_whole_page_to_load() throws InterruptedException {
+        maxBet.waitForPageToLoad();
+    }
+    @Then("write all match in document")
+    public void write_all_match_in_document() {
+          maxBet.writeMatch();
     }
 
 }
