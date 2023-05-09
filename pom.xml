@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>cucamber-bangie</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-bom</artifactId>
+                <version>7.11.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.9.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <!--            <version>7.11.1</version>-->
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.3.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230227</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.kklisura.cdt</groupId>
+            <artifactId>cdt-java-client</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>tech.grasshopper</groupId>-->
+<!--            <artifactId>extentreports-cucumber6-adapter</artifactId>-->
+<!--            <version>2.1.0</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.aventstack</groupId>-->
+<!--            <artifactId>extentreports</artifactId>-->
+<!--            <version>5.0.4</version>-->
+<!--        </dependency>-->
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>net.masterthought</groupId>-->
+            <!--                <artifactId>maven-cucumber-reporting</artifactId>-->
+            <!--                <version>5.0.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>execution</id>-->
+            <!--                        <phase>verify</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <projectName>cucumber-jvm-example</projectName>-->
+            <!--                            &lt;!&ndash; optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified &ndash;&gt;-->
+            <!--                            <skip>false</skip>-->
+            <!--                            &lt;!&ndash; output directory for the generated report &ndash;&gt;-->
+            <!--                            <outputDirectory>${project.build.directory}</outputDirectory>-->
+            <!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
+            <!--                            <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>-->
+            <!--                            <jsonFiles>-->
+            <!--                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;-->
+            <!--                                <param>**/*.json</param>-->
+            <!--                            </jsonFiles>-->
+            <!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
+            <!--                            &lt;!&ndash;                            <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>&ndash;&gt;-->
+            <!--                            &lt;!&ndash;                            <classificationFiles>&ndash;&gt;-->
+            <!--                            &lt;!&ndash;                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;&ndash;&gt;-->
+            <!--                            &lt;!&ndash;                                <param>sample.properties</param>&ndash;&gt;-->
+            <!--                            &lt;!&ndash;                                <param>other.properties</param>&ndash;&gt;-->
+            <!--                            &lt;!&ndash;                            </classificationFiles>&ndash;&gt;-->
+            <!--&lt;!&ndash;                            <parallelTesting>false</parallelTesting>&ndash;&gt;-->
+            <!--                            &lt;!&ndash; optional, set true to group features by its Ids &ndash;&gt;-->
+            <!--                            <mergeFeaturesById>false</mergeFeaturesById>-->
+            <!--                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>-->
+            <!--                            &lt;!&ndash; optional, set true to fail build on test failures &ndash;&gt;-->
+            <!--                            <checkBuildResult>false</checkBuildResult>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>tech.grasshopper</groupId>
+                <artifactId>cucumber-pdf-plugin</artifactId>
+                <version>1.12.0</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>pdfreport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <cucumberJsonReportDirectory>${project.build.directory}/json-report</cucumberJsonReportDirectory>
+                    <cucumberPdfReportDirectory>secret</cucumberPdfReportDirectory>
+                    <cucumberPdfReportDirectoryTimeStamp>d M yy H m s</cucumberPdfReportDirectoryTimeStamp>
+                    <title>Lumen spei - [FE] FACTIIV-CRM</title>
+                    <titleColor>#080707</titleColor>
+<!--                    <titleColor>#DE1D1D</titleColor>-->
+<!--                    <passColor>#6ed83c</passColor>-->
+<!--                    <failColor>#960025</failColor>-->
+<!--                    <skipColor>#DA0F2A</skipColor>-->
+                    <displayFeature>true</displayFeature>
+                    <displayScenario>true</displayScenario>
+                    <displayDetailed>true</displayDetailed>
+                    <displayAttached>true</displayAttached>
+                    <displayExpanded>false</displayExpanded>
+
+                    <skipHooks>false</skipHooks>
+                    <skipScenarioHooks>false</skipScenarioHooks>
+                    <skipStepHooks>false</skipStepHooks>
+
+                    <strictCucumber6Behavior>true</strictCucumber6Behavior>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
