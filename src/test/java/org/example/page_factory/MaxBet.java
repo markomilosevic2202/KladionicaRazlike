@@ -111,7 +111,9 @@ public class MaxBet {
             WebElement element = listMatchDiv.get(i);
             Match match = new Match();
             match.setCode(element.findElement(By.xpath("match/span/div/div[1]")).getText());
-            match.setTime(element.findElement(By.xpath("match/span/div/div[2]")).getText());
+            String fullDate = element.findElement(By.xpath("match/span/div/div[2]")).getText();
+            match.setTime(fullDate.substring(7,12));
+            match.setDate(fullDate.substring(0,5));
             match.setName(element.findElement(By.xpath("match/span/div/div[3]")).getText());
             match.setOne(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd")).getText());
             match.setTwo(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd[2]")).getText());

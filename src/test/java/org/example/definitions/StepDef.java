@@ -37,6 +37,7 @@ public class StepDef {
     Actions actions;
 
     MaxBet maxBet;
+    Foreign foreign;
 
 
 
@@ -61,6 +62,7 @@ public class StepDef {
         dataFile = readerData();
 
         maxBet = new MaxBet(driver);
+        foreign = new Foreign(driver);
 
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -82,9 +84,9 @@ public class StepDef {
 
 
     @After(order = 0)
-    public void afterClass()  {
+    public void afterClass() throws InterruptedException {
 
-
+         Thread.sleep(3000);
         driver.quit();
     }
 
@@ -97,6 +99,7 @@ public class StepDef {
     }
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
     }
     @When("choose which period you are watching {string}")
@@ -123,6 +126,10 @@ public class StepDef {
     @When("wait for the whole page to load")
     public void wait_for_the_whole_page_to_load() throws InterruptedException {
         maxBet.waitForPageToLoad();
+    }
+    @When("take all the matches according to the given criteria")
+    public void take_all_the_matches_according_to_the_given_criteria() throws InterruptedException {
+         foreign.findMatches();
     }
     @Then("write all match in document")
     public void write_all_match_in_document() {

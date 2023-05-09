@@ -12,6 +12,7 @@ import lombok.*;
 public class Match {
 
     private String code;
+    private String date;
     private String time;
     private String name;
     private String one;
