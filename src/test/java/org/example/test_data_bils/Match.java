@@ -1,4 +1,4 @@
-package org.example.object;
+package org.example.test_data_bils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;

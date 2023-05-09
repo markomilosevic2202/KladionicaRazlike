@@ -1,15 +1,14 @@
 package org.example.page_factory;
 
-import org.example.object.Match;
+import com.google.gson.Gson;
+import org.example.test_data_bils.Match;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MaxBet {
     WebElement btnMaxBonus;
 
     @FindBy(xpath = "//*[contains(@class, 'home-game bck-col-1 ng-scope')]")
-    List<WebElement> listMatch;
+    List<WebElement> listMatchDiv;
 
     @FindBy(xpath = "//*[contains(@class, 'ui-slider-handle ui-state-default ui-corner-all')]")
     WebElement slider;
@@ -57,10 +56,11 @@ public class MaxBet {
     public void clickSlider(String hours) {
 
         slider.click();
-        if(hours.equals("3")){
+        if(hours.equals("3")) {
             for (int i = 0; i < 5; i++) {
                 slider.sendKeys(Keys.ARROW_LEFT);
             }
+
         } else if (hours.equals("5")) {
             for (int i = 0; i < 4; i++) {
                 slider.sendKeys(Keys.ARROW_LEFT);
@@ -75,7 +75,7 @@ public class MaxBet {
                 slider.sendKeys(Keys.ARROW_LEFT);
             }
         }
-        else if (hours.equals("24")) {
+        else if (hours.equals("48")) {
             slider.sendKeys(Keys.ARROW_LEFT);
         }
         else if (hours.equals("all")) {
@@ -85,8 +85,7 @@ public class MaxBet {
             Assertions.fail("  :: The specified parameter was not found. The options offered are 3,5,12,24,48,all :: ");
         }
 
-        slider.sendKeys(Keys.ARROW_LEFT);
-        slider.sendKeys(Keys.ARROW_LEFT);
+
 
     }
 
@@ -106,13 +105,29 @@ public class MaxBet {
         }
     }
     public void writeMatch()  {
-        for (int i = 0; i < listMatch.size(); i++) {
-            WebElement element = listMatch.get(i);
+        List <Match> listObject = new ArrayList<>();
+        System.out.println(listMatchDiv.size());
+        for (int i = 0; i < listMatchDiv.size(); i++) {
+            WebElement element = listMatchDiv.get(i);
             Match match = new Match();
-            System.out.println();
-            System.out.println(element.findElement(By.xpath("match/span/div/div[1]")).getText());
-
+            match.setCode(element.findElement(By.xpath("match/span/div/div[1]")).getText());
+            match.setTime(element.findElement(By.xpath("match/span/div/div[2]")).getText());
+            match.setName(element.findElement(By.xpath("match/span/div/div[3]")).getText());
+            match.setOne(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd")).getText());
+            match.setTwo(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd[2]")).getText());
+            match.setX(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd[3]")).getText());
+            listObject.add(match);
         }
+        Gson gson = new Gson();
+        String json = gson.toJson(listObject);
+        try (FileWriter fileWriter = new FileWriter("/home/marko/IdeaProjects/KladionicaRazlike/src/test/resources/json/data.json")) {
+            fileWriter.write(json);
+            fileWriter.flush();
+            System.out.println("upsao");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     }
-    }
+
