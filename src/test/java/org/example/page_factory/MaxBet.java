@@ -45,11 +45,9 @@ public class MaxBet {
 
     public void clickSelectAll() {
         btnSelectAll.click();
-
     }
 
     public void clickMaxBonus() {
-
         btnMaxBonus.click();
 
     }
@@ -105,7 +103,7 @@ public class MaxBet {
         }
     }
     public void writeMatch()  {
-        List <Match> listObject = new ArrayList<>();
+        List<Match> listObject = new ArrayList<>();
         System.out.println(listMatchDiv.size());
         for (int i = 0; i < listMatchDiv.size(); i++) {
             WebElement element = listMatchDiv.get(i);

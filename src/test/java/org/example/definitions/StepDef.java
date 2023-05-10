@@ -63,11 +63,8 @@ public class StepDef {
 
         maxBet = new MaxBet(driver);
         foreign = new Foreign(driver);
-
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
 
     @After(order = 1)
     public void teardown(Scenario scenario) throws IOException {
@@ -78,7 +75,6 @@ public class StepDef {
             scenario.attach(src, "image/png", "screenshot");
 
         }
-
 
     }
 

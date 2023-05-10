@@ -1,1 +1,1136 @@
-[{"code":"1","date":"09.05","time":"21:00","name":"Real M. - Man.City","one":"3.20","two":"3.55","x":"2.30"},{"code":"2","date":"10.05","time":"21:00","name":"Milan - Inter","one":"3.10","two":"3.15","x":"2.55"},{"code":"270","date":"09.05","time":"18:15","name":"Mladost L. - Radnik S.","one":"2.60","two":"3.15","x":"2.70"},{"code":"271","date":"09.05","time":"18:15","name":"Napredak - Radnicki Nis","one":"6.10","two":"3.55","x":"1.55"},{"code":"1052","date":"10.05","time":"15:00","name":"Young Africans - Marumo Gallants","one":"1.50","two":"3.50","x":"6.90"},{"code":"1053","date":"10.05","time":"18:00","name":"Mimosas ASEC - USM Alger","one":"2.05","two":"2.95","x":"3.70"},{"code":"138","date":"09.05","time":"17:00","name":"Khenchela - Kabylie","one":"2.40","two":"2.45","x":"3.75"},{"code":"139","date":"09.05","time":"19:00","name":"MC Alger - Belouizdad","one":"2.45","two":"2.70","x":"3.25"},{"code":"211","date":"10.05","time":"01:05","name":"Union Santa Fe - Almagro","one":"1.88","two":"3.05","x":"4.75"},{"code":"212","date":"11.05","time":"02:10","name":"Barracas C. - CA Estudiantes","one":"1.83","two":"3.25","x":"4.65"},{"code":"674","date":"09.05","time":"20:30","name":"CSR Espanol - Juventud Un.S.M.","one":"2.45","two":"2.80","x":"2.90"},{"code":"675","date":"09.05","time":"20:30","name":"Dep.Muniz - Sp.Barracas","one":"4.15","two":"3.05","x":"1.85"},{"code":"145","date":"09.05","time":"16:00","name":"BKMA - Lernayin Artsakh","one":"1.70","two":"3.30","x":"5.00"},{"code":"146","date":"10.05","time":"17:00","name":"Ararat-Arm. - Alashkert","one":"1.88","two":"3.25","x":"4.00"},{"code":"1068","date":"10.05","time":"12:00","name":"Lake M. City - Edgeworth E.","one":"14.0","two":"7.60","x":"1.12"},{"code":"255","date":"09.05","time":"18:00","name":"Sitra - Al-Shabbab","one":"1.75","two":"3.30","x":"4.60"},{"code":"164","date":"11.05","time":"00:00","name":"Bragantino - America MG","one":"1.95","two":"3.35","x":"3.80"},{"code":"165","date":"11.05","time":"00:00","name":"Internacional - Atletico-PR","one":"1.95","two":"3.20","x":"4.05"},{"code":"166","date":"11.05","time":"00:00","name":"Santos - Bahia","one":"2.25","two":"3.15","x":"3.25"},{"code":"167","date":"11.05","time":"01:00","name":"Cuiaba - Atletico-MG","one":"3.35","two":"3.10","x":"2.20"},{"code":"168","date":"11.05","time":"01:00","name":"Flamengo - Goias","one":"1.28","two":"5.25","x":"10.0"},{"code":"169","date":"11.05","time":"02:30","name":"Cruzeiro - Fluminense FC","one":"2.80","two":"3.20","x":"2.45"},{"code":"170","date":"11.05","time":"02:30","name":"Palmeiras - Gremio","one":"1.53","two":"3.90","x":"6.25"},{"code":"174","date":"11.05","time":"00:00","name":"Ceara - Vitoria","one":"2.15","two":"2.95","x":"3.40"},{"code":"175","date":"11.05","time":"02:30","name":"Sport Recife - Tombense","one":"1.50","two":"3.65","x":"6.50"},{"code":"1085","date":"10.05","time":"00:30","name":"Real Sao Luiz - Bare","one":"1.12","two":"8.25","x":"14.0"},{"code":"766","date":"10.05","time":"00:00","name":"EC Guarani - Santa Cruz RS","one":"4.60","two":"3.25","x":"1.78"},{"code":"1092","date":"10.05","time":"01:00","name":"Br.Farroupilha - GE Gloria","one":"2.95","two":"2.95","x":"2.45"},{"code":"679","date":"10.05","time":"01:00","name":"Toronto FC - CF Montreal","one":"2.15","two":"3.45","x":"2.80"},{"code":"1086","date":"10.05","time":"01:00","name":"Forge - Atl. Ottawa","one":"1.55","two":"3.50","x":"5.45"},{"code":"192","date":"09.05","time":"21:30","name":"Magallanes - Curico Unido","one":"1.80","two":"3.55","x":"4.30"},{"code":"193","date":"10.05","time":"00:00","name":"Nublense - Copiapo","one":"2.05","two":"3.30","x":"3.60"},{"code":"194","date":"10.05","time":"00:00","name":"U.Espanola - U.La Calera","one":"2.40","two":"3.20","x":"2.90"},{"code":"195","date":"10.05","time":"02:30","name":"Colo Colo - Audax","one":"1.73","two":"3.75","x":"4.40"},{"code":"196","date":"11.05","time":"00:00","name":"Cobresal - O Higgins","one":"2.05","two":"3.35","x":"3.60"},{"code":"197","date":"11.05","time":"00:00","name":"Coquimbo - U.De Chile","one":"2.70","two":"3.15","x":"2.60"},{"code":"198","date":"11.05","time":"02:30","name":"U.Catolica - Huachipato","one":"1.85","two":"3.55","x":"4.05"},{"code":"230","date":"09.05","time":"18:00","name":"Puerto Montt - S.Morning","one":"2.40","two":"3.00","x":"2.90"},{"code":"231","date":"10.05","time":"21:30","name":"S.Wanderers - San Marcos","one":"2.20","two":"3.05","x":"3.25"},{"code":"232","date":"11.05","time":"01:00","name":"Rangers T. - San Luis","one":"2.60","two":"2.95","x":"2.75"},{"code":"383","date":"09.05","time":"18:00","name":"Limache - Real S.Joaquin","one":"1.95","two":"3.10","x":"3.60"},{"code":"384","date":"09.05","time":"21:00","name":"Deportes Rengo - Iberia","one":"2.10","two":"3.15","x":"3.15"},{"code":"385","date":"09.05","time":"21:00","name":"Osorno - G.Velasquez","one":"2.25","two":"3.25","x":"2.80"},{"code":"386","date":"09.05","time":"22:00","name":"San Antonio U. - Linares Unido","one":"2.10","two":"3.05","x":"3.25"},{"code":"204","date":"09.05","time":"13:35","name":"Dalian Pro - Cangzhou","one":"2.20","two":"3.15","x":"3.35"},{"code":"205","date":"09.05","time":"13:35","name":"Henan - Wuhan Three T.","one":"5.30","two":"3.80","x":"1.63"},{"code":"206","date":"09.05","time":"13:35","name":"Shenzhen - Shan.Shenhua","one":"8.25","two":"4.20","x":"1.40"},{"code":"207","date":"10.05","time":"13:35","name":"Beijing Guoan - Tianjin JT","one":"2.00","two":"3.30","x":"3.75"},{"code":"208","date":"10.05","time":"13:35","name":"Changchun Y. - Meizhou Hakka","one":"1.95","two":"3.50","x":"3.70"},{"code":"209","date":"10.05","time":"13:35","name":"Nantong Zhiyun - Zhejiang","one":"2.60","two":"3.25","x":"2.60"},{"code":"210","date":"10.05","time":"13:35","name":"Shanghai Port - Qingdao Hainiu","one":"1.32","two":"4.75","x":"9.50"},{"code":"213","date":"11.05","time":"03:10","name":"Millonarios - Petrolera Al.","one":"1.55","two":"3.70","x":"5.80"},{"code":"269","date":"09.05","time":"18:00","name":"Chloraka - AEL Limassol","one":"2.85","two":"3.20","x":"2.45"},{"code":"258","date":"10.05","time":"02:00","name":"9 de Octubre - Vargas Torres","one":"1.95","two":"3.10","x":"3.60"},{"code":"259","date":"10.05","time":"22:00","name":"America de Quito - Buhos ULVR","one":"2.12","two":"2.90","x":"3.40"},{"code":"260","date":"11.05","time":"02:00","name":"Imbabura - Cuniburo","one":"1.90","two":"3.00","x":"4.00"},{"code":"261","date":"11.05","time":"02:00","name":"Macara - Ind.Juniors","one":"1.90","two":"2.95","x":"4.15"},{"code":"140","date":"09.05","time":"18:00","name":"Pyramids FC - Ismaily Sc","one":"1.70","two":"3.30","x":"5.50"},{"code":"1066","date":"09.05","time":"17:00","name":"Zamalek - Proxy","one":"1.15","two":"5.80","x":"15.0"},{"code":"1067","date":"09.05","time":"20:00","name":"Al Ittihad Al. - Al Sekka","one":"1.35","two":"4.15","x":"7.75"},{"code":"514","date":"09.05","time":"14:00","name":"Bristol City U21 - Coventry U21","one":"1.53","two":"4.00","x":"4.80"},{"code":"515","date":"09.05","time":"14:00","name":"Cardiff U21 - Crewe U21","one":"1.53","two":"4.20","x":"4.50"},{"code":"516","date":"09.05","time":"14:00","name":"Watford U21 - Burnley U21","one":"2.55","two":"3.60","x":"2.25"},{"code":"517","date":"09.05","time":"14:30","name":"QPR U21 - Wigan U21","one":"3.05","two":"3.90","x":"1.90"},{"code":"518","date":"09.05","time":"15:00","name":"Charlton U21 - Hull U21","one":"2.35","two":"4.00","x":"2.30"},{"code":"519","date":"09.05","time":"20:00","name":"Colchester U21 - Peterborough U21","one":"2.38","two":"3.70","x":"2.38"},{"code":"1079","date":"10.05","time":"15:00","name":"Swansea U21 - Birmingham U21","one":"1.35","two":"4.95","x":"5.90"},{"code":"1058","date":"09.05","time":"20:45","name":"Brentford U21 - Blackburn U21","one":"2.00","two":"3.80","x":"3.10"},{"code":"431","date":"09.05","time":"14:00","name":"Bahir Dar Kenema - Ethiopia Bunna","one":"1.65","two":"3.25","x":"4.60"},{"code":"432","date":"09.05","time":"17:00","name":"Ethio Electric - Dire Dawa","one":"2.60","two":"2.80","x":"2.55"},{"code":"1059","date":"09.05","time":"18:00","name":"AB Argir - 07 Vestur Sorvagur","one":"3.90","two":"3.80","x":"1.75"},{"code":"1060","date":"09.05","time":"19:00","name":"B36 Torshavn - HB Torshavn","one":"3.15","two":"3.55","x":"1.95"},{"code":"1061","date":"09.05","time":"19:00","name":"Streymur - Skala Itrottarfelag","one":"1.65","two":"3.50","x":"4.60"},{"code":"1062","date":"09.05","time":"19:00","name":"Toftir - NSI Runavik","one":"1.68","two":"4.20","x":"3.85"},{"code":"176","date":"09.05","time":"17:00","name":"AC Oulu - KuPS","one":"3.30","two":"3.15","x":"2.25"},{"code":"177","date":"09.05","time":"17:00","name":"Honka - Haka","one":"1.73","two":"3.55","x":"4.95"},{"code":"178","date":"09.05","time":"17:00","name":"KTP - HJK Helsinki","one":"6.00","two":"3.95","x":"1.55"},{"code":"127","date":"10.05","time":"19:30","name":"Orleans - Le Mans","one":"2.35","two":"3.15","x":"3.20"},{"code":"447","date":"09.05","time":"18:00","name":"Dila Gori - Saburtalo Tb.","one":"1.95","two":"3.35","x":"3.35"},{"code":"1054","date":"10.05","time":"13:00","name":"Gagra - Torpedo K.","one":"3.25","two":"2.90","x":"2.20"},{"code":"1055","date":"10.05","time":"14:00","name":"Samgurali - Dinamo Tb.","one":"3.10","two":"3.00","x":"2.20"},{"code":"1056","date":"10.05","time":"14:30","name":"Samtredia - Din.Batumi","one":"7.75","two":"4.60","x":"1.31"},{"code":"1057","date":"10.05","time":"17:00","name":"Telavi - Shukura","one":"2.12","two":"3.05","x":"3.20"},{"code":"1088","date":"10.05","time":"19:00","name":"Babelsberg - Halberstadt","one":"1.29","two":"5.10","x":"8.25"},{"code":"1063","date":"09.05","time":"21:15","name":"Keflavik W - Breidablik W","one":"13.0","two":"6.60","x":"1.13"},{"code":"154","date":"10.05","time":"12:30","name":"Urawa - Sagan Tosu","one":"1.58","two":"3.85","x":"5.75"},{"code":"229","date":"10.05","time":"14:00","name":"Maqtaaral - Astana","one":"7.50","two":"3.95","x":"1.38"},{"code":"1078","date":"09.05","time":"18:00","name":"Kazma SC - Al Kuwait","one":"6.30","two":"4.15","x":"1.40"},{"code":"202","date":"09.05","time":"16:00","name":"Tukums 2000 - Rigas","one":"23.0","two":"6.60","x":"1.09"},{"code":"203","date":"09.05","time":"17:00","name":"Jelgava - Metta/LU","one":"2.45","two":"3.15","x":"2.60"},{"code":"522","date":"09.05","time":"20:00","name":"U. San Martin - Union Huaral","one":"2.25","two":"3.20","x":"2.80"},{"code":"523","date":"09.05","time":"22:30","name":"Pirata - Juan Aurich","one":"2.45","two":"3.25","x":"2.50"},{"code":"524","date":"10.05","time":"20:00","name":"Carlos Stein - Comerciantes","one":"1.73","two":"3.35","x":"4.40"},{"code":"147","date":"09.05","time":"18:00","name":"Al-Ahli Doha - Al Markhiya","one":"2.40","two":"3.60","x":"2.38"},{"code":"1080","date":"09.05","time":"18:30","name":"Portimonense U23 - Estrela U23","one":"2.50","two":"3.30","x":"2.45"},{"code":"1089","date":"10.05","time":"18:00","name":"Poli Iasi - Steaua Bucuresti","one":"2.35","two":"3.00","x":"3.10"},{"code":"142","date":"09.05","time":"18:00","name":"Al Feiha - Al-Fateh","one":"2.65","two":"3.20","x":"2.50"},{"code":"143","date":"09.05","time":"18:00","name":"Al-Taawon - Al Raed","one":"1.65","two":"3.95","x":"4.30"},{"code":"144","date":"10.05","time":"18:00","name":"Al Batin - Al Taee","one":"3.20","two":"3.50","x":"2.05"},{"code":"263","date":"09.05","time":"18:15","name":"Al-Qaisumah - Jeddah Club","one":"2.55","two":"3.30","x":"2.55"},{"code":"264","date":"09.05","time":"19:45","name":"Al Ahli Jeddah - Al Arabi","one":"1.40","two":"4.10","x":"7.50"},{"code":"1081","date":"10.05","time":"14:50","name":"Al-Ain Atawlah - Al-Hazem","one":"4.15","two":"3.15","x":"1.80"},{"code":"1082","date":"10.05","time":"17:15","name":"Al-Sahel - Najran","one":"2.25","two":"2.90","x":"3.15"},{"code":"1083","date":"10.05","time":"18:15","name":"Al-Faisaly - Al Qadisiya","one":"1.85","two":"2.90","x":"4.35"},{"code":"1084","date":"10.05","time":"18:20","name":"Al Kholood - Al-Akhdoud","one":"3.15","two":"2.85","x":"2.25"},{"code":"76","date":"09.05","time":"20:45","name":"Partick - Queen\u0027s Park","one":"1.85","two":"3.55","x":"4.05"},{"code":"77","date":"09.05","time":"20:45","name":"Airdrieonians - Falkirk","one":"2.45","two":"3.15","x":"2.90"},{"code":"78","date":"09.05","time":"20:45","name":"Alloa - Hamilton","one":"2.50","two":"3.30","x":"2.70"},{"code":"74","date":"09.05","time":"20:45","name":"Annan - Dumbarton","one":"2.05","two":"3.40","x":"3.45"},{"code":"75","date":"09.05","time":"21:00","name":"East Fife - Clyde","one":"2.60","two":"3.35","x":"2.60"},{"code":"240","date":"10.05","time":"11:00","name":"Philippines U22 - Myanmar U22","one":"5.25","two":"3.60","x":"1.60"},{"code":"241","date":"10.05","time":"14:00","name":"Cambodia U22 - Indonesia U22","one":"5.00","two":"4.30","x":"1.48"},{"code":"151","date":"10.05","time":"12:30","name":"Daejeon - Suwon City","one":"2.05","two":"3.35","x":"3.30"},{"code":"152","date":"10.05","time":"12:30","name":"Jeju Utd - Incheon Utd","one":"2.25","two":"3.15","x":"3.00"},{"code":"153","date":"10.05","time":"12:30","name":"Suwon BW - Jeonbuk","one":"2.95","two":"3.20","x":"2.30"},{"code":"189","date":"09.05","time":"19:00","name":"Hammarby - Mjallby","one":"1.68","two":"3.55","x":"5.10"},{"code":"190","date":"09.05","time":"19:00","name":"Varnamo - Varbergs","one":"1.80","two":"3.40","x":"4.50"},{"code":"191","date":"09.05","time":"19:00","name":"Landskrona - Helsingborg","one":"2.25","two":"3.40","x":"3.05"},{"code":"611","date":"09.05","time":"19:00","name":"Djurgarden W - Pitea W","one":"3.00","two":"3.20","x":"2.15"},{"code":"215","date":"10.05","time":"01:00","name":"Charlotte - Orlando City","one":"2.60","two":"3.05","x":"2.50"},{"code":"216","date":"10.05","time":"01:00","name":"Inter Miami - Charleston","one":"1.48","two":"3.75","x":"6.10"},{"code":"217","date":"10.05","time":"01:30","name":"New England - Pittsburgh","one":"1.45","two":"3.85","x":"6.00"},{"code":"218","date":"10.05","time":"01:30","name":"New York RB - DC United","one":"1.68","two":"3.30","x":"4.75"},{"code":"219","date":"10.05","time":"02:00","name":"Chicago Fire - St. Louis City","one":"1.90","two":"3.35","x":"3.45"},{"code":"220","date":"10.05","time":"02:30","name":"Minnesota United - Philadelphia","one":"2.30","two":"3.25","x":"2.75"},{"code":"221","date":"10.05","time":"04:30","name":"Monterey Bay - Los Angeles FC","one":"4.30","two":"3.50","x":"1.68"},{"code":"222","date":"10.05","time":"04:30","name":"Sacramento R. - Colorado R.","one":"2.45","two":"3.25","x":"2.55"},{"code":"223","date":"11.05","time":"01:00","name":"FC Cincinnati - New York City","one":"2.20","two":"3.35","x":"2.80"},{"code":"224","date":"11.05","time":"01:00","name":"Loudoun - Columbus","one":"4.70","two":"3.50","x":"1.63"},{"code":"1065","date":"11.05","time":"02:00","name":"Birmingham - Memphis","one":"2.00","two":"3.25","x":"3.30"},{"code":"225","date":"11.05","time":"02:30","name":"Houston D. - Kansas City","one":"1.80","two":"3.35","x":"3.90"},{"code":"226","date":"11.05","time":"02:30","name":"Nashville SC - Dallas","one":"1.90","two":"3.20","x":"3.65"},{"code":"227","date":"11.05","time":"04:30","name":"LA Galaxy - Seattle S.","one":"2.30","two":"3.20","x":"2.80"},{"code":"228","date":"11.05","time":"04:30","name":"Portland T. - Salt Lake","one":"1.90","two":"3.25","x":"3.60"}]
+[
+  {
+    "code": "1",
+    "date": "09.05",
+    "time": "21:00",
+    "name": "Real M. - Man.City",
+    "one": "3.20",
+    "two": "3.55",
+    "x": "2.30"
+  },
+  {
+    "code": "2",
+    "date": "10.05",
+    "time": "21:00",
+    "name": "Milan - Inter",
+    "one": "3.10",
+    "two": "3.15",
+    "x": "2.55"
+  },
+  {
+    "code": "270",
+    "date": "09.05",
+    "time": "18:15",
+    "name": "Mladost L. - Radnik S.",
+    "one": "2.60",
+    "two": "3.05",
+    "x": "2.75"
+  },
+  {
+    "code": "271",
+    "date": "09.05",
+    "time": "18:15",
+    "name": "Napredak - Radnicki Nis",
+    "one": "6.40",
+    "two": "3.80",
+    "x": "1.50"
+  },
+  {
+    "code": "1052",
+    "date": "10.05",
+    "time": "15:00",
+    "name": "Young Africans - Marumo Gallants",
+    "one": "1.50",
+    "two": "3.50",
+    "x": "6.90"
+  },
+  {
+    "code": "1053",
+    "date": "10.05",
+    "time": "18:00",
+    "name": "Mimosas ASEC - USM Alger",
+    "one": "2.05",
+    "two": "2.95",
+    "x": "3.70"
+  },
+  {
+    "code": "138",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "Khenchela - Kabylie",
+    "one": "2.40",
+    "two": "2.45",
+    "x": "3.75"
+  },
+  {
+    "code": "139",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "MC Alger - Belouizdad",
+    "one": "2.45",
+    "two": "2.70",
+    "x": "3.25"
+  },
+  {
+    "code": "211",
+    "date": "10.05",
+    "time": "01:05",
+    "name": "Union Santa Fe - Almagro",
+    "one": "1.88",
+    "two": "3.05",
+    "x": "4.75"
+  },
+  {
+    "code": "212",
+    "date": "11.05",
+    "time": "02:10",
+    "name": "Barracas C. - CA Estudiantes",
+    "one": "1.83",
+    "two": "3.25",
+    "x": "4.65"
+  },
+  {
+    "code": "674",
+    "date": "09.05",
+    "time": "20:30",
+    "name": "CSR Espanol - Juventud Un.S.M.",
+    "one": "2.45",
+    "two": "2.80",
+    "x": "2.90"
+  },
+  {
+    "code": "675",
+    "date": "09.05",
+    "time": "20:30",
+    "name": "Dep.Muniz - Sp.Barracas",
+    "one": "4.15",
+    "two": "3.05",
+    "x": "1.85"
+  },
+  {
+    "code": "146",
+    "date": "10.05",
+    "time": "17:00",
+    "name": "Ararat-Arm. - Alashkert",
+    "one": "1.88",
+    "two": "3.25",
+    "x": "4.00"
+  },
+  {
+    "code": "1068",
+    "date": "10.05",
+    "time": "12:00",
+    "name": "Lake M. City - Edgeworth E.",
+    "one": "14.0",
+    "two": "7.50",
+    "x": "1.13"
+  },
+  {
+    "code": "255",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Sitra - Al-Shabbab",
+    "one": "1.80",
+    "two": "3.25",
+    "x": "4.40"
+  },
+  {
+    "code": "164",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Bragantino - America MG",
+    "one": "1.85",
+    "two": "3.45",
+    "x": "4.15"
+  },
+  {
+    "code": "165",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Internacional - Atletico-PR",
+    "one": "1.95",
+    "two": "3.20",
+    "x": "4.05"
+  },
+  {
+    "code": "166",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Santos - Bahia",
+    "one": "2.25",
+    "two": "3.15",
+    "x": "3.25"
+  },
+  {
+    "code": "167",
+    "date": "11.05",
+    "time": "01:00",
+    "name": "Cuiaba - Atletico-MG",
+    "one": "3.35",
+    "two": "3.10",
+    "x": "2.20"
+  },
+  {
+    "code": "168",
+    "date": "11.05",
+    "time": "01:00",
+    "name": "Flamengo - Goias",
+    "one": "1.28",
+    "two": "5.25",
+    "x": "10.0"
+  },
+  {
+    "code": "169",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "Cruzeiro - Fluminense FC",
+    "one": "2.80",
+    "two": "3.20",
+    "x": "2.45"
+  },
+  {
+    "code": "170",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "Palmeiras - Gremio",
+    "one": "1.53",
+    "two": "3.90",
+    "x": "6.25"
+  },
+  {
+    "code": "174",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Ceara - Vitoria",
+    "one": "2.15",
+    "two": "2.95",
+    "x": "3.40"
+  },
+  {
+    "code": "175",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "Sport Recife - Tombense",
+    "one": "1.50",
+    "two": "3.65",
+    "x": "6.50"
+  },
+  {
+    "code": "1085",
+    "date": "10.05",
+    "time": "00:30",
+    "name": "Real Sao Luiz - Bare",
+    "one": "1.12",
+    "two": "8.25",
+    "x": "14.0"
+  },
+  {
+    "code": "766",
+    "date": "10.05",
+    "time": "00:00",
+    "name": "EC Guarani - Santa Cruz RS",
+    "one": "5.00",
+    "two": "3.30",
+    "x": "1.70"
+  },
+  {
+    "code": "1092",
+    "date": "10.05",
+    "time": "01:00",
+    "name": "Br.Farroupilha - GE Gloria",
+    "one": "2.95",
+    "two": "2.95",
+    "x": "2.45"
+  },
+  {
+    "code": "679",
+    "date": "10.05",
+    "time": "01:00",
+    "name": "Toronto FC - CF Montreal",
+    "one": "1.80",
+    "two": "3.60",
+    "x": "3.55"
+  },
+  {
+    "code": "1086",
+    "date": "10.05",
+    "time": "01:00",
+    "name": "Forge - Atl. Ottawa",
+    "one": "1.55",
+    "two": "3.50",
+    "x": "5.45"
+  },
+  {
+    "code": "192",
+    "date": "09.05",
+    "time": "21:30",
+    "name": "Magallanes - Curico Unido",
+    "one": "1.75",
+    "two": "3.60",
+    "x": "4.50"
+  },
+  {
+    "code": "193",
+    "date": "10.05",
+    "time": "00:00",
+    "name": "Nublense - Copiapo",
+    "one": "2.05",
+    "two": "3.30",
+    "x": "3.60"
+  },
+  {
+    "code": "194",
+    "date": "10.05",
+    "time": "00:00",
+    "name": "U.Espanola - U.La Calera",
+    "one": "2.55",
+    "two": "3.15",
+    "x": "2.80"
+  },
+  {
+    "code": "195",
+    "date": "10.05",
+    "time": "02:30",
+    "name": "Colo Colo - Audax",
+    "one": "1.83",
+    "two": "3.60",
+    "x": "4.05"
+  },
+  {
+    "code": "196",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Cobresal - O Higgins",
+    "one": "2.05",
+    "two": "3.35",
+    "x": "3.60"
+  },
+  {
+    "code": "197",
+    "date": "11.05",
+    "time": "00:00",
+    "name": "Coquimbo - U.De Chile",
+    "one": "2.70",
+    "two": "3.15",
+    "x": "2.60"
+  },
+  {
+    "code": "198",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "U.Catolica - Huachipato",
+    "one": "1.85",
+    "two": "3.55",
+    "x": "4.05"
+  },
+  {
+    "code": "230",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Puerto Montt - S.Morning",
+    "one": "2.20",
+    "two": "3.00",
+    "x": "3.25"
+  },
+  {
+    "code": "231",
+    "date": "10.05",
+    "time": "21:30",
+    "name": "S.Wanderers - San Marcos",
+    "one": "2.20",
+    "two": "3.05",
+    "x": "3.25"
+  },
+  {
+    "code": "232",
+    "date": "11.05",
+    "time": "01:00",
+    "name": "Rangers T. - San Luis",
+    "one": "2.60",
+    "two": "2.95",
+    "x": "2.75"
+  },
+  {
+    "code": "383",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Limache - Real S.Joaquin",
+    "one": "1.95",
+    "two": "3.10",
+    "x": "3.60"
+  },
+  {
+    "code": "384",
+    "date": "09.05",
+    "time": "21:00",
+    "name": "Deportes Rengo - Iberia",
+    "one": "2.10",
+    "two": "3.15",
+    "x": "3.15"
+  },
+  {
+    "code": "385",
+    "date": "09.05",
+    "time": "21:00",
+    "name": "Osorno - G.Velasquez",
+    "one": "2.10",
+    "two": "3.25",
+    "x": "3.00"
+  },
+  {
+    "code": "386",
+    "date": "09.05",
+    "time": "22:00",
+    "name": "San Antonio U. - Linares Unido",
+    "one": "2.00",
+    "two": "3.10",
+    "x": "3.45"
+  },
+  {
+    "code": "207",
+    "date": "10.05",
+    "time": "13:35",
+    "name": "Beijing Guoan - Tianjin JT",
+    "one": "2.00",
+    "two": "3.30",
+    "x": "3.75"
+  },
+  {
+    "code": "208",
+    "date": "10.05",
+    "time": "13:35",
+    "name": "Changchun Y. - Meizhou Hakka",
+    "one": "2.00",
+    "two": "3.45",
+    "x": "3.55"
+  },
+  {
+    "code": "209",
+    "date": "10.05",
+    "time": "13:35",
+    "name": "Nantong Zhiyun - Zhejiang",
+    "one": "2.60",
+    "two": "3.25",
+    "x": "2.60"
+  },
+  {
+    "code": "210",
+    "date": "10.05",
+    "time": "13:35",
+    "name": "Shanghai Port - Qingdao Hainiu",
+    "one": "1.33",
+    "two": "4.65",
+    "x": "9.25"
+  },
+  {
+    "code": "213",
+    "date": "11.05",
+    "time": "03:10",
+    "name": "Millonarios - Petrolera Al.",
+    "one": "1.55",
+    "two": "3.70",
+    "x": "5.80"
+  },
+  {
+    "code": "269",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Chloraka - AEL Limassol",
+    "one": "3.05",
+    "two": "3.25",
+    "x": "2.30"
+  },
+  {
+    "code": "258",
+    "date": "10.05",
+    "time": "02:00",
+    "name": "9 de Octubre - Vargas Torres",
+    "one": "1.95",
+    "two": "3.10",
+    "x": "3.60"
+  },
+  {
+    "code": "259",
+    "date": "10.05",
+    "time": "22:00",
+    "name": "America de Quito - Buhos ULVR",
+    "one": "2.12",
+    "two": "2.90",
+    "x": "3.40"
+  },
+  {
+    "code": "260",
+    "date": "11.05",
+    "time": "02:00",
+    "name": "Imbabura - Cuniburo",
+    "one": "2.00",
+    "two": "2.95",
+    "x": "3.70"
+  },
+  {
+    "code": "261",
+    "date": "11.05",
+    "time": "02:00",
+    "name": "Macara - Ind.Juniors",
+    "one": "2.15",
+    "two": "2.80",
+    "x": "3.40"
+  },
+  {
+    "code": "140",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Pyramids FC - Ismaily Sc",
+    "one": "1.63",
+    "two": "3.45",
+    "x": "6.00"
+  },
+  {
+    "code": "1066",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "Zamalek - Proxy",
+    "one": "1.13",
+    "two": "6.00",
+    "x": "16.0"
+  },
+  {
+    "code": "1067",
+    "date": "09.05",
+    "time": "20:00",
+    "name": "Al Ittihad Al. - Al Sekka",
+    "one": "1.35",
+    "two": "4.15",
+    "x": "7.75"
+  },
+  {
+    "code": "519",
+    "date": "09.05",
+    "time": "20:00",
+    "name": "Colchester U21 - Peterborough U21",
+    "one": "2.38",
+    "two": "3.70",
+    "x": "2.38"
+  },
+  {
+    "code": "1079",
+    "date": "10.05",
+    "time": "15:00",
+    "name": "Swansea U21 - Birmingham U21",
+    "one": "1.38",
+    "two": "4.70",
+    "x": "5.70"
+  },
+  {
+    "code": "1058",
+    "date": "09.05",
+    "time": "20:45",
+    "name": "Brentford U21 - Blackburn U21",
+    "one": "1.98",
+    "two": "3.85",
+    "x": "3.10"
+  },
+  {
+    "code": "432",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "Ethio Electric - Dire Dawa",
+    "one": "3.45",
+    "two": "2.80",
+    "x": "2.05"
+  },
+  {
+    "code": "1059",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "AB Argir - 07 Vestur Sorvagur",
+    "one": "3.90",
+    "two": "3.80",
+    "x": "1.75"
+  },
+  {
+    "code": "1060",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "B36 Torshavn - HB Torshavn",
+    "one": "3.15",
+    "two": "3.55",
+    "x": "1.95"
+  },
+  {
+    "code": "1061",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Streymur - Skala Itrottarfelag",
+    "one": "1.65",
+    "two": "3.50",
+    "x": "4.60"
+  },
+  {
+    "code": "1062",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Toftir - NSI Runavik",
+    "one": "1.65",
+    "two": "4.25",
+    "x": "4.05"
+  },
+  {
+    "code": "176",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "AC Oulu - KuPS",
+    "one": "3.00",
+    "two": "3.20",
+    "x": "2.40"
+  },
+  {
+    "code": "177",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "Honka - Haka",
+    "one": "1.90",
+    "two": "3.40",
+    "x": "4.25"
+  },
+  {
+    "code": "178",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "KTP - HJK Helsinki",
+    "one": "5.70",
+    "two": "3.95",
+    "x": "1.58"
+  },
+  {
+    "code": "127",
+    "date": "10.05",
+    "time": "19:30",
+    "name": "Orleans - Le Mans",
+    "one": "2.35",
+    "two": "3.15",
+    "x": "3.20"
+  },
+  {
+    "code": "447",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Dila Gori - Saburtalo Tb.",
+    "one": "2.25",
+    "two": "3.10",
+    "x": "2.95"
+  },
+  {
+    "code": "1054",
+    "date": "10.05",
+    "time": "13:00",
+    "name": "Gagra - Torpedo K.",
+    "one": "3.25",
+    "two": "2.90",
+    "x": "2.20"
+  },
+  {
+    "code": "1055",
+    "date": "10.05",
+    "time": "14:00",
+    "name": "Samgurali - Dinamo Tb.",
+    "one": "3.10",
+    "two": "3.00",
+    "x": "2.20"
+  },
+  {
+    "code": "1056",
+    "date": "10.05",
+    "time": "14:30",
+    "name": "Samtredia - Din.Batumi",
+    "one": "7.80",
+    "two": "4.50",
+    "x": "1.32"
+  },
+  {
+    "code": "1057",
+    "date": "10.05",
+    "time": "17:00",
+    "name": "Telavi - Shukura",
+    "one": "2.15",
+    "two": "3.00",
+    "x": "3.20"
+  },
+  {
+    "code": "1088",
+    "date": "10.05",
+    "time": "19:00",
+    "name": "Babelsberg - Halberstadt",
+    "one": "1.29",
+    "two": "5.10",
+    "x": "8.25"
+  },
+  {
+    "code": "1063",
+    "date": "09.05",
+    "time": "21:15",
+    "name": "Keflavik W - Breidablik W",
+    "one": "13.0",
+    "two": "6.60",
+    "x": "1.13"
+  },
+  {
+    "code": "154",
+    "date": "10.05",
+    "time": "12:30",
+    "name": "Urawa - Sagan Tosu",
+    "one": "1.58",
+    "two": "3.85",
+    "x": "5.75"
+  },
+  {
+    "code": "229",
+    "date": "10.05",
+    "time": "14:00",
+    "name": "Maqtaaral - Astana",
+    "one": "7.90",
+    "two": "3.95",
+    "x": "1.35"
+  },
+  {
+    "code": "1078",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Kazma SC - Al Kuwait",
+    "one": "6.30",
+    "two": "4.15",
+    "x": "1.40"
+  },
+  {
+    "code": "203",
+    "date": "09.05",
+    "time": "17:00",
+    "name": "Jelgava - Metta/LU",
+    "one": "2.70",
+    "two": "3.30",
+    "x": "2.25"
+  },
+  {
+    "code": "522",
+    "date": "09.05",
+    "time": "20:00",
+    "name": "U. San Martin - Union Huaral",
+    "one": "2.30",
+    "two": "3.20",
+    "x": "2.80"
+  },
+  {
+    "code": "523",
+    "date": "09.05",
+    "time": "22:30",
+    "name": "Pirata - Juan Aurich",
+    "one": "2.45",
+    "two": "3.25",
+    "x": "2.50"
+  },
+  {
+    "code": "524",
+    "date": "10.05",
+    "time": "20:00",
+    "name": "Carlos Stein - Comerciantes",
+    "one": "1.73",
+    "two": "3.35",
+    "x": "4.40"
+  },
+  {
+    "code": "147",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Al-Ahli Doha - Al Markhiya",
+    "one": "2.45",
+    "two": "3.55",
+    "x": "2.35"
+  },
+  {
+    "code": "1080",
+    "date": "09.05",
+    "time": "18:30",
+    "name": "Portimonense U23 - Estrela U23",
+    "one": "2.50",
+    "two": "3.30",
+    "x": "2.45"
+  },
+  {
+    "code": "1089",
+    "date": "10.05",
+    "time": "18:00",
+    "name": "Poli Iasi - Steaua Bucuresti",
+    "one": "2.35",
+    "two": "3.00",
+    "x": "3.10"
+  },
+  {
+    "code": "1090",
+    "date": "11.05",
+    "time": "16:30",
+    "name": "Unirea Dej - Gloria Buzau",
+    "one": "3.10",
+    "two": "3.00",
+    "x": "2.30"
+  },
+  {
+    "code": "142",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Al Feiha - Al-Fateh",
+    "one": "2.70",
+    "two": "3.20",
+    "x": "2.45"
+  },
+  {
+    "code": "143",
+    "date": "09.05",
+    "time": "18:00",
+    "name": "Al-Taawon - Al Raed",
+    "one": "1.63",
+    "two": "4.00",
+    "x": "4.45"
+  },
+  {
+    "code": "144",
+    "date": "10.05",
+    "time": "18:00",
+    "name": "Al Batin - Al Taee",
+    "one": "3.20",
+    "two": "3.50",
+    "x": "2.05"
+  },
+  {
+    "code": "263",
+    "date": "09.05",
+    "time": "18:15",
+    "name": "Al-Qaisumah - Jeddah Club",
+    "one": "2.55",
+    "two": "3.30",
+    "x": "2.55"
+  },
+  {
+    "code": "264",
+    "date": "09.05",
+    "time": "19:45",
+    "name": "Al Ahli Jeddah - Al Arabi",
+    "one": "1.40",
+    "two": "4.10",
+    "x": "7.50"
+  },
+  {
+    "code": "1081",
+    "date": "10.05",
+    "time": "14:50",
+    "name": "Al-Ain Atawlah - Al-Hazem",
+    "one": "4.15",
+    "two": "3.15",
+    "x": "1.80"
+  },
+  {
+    "code": "1082",
+    "date": "10.05",
+    "time": "17:15",
+    "name": "Al-Sahel - Najran",
+    "one": "2.25",
+    "two": "2.90",
+    "x": "3.15"
+  },
+  {
+    "code": "1083",
+    "date": "10.05",
+    "time": "18:15",
+    "name": "Al-Faisaly - Al Qadisiya",
+    "one": "1.85",
+    "two": "2.90",
+    "x": "4.35"
+  },
+  {
+    "code": "1084",
+    "date": "10.05",
+    "time": "18:20",
+    "name": "Al Kholood - Al-Akhdoud",
+    "one": "3.60",
+    "two": "2.95",
+    "x": "2.00"
+  },
+  {
+    "code": "76",
+    "date": "09.05",
+    "time": "20:45",
+    "name": "Partick - Queen\u0027s Park",
+    "one": "1.78",
+    "two": "3.65",
+    "x": "4.25"
+  },
+  {
+    "code": "77",
+    "date": "09.05",
+    "time": "20:45",
+    "name": "Airdrieonians - Falkirk",
+    "one": "2.45",
+    "two": "3.20",
+    "x": "2.85"
+  },
+  {
+    "code": "78",
+    "date": "09.05",
+    "time": "20:45",
+    "name": "Alloa - Hamilton",
+    "one": "2.30",
+    "two": "3.30",
+    "x": "3.00"
+  },
+  {
+    "code": "74",
+    "date": "09.05",
+    "time": "20:45",
+    "name": "Annan - Dumbarton",
+    "one": "1.93",
+    "two": "3.40",
+    "x": "3.90"
+  },
+  {
+    "code": "75",
+    "date": "09.05",
+    "time": "21:00",
+    "name": "East Fife - Clyde",
+    "one": "2.55",
+    "two": "3.30",
+    "x": "2.65"
+  },
+  {
+    "code": "240",
+    "date": "10.05",
+    "time": "11:00",
+    "name": "Philippines U22 - Myanmar U22",
+    "one": "5.25",
+    "two": "3.60",
+    "x": "1.60"
+  },
+  {
+    "code": "241",
+    "date": "10.05",
+    "time": "14:00",
+    "name": "Cambodia U22 - Indonesia U22",
+    "one": "4.70",
+    "two": "4.50",
+    "x": "1.48"
+  },
+  {
+    "code": "151",
+    "date": "10.05",
+    "time": "12:30",
+    "name": "Daejeon - Suwon City",
+    "one": "2.05",
+    "two": "3.35",
+    "x": "3.30"
+  },
+  {
+    "code": "152",
+    "date": "10.05",
+    "time": "12:30",
+    "name": "Jeju Utd - Incheon Utd",
+    "one": "2.25",
+    "two": "3.15",
+    "x": "3.00"
+  },
+  {
+    "code": "153",
+    "date": "10.05",
+    "time": "12:30",
+    "name": "Suwon BW - Jeonbuk",
+    "one": "2.95",
+    "two": "3.20",
+    "x": "2.25"
+  },
+  {
+    "code": "189",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Hammarby - Mjallby",
+    "one": "1.65",
+    "two": "3.60",
+    "x": "5.30"
+  },
+  {
+    "code": "190",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Varnamo - Varbergs",
+    "one": "1.88",
+    "two": "3.25",
+    "x": "4.35"
+  },
+  {
+    "code": "191",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Landskrona - Helsingborg",
+    "one": "2.25",
+    "two": "3.25",
+    "x": "3.10"
+  },
+  {
+    "code": "611",
+    "date": "09.05",
+    "time": "19:00",
+    "name": "Djurgarden W - Pitea W",
+    "one": "3.00",
+    "two": "3.20",
+    "x": "2.15"
+  },
+  {
+    "code": "1046",
+    "date": "11.05",
+    "time": "16:15",
+    "name": "Al-Jazira - Ittihad Kalba",
+    "one": "1.50",
+    "two": "3.95",
+    "x": "5.20"
+  },
+  {
+    "code": "1047",
+    "date": "11.05",
+    "time": "16:15",
+    "name": "Khorfakkan - Al Wasl",
+    "one": "3.75",
+    "two": "3.80",
+    "x": "1.73"
+  },
+  {
+    "code": "215",
+    "date": "10.05",
+    "time": "01:00",
+    "name": "Charlotte - Orlando City",
+    "one": "2.50",
+    "two": "3.10",
+    "x": "2.60"
+  },
+  {
+    "code": "216",
+    "date": "10.05",
+    "time": "01:00",
+    "name": "Inter Miami - Charleston",
+    "one": "1.48",
+    "two": "3.75",
+    "x": "6.10"
+  },
+  {
+    "code": "217",
+    "date": "10.05",
+    "time": "01:30",
+    "name": "New England - Pittsburgh",
+    "one": "1.45",
+    "two": "3.85",
+    "x": "6.00"
+  },
+  {
+    "code": "218",
+    "date": "10.05",
+    "time": "01:30",
+    "name": "New York RB - DC United",
+    "one": "1.68",
+    "two": "3.25",
+    "x": "4.80"
+  },
+  {
+    "code": "219",
+    "date": "10.05",
+    "time": "02:00",
+    "name": "Chicago Fire - St. Louis City",
+    "one": "1.90",
+    "two": "3.35",
+    "x": "3.45"
+  },
+  {
+    "code": "220",
+    "date": "10.05",
+    "time": "02:30",
+    "name": "Minnesota United - Philadelphia",
+    "one": "2.30",
+    "two": "3.25",
+    "x": "2.75"
+  },
+  {
+    "code": "221",
+    "date": "10.05",
+    "time": "04:30",
+    "name": "Monterey Bay - Los Angeles FC",
+    "one": "4.75",
+    "two": "3.80",
+    "x": "1.58"
+  },
+  {
+    "code": "222",
+    "date": "10.05",
+    "time": "04:30",
+    "name": "Sacramento R. - Colorado R.",
+    "one": "2.45",
+    "two": "3.25",
+    "x": "2.55"
+  },
+  {
+    "code": "223",
+    "date": "11.05",
+    "time": "01:00",
+    "name": "FC Cincinnati - New York City",
+    "one": "2.20",
+    "two": "3.35",
+    "x": "2.80"
+  },
+  {
+    "code": "224",
+    "date": "11.05",
+    "time": "01:00",
+    "name": "Loudoun - Columbus",
+    "one": "4.70",
+    "two": "3.50",
+    "x": "1.63"
+  },
+  {
+    "code": "1065",
+    "date": "11.05",
+    "time": "02:00",
+    "name": "Birmingham - Memphis",
+    "one": "1.93",
+    "two": "3.30",
+    "x": "3.45"
+  },
+  {
+    "code": "225",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "Houston D. - Kansas City",
+    "one": "1.80",
+    "two": "3.35",
+    "x": "3.90"
+  },
+  {
+    "code": "226",
+    "date": "11.05",
+    "time": "02:30",
+    "name": "Nashville SC - Dallas",
+    "one": "1.90",
+    "two": "3.20",
+    "x": "3.65"
+  },
+  {
+    "code": "227",
+    "date": "11.05",
+    "time": "04:30",
+    "name": "LA Galaxy - Seattle S.",
+    "one": "2.30",
+    "two": "3.20",
+    "x": "2.80"
+  },
+  {
+    "code": "228",
+    "date": "11.05",
+    "time": "04:30",
+    "name": "Portland T. - Salt Lake",
+    "one": "1.85",
+    "two": "3.25",
+    "x": "3.85"
+  }
+]
