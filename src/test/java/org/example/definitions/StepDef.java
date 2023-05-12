@@ -1,6 +1,8 @@
 package org.example.definitions;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.cucumber.java.After;
@@ -11,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.page_factory.*;
 import org.example.test_data_bils.DataFile;
+import org.example.test_data_bils.Match;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +24,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -98,6 +103,13 @@ public class StepDef {
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
     }
+    @Given("reade data data1")
+    public void reade_data_data1() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Match> objects = mapper.readValue(new File("/home/marko/IdeaProjects/CRMFront/src/test/resources/json/data.json"), new TypeReference<List<Match>>(){});
+
+        System.out.println(objects.size());
+    }
     @When("choose which period you are watching {string}")
     public void choose_which_period_you_are_watching(String hours) throws InterruptedException {
        maxBet.clickSlider(hours);
@@ -131,5 +143,32 @@ public class StepDef {
     public void write_all_match_in_document() {
           maxBet.writeMatch();
     }
+    @Then("compare odds")
+    public void compare_odds() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Match[] matchHome = objectMapper.readValue(new File("src/test/resources/json/data2.json"), Match[].class);
+        // Učitamo JSON fajl kao niz objekata tipa Osoba
+        Match[] matchOsobe = objectMapper.readValue(new File("src/test/resources/json/data2.json"), Match[].class);
 
-}
+        // Pronađemo objekat sa odgovarajućim parametrima
+        Match trazenaOsoba = null;
+        for (Match match : matchOsobe) {
+            if (match.getName().contains("Shanghai")) {
+                trazenaOsoba = match;
+                break;
+            }
+        }
+
+        // Ispisujemo pronađeni objekat
+        System.out.println(trazenaOsoba);
+
+        Match[] matchsHome = objectMapper.readValue(new File("src/test/resources/json/data2.json"), Match[].class);
+
+        for (int i = 0; i < matchsHome.length; i++) {
+
+        }
+    }
+
+    }
+
+
