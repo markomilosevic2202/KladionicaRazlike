@@ -58,7 +58,7 @@ public class StepDef {
 
     public void before() throws FileNotFoundException {
         System.setProperty("webdriver.chrome.driver",
-                "src/main/resources/chromedriver");
+                "src/test/resources/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(chromeOptions);
@@ -92,14 +92,11 @@ public class StepDef {
     }
 
 
-
-
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
     }
-
 
 
     @When("choose which period you are watching {string}")
@@ -153,49 +150,53 @@ public class StepDef {
         List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchDiscard = new ArrayList<>();
 
-        for (int i = 0; i < matchForeign.length; i++) {
+        for (int i = 0; i < matchHome.length; i++) {
 
-            Match mathForeignBetting = matchForeign[i];
-            String name = mathForeignBetting.getName().toLowerCase();
-            String time = mathForeignBetting.getTime();
-            String nameHome = name.substring(0, name.indexOf(" -"));
-            String nameForeign = name.substring(name.lastIndexOf("- ") + 1);
+           // Match matchHomeBetting = matchForeign[i];
+            String nameHomeBetting = matchHomeBetting.getName().toLowerCase();
+            String timeHomeBetting = matchHomeBetting.getTime();
+            String nameHomeTime = nameHomeBetting.substring(0, nameHomeBetting.indexOf(" -"));
+            String nameForeign = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
 
 
+            for (int j = 0; j < matchForeign.length; j++) {
+                Match matchForeignBetting = matchHome[j];
+                String nameForeignBetting = matchForeignBetting.getName().toLowerCase();
+                String timeForeignBetting = matchForeignBetting.getTime();
 
-            for (int j = 0; j < matchHome.length; j++) {
-                Match matchHomeBetting = matchHome[j];
 
-                String nameBetting = matchHomeBetting.getName().toLowerCase();
-                if (nameBetting.contains(name.substring(0, 4)) && time.contains(matchHomeBetting.getTime())) {
+                if (nameForeignBetting.contains(nameHomeBetting.substring(0, 4)) && timeHomeBetting.equals(timeForeignBetting)) {
                     System.out.println("1");
-                    System.out.println(matchHomeBetting.getTime());
-                    System.out.println(time);
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+                    System.out.println("Domaca: " + timeHomeBetting + " Strana: "+ timeForeignBetting);
+                    System.out.println("Domaca: " + nameHomeBetting);
+                    System.out.println("Strana: " + nameForeignBetting);
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
                     break;
-                } else if (nameBetting.contains(name.substring((name.length()) - 4, name.length())) && time.contains(matchHomeBetting.getTime())) {
+                } else if (nameForeignBetting.contains(nameHomeBetting.substring((nameHomeBetting.length()) - 4, nameHomeBetting.length())) && timeHomeBetting.equals(timeForeignBetting)) {
                     System.out.println("2");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
-                    break;
-                } else if (nameBetting.contains(nameHome.substring((nameHome.length()) - 3, nameHome.length())) && time.contains(matchHomeBetting.getTime())) {
-                    System.out.println("3");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+                    System.out.println("Domaca: " + timeHomeBetting + " Strana: "+ timeForeignBetting);
+                    System.out.println("Domaca: " + nameHomeBetting);
+                    System.out.println("Strana: " + nameForeignBetting);
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
                     break;
 
-                } else if (nameBetting.contains(nameHome.substring(0, 3)) && time.contains(matchHomeBetting.getTime())) {
+                } else if (nameForeignBetting.contains(nameHomeTime.substring((nameHomeTime.length()) - 3, nameHomeTime.length())) && timeHomeBetting.equals(timeForeignBetting)) {
+                    System.out.println("3");
+                    System.out.println("Domaca: " + timeHomeBetting + " Strana: "+ timeForeignBetting);
+                    System.out.println("Domaca: " + nameHomeBetting);
+                    System.out.println("Strana: " + nameForeignBetting);
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+                    break;
+
+                } else if (nameForeignBetting.contains(nameHomeTime.substring(0, 3)) && timeHomeBetting.equals(timeForeignBetting)) {
                     System.out.println("4");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+                    System.out.println("Domaca: " + timeHomeBetting + " Strana: "+ timeForeignBetting);
+                    System.out.println("Domaca: " + nameHomeBetting);
+                    System.out.println("Strana: " + nameForeignBetting);
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
                     break;
                 } else {
-                    matchDiscard.add(matchHomeBetting);
+                   matchDiscard.add(matchHomeBetting);
                 }
             }
         }
@@ -259,7 +260,7 @@ public class StepDef {
 
         MatchDifferences matchDifferences = new MatchDifferences();
         matchDifferences.setTime(matchHomeBetting.getTime());
-        matchDifferences.setCodeHome(matchHomeBetting.getCode());
+//        matchDifferences.setCodeHome(matchHomeBetting.getCode());
         matchDifferences.setDate(matchHomeBetting.getDate());
         matchDifferences.setName(matchHomeBetting.getName());
         matchDifferences.setOneHome(matchHomeBetting.getOne());
@@ -328,7 +329,7 @@ public class StepDef {
             MatchDifferences match = matchDifferences[i];
             int cellnum1 = 1;
             Cell cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getCodeHome());
+            cell1.setCellValue("match.getCodeHome()");
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getDate());
             cell1 = row.createCell(cellnum1++);
@@ -367,8 +368,6 @@ public class StepDef {
         }
 
     }
-
-
 
 
 //    static void sendEmail() {
