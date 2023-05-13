@@ -16,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.page_factory.*;
 import org.example.test_data_bils.Match;
+import org.example.test_data_bils.MatchDifferences;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -149,18 +150,17 @@ public class StepDef {
         System.out.println(matchHome.length);
         System.out.println(matchForeign.length);
 
-        List<Match> matchesBingo = new ArrayList<>();
+        List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchDiscard = new ArrayList<>();
 
         for (int i = 0; i < matchForeign.length; i++) {
 
-            System.out.println("Br utakmica " + matchForeign.length);
             Match mathForeignBetting = matchForeign[i];
             String name = mathForeignBetting.getName().toLowerCase();
             String time = mathForeignBetting.getTime();
             String nameHome = name.substring(0, name.indexOf(" -"));
             String nameForeign = name.substring(name.lastIndexOf("- ") + 1);
-            System.out.println(nameForeign);
+
 
 
             for (int j = 0; j < matchHome.length; j++) {
@@ -217,63 +217,71 @@ public class StepDef {
     @Then("sort data en write in excel")
     public void sort_data_en_write_in_excel() throws IOException {
 
-        Match[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), Match[].class);
-        for (int i = 0; i < matchArray.length - 1; i++) {
-            for (int j = i + 1; j < matchArray.length; j++) {
-
-                double iValueOne = Double.parseDouble(matchArray[i].getOne());
-                double iMax = iValueOne;
-                double iValueTwo = Double.parseDouble(matchArray[i].getTwo());
-                if (iMax < iValueTwo){
-                    iMax = iValueTwo;
-                }
-                double iValueX = Double.parseDouble(matchArray[i].getX());
-                if (iMax < iValueX){
-                    iMax = iValueX;
-                }
-
-                double jValueOne = Double.parseDouble(matchArray[j].getOne());
-                double jMax = jValueOne;
-                double jValueTwo = Double.parseDouble(matchArray[j].getTwo());
-                if (jMax < jValueTwo){
-                    jMax = jValueTwo;
-                }
-                double jValueX = Double.parseDouble(matchArray[j].getX());
-                if (jMax < jValueX){
-                    jMax = jValueX;
-                }
-                //|| jValueTwo > iValue || jValueX > iValue
-                if (jMax > iMax) {
-                    Match temp = matchArray[i];
-                    matchArray[i] = matchArray[j];
-                    matchArray[j] = temp;
-
-                }
-            }
-        }
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
+//        for (int i = 0; i < matchArray.length - 1; i++) {
+//            for (int j = i + 1; j < matchArray.length; j++) {
+//
+//                double iValueOne = Double.parseDouble(matchArray[i].getOneDifferences());
+//                double iMax = iValueOne;
+//                double iValueTwo = Double.parseDouble(matchArray[i].getTwoDifferences());
+//                if (iMax < iValueTwo){
+//                    iMax = iValueTwo;
+//                }
+//                double iValueX = Double.parseDouble(matchArray[i].getXDifferences());
+//                if (iMax < iValueX){
+//                    iMax = iValueX;
+//                }
+//
+//                double jValueOne = Double.parseDouble(matchArray[j].getOneDifferences());
+//                double jMax = jValueOne;
+//                double jValueTwo = Double.parseDouble(matchArray[j].getTwoDifferences());
+//                if (jMax < jValueTwo){
+//                    jMax = jValueTwo;
+//                }
+//                double jValueX = Double.parseDouble(matchArray[j].getXDifferences());
+//                if (jMax < jValueX){
+//                    jMax = jValueX;
+//                }
+//                //|| jValueTwo > iValue || jValueX > iValue
+//                if (jMax > iMax) {
+//                    MatchDifferences temp = matchArray[i];
+//                    matchArray[i] = matchArray[j];
+//                    matchArray[j] = temp;
+//
+//                }
+//            }
+//        }
         writeInExcel(matchArray);
 //        sendEmail();
     }
 
-    static Match differences(Match matchHomeBetting, Match matchForeignBetting) {
+    static MatchDifferences differences(Match matchHomeBetting, Match matchForeignBetting) {
 
-        Match match = new Match();
+        MatchDifferences matchDifferences = new MatchDifferences();
+        matchDifferences.setTime(matchHomeBetting.getTime());
+        matchDifferences.setCodeHome(matchHomeBetting.getCode());
+        matchDifferences.setDate(matchHomeBetting.getDate());
+        matchDifferences.setName(matchHomeBetting.getName());
+        matchDifferences.setOneHome(matchHomeBetting.getOne());
+        matchDifferences.setOneForeign(matchForeignBetting.getOne());
         double one = Double.parseDouble(matchHomeBetting.getOne()) - Double.parseDouble(matchForeignBetting.getOne());
-        match.setOne(Double.toString(Math.round(one * 100.0) / 100.0));
+        matchDifferences.setOneDifferences(Double.toString(Math.round(one * 100.0) / 100.0));
+
+        matchDifferences.setTwoHome(matchHomeBetting.getTwo());
+        matchDifferences.setTwoForeign(matchForeignBetting.getTwo());
         double two = Double.parseDouble(matchHomeBetting.getTwo()) - Double.parseDouble(matchForeignBetting.getTwo());
-        match.setTwo(Double.toString(Math.round(two * 100.0) / 100.0));
+        matchDifferences.setTwoDifferences(Double.toString(Math.round(two * 100.0) / 100.0));
+
+        matchDifferences.setXHome(matchHomeBetting.getX());
+        matchDifferences.setXForeign(matchForeignBetting.getX());
         double x = Double.parseDouble(matchHomeBetting.getX()) - Double.parseDouble(matchForeignBetting.getX());
-        match.setX(Double.toString(Math.round(x * 100.0) / 100.0));
-        match.setName(matchHomeBetting.getName());
-        match.setDate(matchHomeBetting.getDate());
-        match.setTime(matchHomeBetting.getTime());
+        matchDifferences.setXDifferences(Double.toString(Math.round(x * 100.0) / 100.0));
 
-
-        return match;
+        return matchDifferences;
 
     }
 
-    static void writeInExcel(Match[] matchDifferences) {
+    static void writeInExcel(MatchDifferences[] matchDifferences) {
 
 
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -286,45 +294,65 @@ public class StepDef {
         Row row = sheet.createRow(rownum++);
         int cellnum = 1;
         Cell cell = row.createCell(cellnum++);
+        cell.setCellValue("Sifra Domaca");
+        cell = row.createCell(cellnum++);
         cell.setCellValue("Datum");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Vreme");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Naziv");
         cell = row.createCell(cellnum++);
-        cell.setCellValue("Kec");
+        cell.setCellValue("Kec Domaca");
         cell = row.createCell(cellnum++);
-        cell.setCellValue("Razlika Kec");
+        cell.setCellValue("Kec Strana");
         cell = row.createCell(cellnum++);
-        cell.setCellValue("Dvojka");
+        cell.setCellValue("Kec Razlika");
         cell = row.createCell(cellnum++);
-        cell.setCellValue("Razlika Dvojka");
+        cell.setCellValue("Dvojka Domaca");
         cell = row.createCell(cellnum++);
-        cell.setCellValue("X");
+        cell.setCellValue("Dvojka Strana");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Dvojka Razlika");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("X Domaca");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("X Strana");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("X Razlika");
 
 
         for (int i = 0; i < matchDifferences.length; i++) {
 
 
             row = sheet.createRow(rownum++);
-            Match match = matchDifferences[i];
+            MatchDifferences match = matchDifferences[i];
             int cellnum1 = 1;
             Cell cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getCodeHome());
+            cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getDate());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getTime());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getName());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getOne());
+            cell1.setCellValue(match.getOneHome());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getTwo());
+            cell1.setCellValue(match.getOneForeign());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getTwo());
+            cell1.setCellValue(match.getOneDifferences());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getTwo());
+            cell1.setCellValue(match.getTwoHome());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getX());
+            cell1.setCellValue(match.getTwoForeign());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getTwoDifferences());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getXHome());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getXForeign());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getXDifferences());
 
         }
         try {
