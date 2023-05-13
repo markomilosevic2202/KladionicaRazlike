@@ -66,7 +66,7 @@ public class Foreign {
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
 
             Thread.sleep(300);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -74,11 +74,11 @@ public class Foreign {
             for (int j = 0; j < listMatchWeb.size(); j++) {
                 try {
                     Match match = new Match();
-                    match.setTime(listMatchWeb.get(i).findElement(By.xpath("tbody/tr/td")).getText());
-                    match.setName(listMatchWeb.get(i).findElement(By.xpath("tbody/tr/td[2]")).getText().replace("\n",""));
-                    match.setOne(listMatchWeb.get(i).findElement(By.xpath("tbody/tr/td[5]/div/div/div/span[1]")).getText());
-                    match.setTwo(listMatchWeb.get(i).findElement(By.xpath("tbody/tr/td[8]/div/div/div/span[1]")).getText());
-                    match.setX(listMatchWeb.get(i).findElement(By.xpath("tbody/tr/td[11]/div/div/div/span[1]")).getText());
+                    match.setTime(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td")).getText());
+                    match.setName(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[2]")).getText().replace("\n"," - "));
+                    match.setOne(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[5]/div/div/div/span[1]")).getText());
+                    match.setTwo(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[8]/div/div/div/span[1]")).getText());
+                    match.setX(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[11]/div/div/div/span[1]")).getText());
                     matches.add(match);
 
                 } catch (Throwable e) {
