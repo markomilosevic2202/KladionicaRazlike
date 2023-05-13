@@ -1,10 +1,7 @@
 package org.example.definitions;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.cucumber.java.After;
@@ -18,7 +15,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.page_factory.*;
-import org.example.test_data_bils.DataFile;
 import org.example.test_data_bils.Match;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,17 +24,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.io.*;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -53,15 +40,12 @@ public class StepDef {
 
     public static WebDriver driver;
 
-    public static String baseUrl = "http://178.220.24.117:9914//";
-
-
-    DataFile dataFile = new DataFile();
-
     Actions actions;
 
     MaxBet maxBet;
+
     Foreign foreign;
+
     ObjectMapper objectMapper;
 
 
@@ -79,12 +63,8 @@ public class StepDef {
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         driver.manage().window().maximize();
-        // driver.get(baseUrl);
         actions = new Actions(driver);
-        dataFile = readerData();
-
         maxBet = new MaxBet(driver);
         foreign = new Foreign(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -94,7 +74,6 @@ public class StepDef {
     @After(order = 1)
     public void teardown(Scenario scenario) throws IOException {
         if (scenario.isFailed()) {
-
             TakesScreenshot ts = (TakesScreenshot) driver;
             final byte[] src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(src, "image/png", "screenshot");
@@ -112,12 +91,7 @@ public class StepDef {
     }
 
 
-    public DataFile readerData() throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader("/home/marko/IdeaProjects/CRMFront/src/test/resources/json/data.json"));
-        Gson gson1 = new GsonBuilder().create();
-        DataFile dataObject = gson1.fromJson(br, DataFile.class);
-        return dataObject;
-    }
+
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
@@ -125,14 +99,7 @@ public class StepDef {
         driver.get(address);
     }
 
-    @Given("reade data data1")
-    public void reade_data_data1() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        List<Match> objects = mapper.readValue(new File("/home/marko/IdeaProjects/CRMFront/src/test/resources/json/data.json"), new TypeReference<List<Match>>() {
-        });
 
-        System.out.println(objects.size());
-    }
 
     @When("choose which period you are watching {string}")
     public void choose_which_period_you_are_watching(String hours) throws InterruptedException {
@@ -186,6 +153,7 @@ public class StepDef {
         List<Match> matchDiscard = new ArrayList<>();
 
         for (int i = 0; i < matchForeign.length; i++) {
+
             System.out.println("Br utakmica " + matchForeign.length);
             Match mathForeignBetting = matchForeign[i];
             String name = mathForeignBetting.getName().toLowerCase();
