@@ -66,7 +66,7 @@ public class Foreign {
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
 
             Thread.sleep(300);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -82,20 +82,17 @@ public class Foreign {
                     matches.add(match);
 
                 } catch (Throwable e) {
-                    System.out.println("Fali");
+
                 }
             }
             btnNext.click();
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        System.out.println(matches.size());
-        System.out.println(matches.size());
         Gson gson = new Gson();
         String json = gson.toJson(matches);
-        try (FileWriter fileWriter = new FileWriter("/home/marko/IdeaProjects/KladionicaRazlike/src/test/resources/json/data2.json")) {
+        try (FileWriter fileWriter = new FileWriter("src/test/resources/json/foreignBetting.json")) {
             fileWriter.write(json);
             fileWriter.flush();
-            System.out.println("upsao");
         } catch (IOException e) {
             e.printStackTrace();
         }

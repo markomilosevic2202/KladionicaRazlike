@@ -176,8 +176,8 @@ public class StepDef {
     @Then("compare odds")
     public void compare_odds() throws IOException {
 
-        Match[] matchHome = objectMapper.readValue(new File("src/test/resources/json/data.json"), Match[].class);
-        Match[] matchForeign = objectMapper.readValue(new File("src/test/resources/json/data2.json"), Match[].class);
+        Match[] matchHome = objectMapper.readValue(new File("src/test/resources/json/homeBetting.json"), Match[].class);
+        Match[] matchForeign = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
 
         System.out.println(matchHome.length);
         System.out.println(matchForeign.length);
@@ -237,7 +237,7 @@ public class StepDef {
 
         Gson gson = new Gson();
         String json = gson.toJson(matchesBingo);
-        try (FileWriter fileWriter = new FileWriter("/home/marko/IdeaProjects/KladionicaRazlike/src/test/resources/json/data3.json")) {
+        try (FileWriter fileWriter = new FileWriter("src/test/resources/json/ordinaryQuotaDifferences.json")) {
             fileWriter.write(json);
             fileWriter.flush();
             System.out.println("upsao");
@@ -249,7 +249,7 @@ public class StepDef {
     @Then("sort data en write in excel")
     public void sort_data_en_write_in_excel() throws IOException {
 
-        Match[] matchArray = objectMapper.readValue(new File("src/test/resources/json/data3.json"), Match[].class);
+        Match[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), Match[].class);
         for (int i = 0; i < matchArray.length - 1; i++) {
             for (int j = i + 1; j < matchArray.length; j++) {
 

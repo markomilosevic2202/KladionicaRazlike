@@ -120,10 +120,9 @@ public class MaxBet {
         System.out.println(matches.size());
         Gson gson = new Gson();
         String json = gson.toJson(matches);
-        try (FileWriter fileWriter = new FileWriter("/home/marko/IdeaProjects/KladionicaRazlike/src/test/resources/json/data.json")) {
+        try (FileWriter fileWriter = new FileWriter("src/test/resources/json/homeBetting.json")) {
             fileWriter.write(json);
             fileWriter.flush();
-            System.out.println("upsao");
         } catch (IOException e) {
             e.printStackTrace();
         }
