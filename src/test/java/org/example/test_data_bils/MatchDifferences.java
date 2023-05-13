@@ -12,7 +12,7 @@ import lombok.*;
 
 public class MatchDifferences {
 
-    private String codeHome;
+//    private String codeHome;
     private String date;
     private String time;
     private String name;
