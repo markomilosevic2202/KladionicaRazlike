@@ -144,64 +144,71 @@ public class StepDef {
     @Then("compare odds")
     public void compare_odds() throws IOException {
 
-        Match[] matchHomeBetting = objectMapper.readValue(new File("src/test/resources/json/homeBetting.json"), Match[].class);
-        Match[] matchForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
+        Match[] matchsHomeBetting = objectMapper.readValue(new File("src/test/resources/json/homeBetting.json"), Match[].class);
+        Match[] matchsForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
 
-        System.out.println("Home Betting: " + matchHomeBetting.length);
-        System.out.println("Foreign Betting: " + matchForeignBetting.length);
+        System.out.println("Home Betting: " + matchsHomeBetting.length);
+        System.out.println("Foreign Betting: " + matchsForeignBetting.length);
 
         List<MatchDifferences> matchesBingo = new ArrayList<>();
-        List<Match> matchDiscard = new ArrayList<>();
+        List<Match> matchesDiscard = new ArrayList<>();
 
-        for (int i = 0; i < matchForeignBetting.length; i++) {
+        for (int i = 0; i < matchsHomeBetting.length; i++) {
 
-            Match mathForeignBetting = matchForeignBetting[i];
-            String name = mathForeignBetting.getName().toLowerCase();
-            String time = mathForeignBetting.getTime();
-            String nameHome = name.substring(0, name.indexOf(" -"));
-            String nameForeign = name.substring(name.lastIndexOf("- ") + 1);
+            Match matchHomeBetting = matchsHomeBetting[i];
+            String nameHomeBetting = matchHomeBetting.getName().toLowerCase();
+            String timeHomeBetting = matchHomeBetting.getTime();
+            String nameHomeHomeBetting = nameHomeBetting.substring(0, nameHomeBetting.indexOf(" -"));
+            String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
+            Boolean bingo = false;
 
 
 
-            for (int j = 0; j < matchHomeBetting.length; j++) {
-                Match matchHomeBetting = matchHomeBetting[j];
+            for (int j = 0; j < matchsHomeBetting.length; j++) {
+                Match matchForeignBetting = matchsForeignBetting[j];
+                String nameForeignBetting = matchForeignBetting.getName().toLowerCase();
+                String timeForeignBetting = matchForeignBetting.getTime();
 
-                String nameBetting = matchHomeBetting.getName().toLowerCase();
-                if (nameBetting.contains(name.substring(0, 4)) && time.contains(matchHomeBetting.getTime())) {
+                if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting)) {
                     System.out.println("1");
-                    System.out.println(matchHomeBetting.getTime());
-                    System.out.println(time);
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
-                    break;
-                } else if (nameBetting.contains(name.substring((name.length()) - 4, name.length())) && time.contains(matchHomeBetting.getTime())) {
-                    System.out.println("2");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
-                    break;
-                } else if (nameBetting.contains(nameHome.substring((nameHome.length()) - 3, nameHome.length())) && time.contains(matchHomeBetting.getTime())) {
-                    System.out.println("3");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
-                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
-                    break;
+                    System.out.println("Name Home Betting:" + nameHomeBetting);
+                    System.out.println("Name Foreign Betting:" + nameForeignBetting;
 
-                } else if (nameBetting.contains(nameHome.substring(0, 3)) && time.contains(matchHomeBetting.getTime())) {
-                    System.out.println("4");
-                    System.out.println(name);
-                    System.out.println(matchHomeBetting.getName());
                     matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+                    bingo = true;
                     break;
-                } else {
-                    matchDiscard.add(matchHomeBetting);
-                }
+//                } else if (nameBetting.contains(name.substring((name.length()) - 4, name.length())) && time.contains(matchHomeBetting.getTime())) {
+//                    System.out.println("2");
+//                    System.out.println(name);
+//                    System.out.println(matchHomeBetting.getName());
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+//                    break;
+//                } else if (nameBetting.contains(nameHome.substring((nameHome.length()) - 3, nameHome.length())) && time.contains(matchHomeBetting.getTime())) {
+//                    System.out.println("3");
+//                    System.out.println(name);
+//                    System.out.println(matchHomeBetting.getName());
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+//                    break;
+//
+//                } else if (nameBetting.contains(nameHome.substring(0, 3)) && time.contains(matchHomeBetting.getTime())) {
+//                    System.out.println("4");
+//                    System.out.println(name);
+//                    System.out.println(matchHomeBetting.getName());
+//                    matchesBingo.add(differences(matchHomeBetting, mathForeignBetting));
+//                    break;
+//                } else {
+//                    matchDiscard.add(matchHomeBetting);
+               }
             }
+
+            if(bingo = true){
+                matchesDiscard.add(matchHomeBetting);
+            }
+
         }
         // Ispisujemo pronađeni objekat
         System.out.println(matchesBingo.size());
-        System.out.println(matchDiscard.size());
+        System.out.println(matchesDiscard.size());
 
         Gson gson = new Gson();
         String json = gson.toJson(matchesBingo);

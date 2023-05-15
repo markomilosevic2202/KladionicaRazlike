@@ -25,6 +25,7 @@ public class MatchDifferences {
     private String xHome;
     private String xForeign;
     private String xDifferences;
+    private String comparison;
 
 
 }
