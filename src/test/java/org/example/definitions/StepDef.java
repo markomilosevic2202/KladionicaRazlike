@@ -144,18 +144,18 @@ public class StepDef {
     @Then("compare odds")
     public void compare_odds() throws IOException {
 
-        Match[] matchHome = objectMapper.readValue(new File("src/test/resources/json/homeBetting.json"), Match[].class);
-        Match[] matchForeign = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
+        Match[] matchHomeBetting = objectMapper.readValue(new File("src/test/resources/json/homeBetting.json"), Match[].class);
+        Match[] matchForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
 
-        System.out.println(matchHome.length);
-        System.out.println(matchForeign.length);
+        System.out.println("Home Betting: " + matchHomeBetting.length);
+        System.out.println("Foreign Betting: " + matchForeignBetting.length);
 
         List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchDiscard = new ArrayList<>();
 
-        for (int i = 0; i < matchForeign.length; i++) {
+        for (int i = 0; i < matchForeignBetting.length; i++) {
 
-            Match mathForeignBetting = matchForeign[i];
+            Match mathForeignBetting = matchForeignBetting[i];
             String name = mathForeignBetting.getName().toLowerCase();
             String time = mathForeignBetting.getTime();
             String nameHome = name.substring(0, name.indexOf(" -"));
@@ -163,8 +163,8 @@ public class StepDef {
 
 
 
-            for (int j = 0; j < matchHome.length; j++) {
-                Match matchHomeBetting = matchHome[j];
+            for (int j = 0; j < matchHomeBetting.length; j++) {
+                Match matchHomeBetting = matchHomeBetting[j];
 
                 String nameBetting = matchHomeBetting.getName().toLowerCase();
                 if (nameBetting.contains(name.substring(0, 4)) && time.contains(matchHomeBetting.getTime())) {
