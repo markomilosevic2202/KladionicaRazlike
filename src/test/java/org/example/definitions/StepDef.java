@@ -157,6 +157,7 @@ public class StepDef {
 
             Match matchHomeBetting = matchsHomeBetting[i];
             String nameHomeBetting = matchHomeBetting.getName().toLowerCase();
+            String dateHomeBetting = matchHomeBetting.getDate().substring(0,2);
             String timeHomeBetting = matchHomeBetting.getTime();
             String nameHomeHomeBetting = nameHomeBetting.substring(0, nameHomeBetting.indexOf(" -"));
             String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
@@ -168,15 +169,16 @@ public class StepDef {
                 Match matchForeignBetting = matchsForeignBetting[j];
                 String nameForeignBetting = matchForeignBetting.getName().toLowerCase();
                 String timeForeignBetting = matchForeignBetting.getTime();
+                String dateForeignBetting = matchForeignBetting.getDate().substring(matchForeignBetting.getDate().length()-2, matchForeignBetting.getDate().length());
 
-                if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting)) {
+                if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                     System.out.println("1");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
                     matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
                     bingo = true;
                     break;
-                } else if (nameForeignBetting.contains(nameHomeHomeBetting)  && timeForeignBetting.contains(timeHomeBetting)) {
+                } else if (nameForeignBetting.contains(nameHomeHomeBetting)  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                     System.out.println("2");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
@@ -184,7 +186,7 @@ public class StepDef {
                     bingo = true;
                     break;
                 }
-                 else if (nameForeignBetting.contains(nameGuestHomeBetting)  && timeForeignBetting.contains(timeHomeBetting)) {
+                 else if (nameForeignBetting.contains(nameGuestHomeBetting)  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                     System.out.println("3");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
@@ -195,7 +197,7 @@ public class StepDef {
                 try {
 
 
-                    if (nameForeignBetting.contains(nameHomeHomeBetting.substring(0,6))  && timeForeignBetting.contains(timeHomeBetting)) {
+                    if (nameForeignBetting.contains(nameHomeHomeBetting.substring(0,6))  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                         System.out.println("4");
                         System.out.println("Name Home Betting:" + nameHomeBetting);
                         System.out.println("Name Foreign Betting:" + nameForeignBetting);
@@ -203,7 +205,7 @@ public class StepDef {
                         bingo = true;
                         break;
                     }
-                    else if (nameForeignBetting.contains(nameGuestHomeBetting.substring(0,6))  && timeForeignBetting.contains(timeHomeBetting)) {
+                    else if (nameForeignBetting.contains(nameGuestHomeBetting.substring(0,6))  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                         System.out.println("5");
                         System.out.println("Name Home Betting:" + nameHomeBetting);
                         System.out.println("Name Foreign Betting:" + nameForeignBetting);
@@ -225,7 +227,7 @@ public class StepDef {
                  try {
 
 
-                if (nameForeignBetting.contains(nameHomeHomeBetting.substring(0,5))  && timeForeignBetting.contains(timeHomeBetting)) {
+                if (nameForeignBetting.contains(nameHomeHomeBetting.substring(0,5))  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                     System.out.println("6");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
@@ -233,7 +235,7 @@ public class StepDef {
                     bingo = true;
                     break;
                 }
-                else if (nameForeignBetting.contains(nameGuestHomeBetting.substring(0,5))  && timeForeignBetting.contains(timeHomeBetting)) {
+                else if (nameForeignBetting.contains(nameGuestHomeBetting.substring(0,5))  && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
                     System.out.println("7");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);

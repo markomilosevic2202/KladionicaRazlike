@@ -15,9 +15,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class Foreign {
@@ -65,20 +68,33 @@ public class Foreign {
 //        List<Match> matches = gson.fromJson(matchesString, ArrayList.class);
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
+
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDate afterTomorrow = today.plusDays(2);
+
+
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i <5; i++) {
+        for (int i = 0; i < 10; i++) {
 
             Thread.sleep(500);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 //        driver.findElement(By.xpath("//*[contains(@class, 'biab_group-markets-table js-inplay-market')]"));
             for (int j = 0; j < listMatchWeb.size(); j++) {
                 try {
+                    String datePage = listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td")).getText();
                     Match match = new Match();
-                    match.setTime(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td")).getText());
-                    match.setName(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[2]")).getText().replace("\n"," - "));
+                    match.setTime(datePage);
+                    match.setName(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[2]")).getText().replace("\n", " - "));
                     match.setOne(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[5]/div/div/div/span[1]")).getText());
                     match.setX(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[8]/div/div/div/span[1]")).getText());
                     match.setTwo(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[11]/div/div/div/span[1]")).getText());
+                    if (datePage.contains("Tomorrow")) {
+                        match.setDate(tomorrow.toString());
+                    } else if (datePage.contains("Wednesday") || datePage.contains("Thursday") || datePage.contains("Friday") || datePage.contains("Saturday")
+                            || datePage.contains("Sunday") || datePage.contains("Monday") || datePage.contains("Tuesday")) {
+                        match.setDate(afterTomorrow.toString());
+                    } else match.setDate(today.toString());
                     matches.add(match);
 
                 } catch (Throwable e) {
@@ -99,17 +115,12 @@ public class Foreign {
     }
 
 
-
-
-
-
-
 //         match1.setName(listMatchWeb.get(i).findElement(By.xpath("//*[contains(@class, 'biab_market-title-team-names js-teams')]")).getText());
 //            match1.setTime(listMatchWeb.get(i).findElement(By.xpath("//*[contains(@class, 'biab_market-time')]")).getText());
 //            match1.setOne(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(1).getText());
 //            match1.setTwo(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(5).getText());
 //            match1.setOne(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(3).getText());
-    }
+}
 
 
 
