@@ -16,6 +16,7 @@ public class MatchDifferences {
     private String date;
     private String time;
     private String name;
+    private String nameForeign;
     private String oneHome;
     private String oneForeign;
     private String oneDifferences;

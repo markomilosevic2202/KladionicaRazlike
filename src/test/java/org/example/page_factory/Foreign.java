@@ -66,9 +66,9 @@ public class Foreign {
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i <5; i++) {
 
-            Thread.sleep(300);
+            Thread.sleep(500);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 //        driver.findElement(By.xpath("//*[contains(@class, 'biab_group-markets-table js-inplay-market')]"));
             for (int j = 0; j < listMatchWeb.size(); j++) {
