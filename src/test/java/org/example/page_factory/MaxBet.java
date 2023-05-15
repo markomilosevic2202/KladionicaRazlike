@@ -109,8 +109,8 @@ public class MaxBet {
                         "        \"code\": e.querySelector('.cc-match-code').innerText,\n" +
                         "        \"name\": e.querySelector('.teams-overflow').textContent.replaceAll('\\n', ''),\n" +
                         "        \"one\": e.getElementsByTagName('odd')[0].outerText,\n" +
-                        "        \"two\": e.getElementsByTagName('odd')[1].outerText,\n" +
-                        "        \"x\": e.getElementsByTagName('odd')[2].outerText,\n" +
+                        "        \"x\": e.getElementsByTagName('odd')[1].outerText,\n" +
+                        "        \"two\": e.getElementsByTagName('odd')[2].outerText,\n" +
                         "        \"time\": e.querySelector('.cc-match-kickoff').outerText.split(' ')[1],\n" +
                         "        \"date\": e.querySelector('.cc-match-kickoff').outerText.split(' ')[0]\n" +
                         "\n" +

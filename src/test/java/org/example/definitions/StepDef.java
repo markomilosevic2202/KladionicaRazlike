@@ -173,14 +173,14 @@ public class StepDef {
                     System.out.println("1");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
-                    matchesBingo.add(differences(matchHomeBetting, matchHomeBetting, "home & guest"));
+                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
                     bingo = true;
                     break;
                 } else if (nameForeignBetting.contains(nameHomeHomeBetting)  && timeForeignBetting.contains(timeHomeBetting)) {
                     System.out.println("2");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
-                    matchesBingo.add(differences(matchHomeBetting, matchHomeBetting, "home"));
+                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home"));
                     bingo = true;
                     break;
                 }
@@ -188,7 +188,7 @@ public class StepDef {
                     System.out.println("3");
                     System.out.println("Name Home Betting:" + nameHomeBetting);
                     System.out.println("Name Foreign Betting:" + nameForeignBetting);
-                    matchesBingo.add(differences(matchHomeBetting, matchHomeBetting, "guest"));
+                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest"));
                     bingo = true;
                     break;
                 }
@@ -211,6 +211,9 @@ public class StepDef {
         // Ispisujemo pronađeni objekat
         System.out.println("Bingo: " + matchesBingo.size());
         System.out.println("Discard: " + matchesDiscard.size());
+        for (int i = 0; i < ; i++) {
+            
+        }
 
         Gson gson = new Gson();
         String json = gson.toJson(matchesBingo);
@@ -227,39 +230,39 @@ public class StepDef {
     public void sort_data_en_write_in_excel() throws IOException {
 
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
-//        for (int i = 0; i < matchArray.length - 1; i++) {
-//            for (int j = i + 1; j < matchArray.length; j++) {
-//
-//                double iValueOne = Double.parseDouble(matchArray[i].getOneDifferences());
-//                double iMax = iValueOne;
-//                double iValueTwo = Double.parseDouble(matchArray[i].getTwoDifferences());
-//                if (iMax < iValueTwo){
-//                    iMax = iValueTwo;
-//                }
+        for (int i = 0; i < matchArray.length - 1; i++) {
+            for (int j = i + 1; j < matchArray.length; j++) {
+
+                double iValueOne = Double.parseDouble(matchArray[i].getOneDifferences());
+                double iMax = iValueOne;
+                double iValueTwo = Double.parseDouble(matchArray[i].getTwoDifferences());
+                if (iMax < iValueTwo){
+                    iMax = iValueTwo;
+                }
 //                double iValueX = Double.parseDouble(matchArray[i].getXDifferences());
 //                if (iMax < iValueX){
 //                    iMax = iValueX;
 //                }
-//
-//                double jValueOne = Double.parseDouble(matchArray[j].getOneDifferences());
-//                double jMax = jValueOne;
-//                double jValueTwo = Double.parseDouble(matchArray[j].getTwoDifferences());
-//                if (jMax < jValueTwo){
-//                    jMax = jValueTwo;
-//                }
+
+                double jValueOne = Double.parseDouble(matchArray[j].getOneDifferences());
+                double jMax = jValueOne;
+                double jValueTwo = Double.parseDouble(matchArray[j].getTwoDifferences());
+                if (jMax < jValueTwo){
+                    jMax = jValueTwo;
+                }
 //                double jValueX = Double.parseDouble(matchArray[j].getXDifferences());
 //                if (jMax < jValueX){
 //                    jMax = jValueX;
 //                }
-//                //|| jValueTwo > iValue || jValueX > iValue
-//                if (jMax > iMax) {
-//                    MatchDifferences temp = matchArray[i];
-//                    matchArray[i] = matchArray[j];
-//                    matchArray[j] = temp;
-//
-//                }
-//            }
-//        }
+                //|| jValueTwo > iValue || jValueX > iValue
+                if (jMax > iMax) {
+                    MatchDifferences temp = matchArray[i];
+                    matchArray[i] = matchArray[j];
+                    matchArray[j] = temp;
+
+                }
+            }
+        }
         writeInExcel(matchArray);
 //        sendEmail();
     }
@@ -299,12 +302,15 @@ public class StepDef {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH mm ss");
         DecimalFormat df = new DecimalFormat("#.##"); // format kvota
         XSSFSheet sheet = workbook.createSheet(time.format(formatter));//formira shit
-        sheet.setColumnWidth(3, 10000); // širi kolonu
+        sheet.setColumnWidth(2, 5000);
+        sheet.setColumnWidth(5, 10000);// širi kolonu
         int rownum = 0;
         Row row = sheet.createRow(rownum++);
         int cellnum = 1;
         Cell cell = row.createCell(cellnum++);
         cell.setCellValue("Sifra Domaca");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Uhvacen");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Datum");
         cell = row.createCell(cellnum++);
@@ -339,6 +345,8 @@ public class StepDef {
             int cellnum1 = 1;
             Cell cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getCodeHome());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getComparison());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getDate());
             cell1 = row.createCell(cellnum1++);
