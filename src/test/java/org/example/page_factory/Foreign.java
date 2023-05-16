@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class Foreign {
     }
 
 
-    public void findMatches() throws InterruptedException {
+    public void findMatches(String hours) throws InterruptedException {
 //        Gson gson = new Gson();
 //        List<Match> list = new ArrayList<>();
 ////        for (int i = 0; i < 2; i++) {
@@ -68,10 +69,13 @@ public class Foreign {
 //        List<Match> matches = gson.fromJson(matchesString, ArrayList.class);
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate today = LocalDate.now();
+        String todayString = today.format(formatter);
         LocalDate tomorrow = today.plusDays(1);
-        LocalDate afterTomorrow = today.plusDays(2);
+        String tomorrowStrong = tomorrow.format(formatter);
+        LocalDate afterOneDayTomorrow = today.plusDays(2);
+        String afterOneDayTomorrowString = afterOneDayTomorrow.format(formatter);
 
 
         List<Match> matches = new ArrayList<>();
@@ -79,7 +83,7 @@ public class Foreign {
 
             Thread.sleep(500);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        driver.findElement(By.xpath("//*[contains(@class, 'biab_group-markets-table js-inplay-market')]"));
+
             for (int j = 0; j < listMatchWeb.size(); j++) {
                 try {
                     String datePage = listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td")).getText();
@@ -90,11 +94,11 @@ public class Foreign {
                     match.setX(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[8]/div/div/div/span[1]")).getText());
                     match.setTwo(listMatchWeb.get(j).findElement(By.xpath("tbody/tr/td[11]/div/div/div/span[1]")).getText());
                     if (datePage.contains("Tomorrow")) {
-                        match.setDate(tomorrow.toString());
+                        match.setDate(tomorrowStrong);
                     } else if (datePage.contains("Wednesday") || datePage.contains("Thursday") || datePage.contains("Friday") || datePage.contains("Saturday")
                             || datePage.contains("Sunday") || datePage.contains("Monday") || datePage.contains("Tuesday")) {
-                        match.setDate(afterTomorrow.toString());
-                    } else match.setDate(today.toString());
+                        match.setDate(afterOneDayTomorrowString);
+                    } else match.setDate(todayString);
                     matches.add(match);
 
                 } catch (Throwable e) {

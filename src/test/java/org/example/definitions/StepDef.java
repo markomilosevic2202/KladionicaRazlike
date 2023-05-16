@@ -49,6 +49,8 @@ public class StepDef {
 
     ObjectMapper objectMapper;
 
+    String hours;
+
 
 //    WebDriverWait wait = new WebDriverWait(driver, 10);
 //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -100,10 +102,9 @@ public class StepDef {
 
 
     @When("choose which period you are watching {string}")
-    public void choose_which_period_you_are_watching(String hours) throws InterruptedException {
-        Thread.sleep(2000);
-        actions.sendKeys(Keys.F5).perform();
-        maxBet.clickSlider(hours);
+    public void choose_which_period_you_are_watching(String hoursPage) throws InterruptedException {
+        hours = hoursPage;
+        maxBet.clickSlider(hoursPage);
         Thread.sleep(1000);
     }
 
@@ -132,7 +133,7 @@ public class StepDef {
 
     @When("take all the matches according to the given criteria")
     public void take_all_the_matches_according_to_the_given_criteria() throws InterruptedException {
-        foreign.findMatches();
+        foreign.findMatches(hours);
     }
 
     @Then("write all match in document")
@@ -157,7 +158,7 @@ public class StepDef {
 
             Match matchHomeBetting = matchsHomeBetting[i];
             String nameHomeBetting = matchHomeBetting.getName();
-            String dateHomeBetting = matchHomeBetting.getDate().substring(0, 2);
+            String dateHomeBetting = matchHomeBetting.getDate();
             String timeHomeBetting = matchHomeBetting.getTime();
             String nameHomeHomeBetting = nameHomeBetting.substring(0, nameHomeBetting.indexOf(" -"));
             String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
@@ -170,7 +171,7 @@ public class StepDef {
                 String nameHomeForeignBetting = nameForeignBetting.substring(0, nameForeignBetting.indexOf(" -"));
                 String nameGuestForeignBetting = nameForeignBetting.substring(nameForeignBetting.lastIndexOf("- ") + 1);
                 String timeForeignBetting = matchForeignBetting.getTime();
-                String dateForeignBetting = matchForeignBetting.getDate().substring(matchForeignBetting.getDate().length() - 2, matchForeignBetting.getDate().length());
+                String dateForeignBetting = matchForeignBetting.getDate().substring(0,5);
 
                 if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
 //                    System.out.println("1");
