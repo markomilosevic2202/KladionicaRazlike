@@ -27,6 +27,8 @@ public class MatchDifferences {
     private String xForeign;
     private String xDifferences;
     private String comparison;
+    private String counterQuota;
+    private String bet;
 
 
 }
