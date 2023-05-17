@@ -41,15 +41,20 @@ public class StepDef {
 
     public static WebDriver driver;
 
-    Actions actions;
+    private Actions actions;
 
-    MaxBet maxBet;
+    private MaxBet maxBet;
 
-    Foreign foreign;
+    private Foreign foreign;
 
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-    String hours;
+    private String hours;
+
+    static int numberMatchesHome;
+    static int numberMatchesForeign;
+    static int  numberMatchesBingo;
+    static int numberMatchesNotFound;
 
 
 //    WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -219,7 +224,33 @@ public class StepDef {
         int rownum = 0;
         Row row = sheet.createRow(rownum++);
         int cellnum = 1;
-        Cell cell = row.createCell(cellnum++);
+
+        Cell cell = row.createCell(2);
+        cell.setCellValue("Br. Domacih");
+        cell = row.createCell(3);
+        cell.setCellValue(numberMatchesHome);
+        row = sheet.createRow(rownum++);
+        cell = row.createCell(2);
+        cell.setCellValue("Br. Stranih");
+        cell = row.createCell(3);
+        cell.setCellValue(numberMatchesForeign);
+        row = sheet.createRow(rownum++);
+        cell = row.createCell(2);
+        cell.setCellValue("Br. Nadjenih");
+        cell = row.createCell(3);
+        cell.setCellValue(numberMatchesBingo);
+        row = sheet.createRow(rownum++);
+        cell = row.createCell(2);
+        cell.setCellValue("Br. Nenadjenih");
+        cell = row.createCell(3);
+        cell.setCellValue(numberMatchesNotFound);
+
+
+        cellnum = 1;
+        row = sheet.createRow(rownum++);
+        row = sheet.createRow(rownum++);
+        row = sheet.createRow(rownum++);
+        cell = row.createCell(cellnum++);
         cell.setCellValue("Sifra Domaca");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Uhvacen");
@@ -373,9 +404,6 @@ public class StepDef {
     public void compare(Match[] matchesHomeBetting, Match[] matchsForeignBetting, String nameFile) throws IOException {
 
 
-        System.out.println("Home Betting: " + matchesHomeBetting.length);
-        System.out.println("Foreign Betting: " + matchsForeignBetting.length);
-
         List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchesDiscard = new ArrayList<>();
 
@@ -493,13 +521,10 @@ public class StepDef {
             }
 
         }
-
-        System.out.println("Bingo: " + matchesBingo.size());
-        System.out.println("Discard: " + matchesDiscard.size());
-        for (int i = 0; i < matchesDiscard.size(); i++) {
-            System.out.println(matchesDiscard.get(i).toString());
-
-        }
+        numberMatchesHome = matchesHomeBetting.length;
+        numberMatchesForeign = matchsForeignBetting.length;
+        numberMatchesBingo = matchesBingo.size();
+        numberMatchesNotFound = matchesDiscard.size();
 
         writeJsonFileMatchDifferencesList(matchesBingo, nameFile);
     }
