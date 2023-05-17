@@ -99,7 +99,7 @@ public class MaxBet {
         }
     }
 
-    public void writeMatch() {
+    public List<Match> writeMatch() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         List<Match> matches = (List<Match>) js.executeScript(
                 "let list = document.querySelectorAll('.home-game.bck-col-1.ng-scope');\n" +
@@ -118,14 +118,7 @@ public class MaxBet {
                         "});\n" +
                         "return result;");
         System.out.println(matches.size());
-        Gson gson = new Gson();
-        String json = gson.toJson(matches);
-        try (FileWriter fileWriter = new FileWriter("src/test/resources/json/homeBetting.json")) {
-            fileWriter.write(json);
-            fileWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return matches;
 
 //        List<Match> listObject = new ArrayList<>();
 //        System.out.println(listMatchDiv.size());
@@ -143,7 +136,29 @@ public class MaxBet {
 //            match.setTwo(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd[2]")).getText());
 //            match.setX(element.findElement(By.xpath("match/span/div/div[5]/span[1]/odd[3]")).getText());
 //            listObject.add(match);
-//        }
+    }
+
+    public List<Match> writeBonusMatch() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        List<Match> matches = (List<Match>) js.executeScript(
+                "let list = document.querySelectorAll('.home-game.bck-col-1.ng-scope');\n" +
+                        "let result = [];\n" +
+                        "list.forEach(e=>{\n" +
+                        "    result.push({\n" +
+                        "        \"code\": e.querySelector('.cc-match-code').innerText,\n" +
+                        "        \"name\": e.querySelector('.teams-overflow').textContent.replaceAll('\\n', ''),\n" +
+                        "        \"one\": e.getElementsByTagName('odd')[0].outerText,\n" +
+                        "        \"x\": e.getElementsByTagName('odd')[1].outerText,\n" +
+                        "        \"two\": e.getElementsByTagName('odd')[2].outerText,\n" +
+                        "        \"time\": e.querySelector('.cc-match-kickoff').outerText.split(' ')[1],\n" +
+                        "        \"date\": e.querySelector('.cc-match-kickoff').outerText.split(' ')[0]\n" +
+                        "\n" +
+                        "    });\n" +
+                        "});\n" +
+                        "return result;");
+        System.out.println(matches.size());
+        return matches;
+
 
     }
 }

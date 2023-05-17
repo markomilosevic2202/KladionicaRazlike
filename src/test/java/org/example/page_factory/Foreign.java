@@ -19,10 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Foreign {
 
@@ -41,7 +38,7 @@ public class Foreign {
     }
 
 
-    public void findMatches(String hours) throws InterruptedException {
+    public List<Match> findMatches(String hours) throws InterruptedException {
 //        Gson gson = new Gson();
 //        List<Match> list = new ArrayList<>();
 ////        for (int i = 0; i < 2; i++) {
@@ -70,16 +67,33 @@ public class Foreign {
 //        System.out.println(matches.size());
 //        System.out.println(matches.get(1).toString());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatterText = DateTimeFormatter.ofPattern("dd MMM", Locale.ENGLISH);
+
         LocalDate today = LocalDate.now();
         String todayString = today.format(formatter);
         LocalDate tomorrow = today.plusDays(1);
         String tomorrowStrong = tomorrow.format(formatter);
         LocalDate afterOneDayTomorrow = today.plusDays(2);
         String afterOneDayTomorrowString = afterOneDayTomorrow.format(formatter);
+        String afterOneDayTomorrowStringTextMount = afterOneDayTomorrow.format(formatterText);
+        LocalDate afterTwoDayTomorrow = today.plusDays(3);
+        String afterTwoTomorrowStringTextMount = afterTwoDayTomorrow.format(formatterText);
+        LocalDate afterForeDayTomorrow = today.plusDays(5);
+        String afterForeTomorrowStringTextMount = afterForeDayTomorrow.format(formatterText);
+
+        String andDate;
+
+        if (hours.equals("3") || hours.equals("5") || hours.equals("12") || hours.equals("24")) {
+            andDate = afterOneDayTomorrowStringTextMount;
+        } else if (hours.equals("48")) {
+            andDate = afterTwoTomorrowStringTextMount;
+        } else {
+            andDate = afterForeTomorrowStringTextMount;
+        }
 
 
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
 
             Thread.sleep(500);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -105,25 +119,19 @@ public class Foreign {
 
                 }
             }
+            List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + andDate + "')]"));
+            if (list.size() > 0) {
+                break;
+            }
             btnNext.click();
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Gson gson = new Gson();
-        String json = gson.toJson(matches);
-        try (FileWriter fileWriter = new FileWriter("src/test/resources/json/foreignBetting.json")) {
-            fileWriter.write(json);
-            fileWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+         return matches;
     }
 
 
-//         match1.setName(listMatchWeb.get(i).findElement(By.xpath("//*[contains(@class, 'biab_market-title-team-names js-teams')]")).getText());
-//            match1.setTime(listMatchWeb.get(i).findElement(By.xpath("//*[contains(@class, 'biab_market-time')]")).getText());
-//            match1.setOne(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(1).getText());
-//            match1.setTwo(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(5).getText());
-//            match1.setOne(listMatchWeb.get(i).findElements(By.xpath("//span[contains(@class, 'js-odds biab_odds')]")).get(3).getText());
+
 }
 
 
