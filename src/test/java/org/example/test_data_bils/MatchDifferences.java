@@ -28,6 +28,7 @@ public class MatchDifferences {
     private String xDifferences;
     private String comparison;
     private String counterQuota;
+    private String higherOdds;
     private String bet;
 
 

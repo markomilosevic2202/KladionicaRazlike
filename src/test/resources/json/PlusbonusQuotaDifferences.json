@@ -11,10 +11,9 @@
     "twoHome": "2.95",
     "twoForeign": "3",
     "twoDifferences": "-0.05",
-    "xHome": "3.00",
-    "xForeign": "2.9",
-    "xDifferences": "0.1",
-    "comparison": "home4"
+    "comparison": "home4",
+    "counterQuota": "1.4",
+    "bet": "921"
   },
   {
     "codeHome": "897",
@@ -28,10 +27,9 @@
     "twoHome": "2.00",
     "twoForeign": "1.91",
     "twoDifferences": "0.09",
-    "xHome": "3.80",
-    "xForeign": "3.7",
-    "xDifferences": "0.1",
-    "comparison": "home4"
+    "comparison": "home4",
+    "counterQuota": "1.75",
+    "bet": "445"
   },
   {
     "codeHome": "898",
@@ -45,9 +43,6 @@
     "twoHome": "2.10",
     "twoForeign": "1.98",
     "twoDifferences": "0.12",
-    "xHome": "3.95",
-    "xForeign": "4",
-    "xDifferences": "-0.05",
     "comparison": "home4"
   },
   {
@@ -62,10 +57,9 @@
     "twoHome": "3.20",
     "twoForeign": "3.35",
     "twoDifferences": "-0.15",
-    "xHome": "3.65",
-    "xForeign": "3.6",
-    "xDifferences": "0.05",
-    "comparison": "home4"
+    "comparison": "home4",
+    "counterQuota": "1.73",
+    "bet": "854"
   },
   {
     "codeHome": "900",
@@ -79,10 +73,9 @@
     "twoHome": "2.70",
     "twoForeign": "2.6",
     "twoDifferences": "0.1",
-    "xHome": "3.40",
-    "xForeign": "3.6",
-    "xDifferences": "-0.2",
-    "comparison": "home4"
+    "comparison": "home4",
+    "counterQuota": "1.71",
+    "bet": "2080"
   },
   {
     "codeHome": "901",
@@ -96,10 +89,8 @@
     "twoHome": "2.75",
     "twoForeign": "2.8",
     "twoDifferences": "-0.05",
-    "xHome": "3.45",
-    "xForeign": "3.35",
-    "xDifferences": "0.1",
-    "comparison": "guest4"
+    "comparison": "guest4",
+    "counterQuota": "1.51",
+    "bet": "144"
   }
-
 ]

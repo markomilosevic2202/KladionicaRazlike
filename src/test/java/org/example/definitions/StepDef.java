@@ -175,11 +175,23 @@ public class StepDef {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sort(matchArray), "Bonus");
     }
+    @Then("sort data en write in excel bonus odds plus")
+    public void sort_data_en_write_in_excel_bonus_odds_plus() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusbonusQuotaDifferences.json"), MatchDifferences[].class);
+        writeInExcel(sort(matchArray), "Bonus");
+    }
     @Then("compare bonus odds")
     public void compare_bonus_odds() throws IOException{
         Match[] matchesHomeBettingBonus = objectMapper.readValue(new File("src/test/resources/json/homeBonusBetting.json"), Match[].class);
         Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
         compare(matchesHomeBettingBonus, matchesForeignBetting, "bonusQuotaDifferences");
+
+    }
+    @Then("find all the opposite odds")
+    public void find_all_the_opposite_odds() throws IOException, InterruptedException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
+        foreign.addOppositeOdds(matchArray);
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusbonusQuotaDifferences");
 
     }
 
@@ -280,6 +292,12 @@ public class StepDef {
         cell.setCellValue("X Razlika");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Ime Strna");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Kontra kvota");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Kvota Domaca");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Ulog");
 
 
         for (int i = 0; i < matchDifferences.length; i++) {
@@ -318,6 +336,13 @@ public class StepDef {
             cell1.setCellValue(match.getXDifferences());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getNameForeign());
+
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getCounterQuota());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getHigherOdds());
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getBet());
 
         }
         try {

@@ -4,10 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import io.cucumber.java.it.Ma;
 import org.example.test_data_bils.Match;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.example.test_data_bils.MatchDifferences;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,6 +28,15 @@ public class Foreign {
 
     @FindBy(xpath = "//a[contains(text(),'Next')]")
     WebElement btnNext;
+
+    @FindBy(className = "biab_search-input")
+    WebElement inpSearch;
+
+    @FindBy(xpath = "//a[contains(text(),'Double Chance')]")
+    WebElement btnDoubleChance;
+
+
+    private Actions actions;
     WebDriver driver;
 
     public Foreign(WebDriver driver) {
@@ -127,9 +135,53 @@ public class Foreign {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-         return matches;
+        return matches;
     }
 
+    public MatchDifferences[] addOppositeOdds(MatchDifferences[] matchDifferences) throws InterruptedException {
+
+        for (int i = 0; i < matchDifferences.length; i++) {
+
+            try {
+
+
+                MatchDifferences matchDifferences1 = matchDifferences[i];
+                String clearIfNameForeign = matchDifferences1.getNameForeign().replaceAll("IF ", "");
+                String characterReplacement = matchDifferences1.getNameForeign().replaceAll("-", "v");
+                int higherOdds = 1;
+                String higherOddsString = matchDifferences1.getOneDifferences();
+                if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getTwoDifferences())) {
+                    higherOdds = 0;
+                    higherOddsString = matchDifferences1.getTwoDifferences();
+                }
+
+
+                inpSearch.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+                inpSearch.sendKeys(clearIfNameForeign);
+                Thread.sleep(2000);
+                driver.findElement(By.xpath("//*[contains(text(),'" + characterReplacement + "')]")).click();
+                Thread.sleep(2000);
+                btnDoubleChance.click();
+                Thread.sleep(2000);
+                System.out.println(matchDifferences1.getNameForeign());
+                WebElement webElement = driver.findElements(By.xpath("//*[contains(@class, 'biab_bet biab_blue-cell js-blue-cell biab_bet-back js-bet-back biab_back-0 js-back-0')]"))
+                        .get(higherOdds);
+                matchDifferences1.setCounterQuota(webElement.findElement(By.xpath("div/div/div/span[1]")).getText());
+                matchDifferences1.setBet(webElement.findElement(By.xpath("div/div/div/span[2]")).getText());
+                matchDifferences1.setHigherOdds(higherOddsString);
+
+
+            } catch (Exception e) {
+                System.out.println("Puska");
+
+            }
+
+
+        }
+
+
+        return matchDifferences;
+    }
 
 
 }
