@@ -149,10 +149,10 @@ public class Foreign {
                 String clearIfNameForeign = matchDifferences1.getNameForeign().replaceAll("IF ", "");
                 String characterReplacement = matchDifferences1.getNameForeign().replaceAll("-", "v");
                 int higherOdds = 1;
-                String higherOddsString = matchDifferences1.getOneDifferences();
+                String higherOddsString = matchDifferences1.getOneHome();
                 if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getTwoDifferences())) {
                     higherOdds = 0;
-                    higherOddsString = matchDifferences1.getTwoDifferences();
+                    higherOddsString = matchDifferences1.getTwoHome();
                 }
 
 
