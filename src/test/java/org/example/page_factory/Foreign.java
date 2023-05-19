@@ -140,14 +140,15 @@ public class Foreign {
 
     public MatchDifferences[] addOppositeOdds(MatchDifferences[] matchDifferences) throws InterruptedException {
 
+        String name = null;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         for (int i = 0; i < matchDifferences.length; i++) {
 
             try {
-
-
                 MatchDifferences matchDifferences1 = matchDifferences[i];
                 String clearIfNameForeign = matchDifferences1.getNameForeign().replaceAll("IF ", "");
                 String characterReplacement = matchDifferences1.getNameForeign().replaceAll("-", "v");
+                name = characterReplacement;
                 int higherOdds = 1;
                 String higherOddsString = matchDifferences1.getOneHome();
                 if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getTwoDifferences())) {
@@ -155,14 +156,13 @@ public class Foreign {
                     higherOddsString = matchDifferences1.getTwoHome();
                 }
 
-
                 inpSearch.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
                 inpSearch.sendKeys(clearIfNameForeign);
-                Thread.sleep(2000);
-                driver.findElement(By.xpath("//*[contains(text(),'" + characterReplacement + "')]")).click();
-                Thread.sleep(2000);
+                Thread.sleep(1000);
+                driver.navigate().refresh();
+                driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
                 btnDoubleChance.click();
-                Thread.sleep(2000);
+                Thread.sleep(5000);
                 System.out.println(matchDifferences1.getNameForeign());
                 WebElement webElement = driver.findElements(By.xpath("//*[contains(@class, 'biab_bet biab_blue-cell js-blue-cell biab_bet-back js-bet-back biab_back-0 js-back-0')]"))
                         .get(higherOdds);
@@ -172,14 +172,15 @@ public class Foreign {
 
 
             } catch (Exception e) {
-                System.out.println("Puska");
+                System.out.println("Puska" + name);
+
 
             }
 
 
         }
 
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return matchDifferences;
     }
 

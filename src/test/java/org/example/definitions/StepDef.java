@@ -109,8 +109,9 @@ public class StepDef {
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+       // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
+        driver.navigate().refresh();
     }
 
 
@@ -198,7 +199,7 @@ public class StepDef {
     @Then("find all the opposite odds")
     public void find_all_the_opposite_odds() throws IOException, InterruptedException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
-        foreign.addOppositeOdds(matchArray);
+
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusbonusQuotaDifferences");
 
     }
@@ -355,6 +356,11 @@ public class StepDef {
             cell1.setCellValue(match.getHigherOdds());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getBet());
+            cell1 = row.createCell(cellnum1++);
+
+            cell1.setCellValue("= (85.47*R"+ (i + 8) +"/(100/(R" + (i + 8) +"*100-100)+1))-(85.47*R" + (i + 8) + "/Q" +  (i + 8) +")");
+            cell1 = row.createCell(cellnum1++);
+            cell1.setCellValue(match.getBet());
 
         }
         try {
@@ -438,62 +444,62 @@ public class StepDef {
 //            mex.printStackTrace();
 //        }
 //    }
-            Properties properties = new Properties();
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", "587");
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
-
-            // E-mail korisnički podaci
-            String username = "kraljevicmarko822@gmail.com";
-            String password = "donjevlase";
-
-            // Primalac, naslov i tekst poruke
-            String recipient = "marko.milosevic2202@gmail.com";
-            String subject = "Test e-mail sa privicom";
-            String messageText = "Pozdrav! Molimo pogledajte prilog.";
-
-            // Putanja do privitka
-            String attachmentPath = "path_to_attachment.pdf";
-
-            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                    return new javax.mail.PasswordAuthentication(username, password);
-                }
-            });
-
-            try {
-                // Kreiranje e-mail poruke
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(username));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-                message.setSubject(subject);
-
-                // Kreiranje dela poruke
-                MimeBodyPart messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setText(messageText);
-
-                // Kreiranje dela privitka
-                MimeBodyPart attachmentPart = new MimeBodyPart();
-                attachmentPart.attachFile(attachmentPath);
-
-                // Spajanje dela poruke i dela privitka u jednu poruku
-                Multipart multipart = new MimeMultipart();
-                multipart.addBodyPart(messageBodyPart);
-                multipart.addBodyPart(attachmentPart);
-
-                message.setContent(multipart);
-
-                // Slanje e-maila
-                Transport.send(message);
-
-                System.out.println("E-mail je uspešno poslat!");
-
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            Properties properties = new Properties();
+//            properties.put("mail.smtp.host", "smtp.gmail.com");
+//            properties.put("mail.smtp.port", "587");
+//            properties.put("mail.smtp.auth", "true");
+//            properties.put("mail.smtp.starttls.enable", "true");
+//
+//            // E-mail korisnički podaci
+//            String username = "kraljevicmarko822@gmail.com";
+//            String password = "donjevlase";
+//
+//            // Primalac, naslov i tekst poruke
+//            String recipient = "marko.milosevic2202@gmail.com";
+//            String subject = "Test e-mail sa privicom";
+//            String messageText = "Pozdrav! Molimo pogledajte prilog.";
+//
+//            // Putanja do privitka
+//            String attachmentPath = "path_to_attachment.pdf";
+//
+//            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+//                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+//                    return new javax.mail.PasswordAuthentication(username, password);
+//                }
+//            });
+//
+//            try {
+//                // Kreiranje e-mail poruke
+//                Message message = new MimeMessage(session);
+//                message.setFrom(new InternetAddress(username));
+//                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+//                message.setSubject(subject);
+//
+//                // Kreiranje dela poruke
+//                MimeBodyPart messageBodyPart = new MimeBodyPart();
+//                messageBodyPart.setText(messageText);
+//
+//                // Kreiranje dela privitka
+//                MimeBodyPart attachmentPart = new MimeBodyPart();
+//                attachmentPart.attachFile(attachmentPath);
+//
+//                // Spajanje dela poruke i dela privitka u jednu poruku
+//                Multipart multipart = new MimeMultipart();
+//                multipart.addBodyPart(messageBodyPart);
+//                multipart.addBodyPart(attachmentPart);
+//
+//                message.setContent(multipart);
+//
+//                // Slanje e-maila
+//                Transport.send(message);
+//
+//                System.out.println("E-mail je uspešno poslat!");
+//
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 
     public void compare(Match[] matchesHomeBetting, Match[] matchsForeignBetting, String nameFile) throws IOException {
