@@ -104,10 +104,8 @@ public class Foreign {
         List<Match> matches = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
 
-//            Thread.sleep(500);
-//            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-           //WebElement a =  driver.findElement(By.xpath("//*[contains(@class, 'js-bet biab_bet-cell')]"));
-            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class, 'js-bet biab_bet-cell')]")));
+            Thread.sleep(500);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
 
             for (int j = 0; j < listMatchWeb.size(); j++) {
@@ -142,7 +140,7 @@ public class Foreign {
         return matches;
     }
 
-    public MatchDifferences[] addOppositeOdds(MatchDifferences[] matchDifferences) throws InterruptedException {
+    public MatchDifferences[] addOppositeOdds(MatchDifferences[] matchDifferences)  {
 
         String name = null;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));

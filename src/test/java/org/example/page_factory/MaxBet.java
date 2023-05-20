@@ -92,7 +92,7 @@ public class MaxBet {
 
 
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            Thread.sleep(500);
+         //   Thread.sleep(500);
             isScrollBarAtEnd = (boolean) js.executeScript("return (document.documentElement.scrollHeight - window.innerHeight) === window.scrollY");
 
 
