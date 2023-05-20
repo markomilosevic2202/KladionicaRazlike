@@ -187,7 +187,7 @@ public class StepDef {
     @Then("sort data en write in excel bonus odds plus")
     public void sort_data_en_write_in_excel_bonus_odds_plus() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusbonusQuotaDifferences.json"), MatchDifferences[].class);
-        writeInExcel(sort(matchArray), "Bonus");
+        writeInExcel(sortEarnings(matchArray), "Bonus");
     }
     @Then("compare bonus odds")
     public void compare_bonus_odds() throws IOException{
@@ -245,7 +245,8 @@ public class StepDef {
         DecimalFormat df = new DecimalFormat("#.##"); // format kvota
         XSSFSheet sheet = workbook.createSheet(time.format(formatter));//formira shit
         sheet.setColumnWidth(2, 5000);
-        sheet.setColumnWidth(5, 10000);// širi kolonu
+        sheet.setColumnWidth(5, 8000);
+        sheet.setColumnWidth(15, 8000);// širi kolonu// širi kolonu
         int rownum = 0;
         Row row = sheet.createRow(rownum++);
         int cellnum = 1;
@@ -311,6 +312,8 @@ public class StepDef {
         cell.setCellValue("Kvota Domaca");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Ulog");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Zarada");
 
 
         for (int i = 0; i < matchDifferences.length; i++) {
@@ -357,10 +360,10 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getBet());
             cell1 = row.createCell(cellnum1++);
-
-            cell1.setCellValue("= (85.47*R"+ (i + 8) +"/(100/(R" + (i + 8) +"*100-100)+1))-(85.47*R" + (i + 8) + "/Q" +  (i + 8) +")");
+            cell1.setCellValue(match.getEarnings());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getBet());
+
+
 
         }
         try {
@@ -663,6 +666,22 @@ public class StepDef {
                     matchArray[i] = matchArray[j];
                     matchArray[j] = temp;
 
+                }
+            }
+        }
+        return matchArray;
+    }
+    public MatchDifferences[] sortEarnings(MatchDifferences[] matchArray) throws IOException {
+
+
+        for (int i = 0; i < matchArray.length - 1; i++) {
+
+            for (int j = 0; j < matchArray.length - i - 1; j++) {
+                if ( Double.parseDouble(matchArray[j].getEarnings()) <  Double.parseDouble(matchArray[j + 1].getEarnings())) {
+
+                    MatchDifferences temp = matchArray[j];
+                    matchArray[j] = matchArray[j + 1];
+                    matchArray[j + 1] = temp;
                 }
             }
         }

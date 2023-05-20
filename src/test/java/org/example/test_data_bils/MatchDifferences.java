@@ -30,6 +30,7 @@ public class MatchDifferences {
     private String counterQuota;
     private String higherOdds;
     private String bet;
+    private String earnings;
 
 
 }

@@ -21,9 +21,10 @@ Feature: Register
 #    When click on the page max-bet button max bonus
 #    When wait for the whole page to load
 #    Then write bonus match in document
-#    Then compare bonus odds
-#    And sort data en write in excel bonus odds
     Given go to the address "https://www.orbitxch.com/customer/sport/1"
+   When take all the matches according to the given criteria
+    Then compare bonus odds
+    And sort data en write in excel bonus odds
     Then find all the opposite odds
     And sort data en write in excel bonus odds plus
   Then send email

@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -103,8 +104,11 @@ public class Foreign {
         List<Match> matches = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
 
-            Thread.sleep(500);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+//            Thread.sleep(500);
+//            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+           //WebElement a =  driver.findElement(By.xpath("//*[contains(@class, 'js-bet biab_bet-cell')]"));
+            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class, 'js-bet biab_bet-cell')]")));
+
 
             for (int j = 0; j < listMatchWeb.size(); j++) {
                 try {
@@ -158,21 +162,37 @@ public class Foreign {
 
                 inpSearch.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
                 inpSearch.sendKeys(clearIfNameForeign);
-                Thread.sleep(1000);
+
                 driver.navigate().refresh();
-                driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]")));
+               // Thread.sleep(1000);
+               // driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
+               WebElement firstMatchOnList  = driver.findElement(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]"));
+                firstMatchOnList.findElement(By.xpath(".//a")).click();
+                //Thread.sleep(2000);
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Correct Score')]")));
                 btnDoubleChance.click();
-                Thread.sleep(5000);
+                //Thread.sleep(2000);
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Double Chance')]")));
                 System.out.println(matchDifferences1.getNameForeign());
                 WebElement webElement = driver.findElements(By.xpath("//*[contains(@class, 'biab_bet biab_blue-cell js-blue-cell biab_bet-back js-bet-back biab_back-0 js-back-0')]"))
                         .get(higherOdds);
                 matchDifferences1.setCounterQuota(webElement.findElement(By.xpath("div/div/div/span[1]")).getText());
                 matchDifferences1.setBet(webElement.findElement(By.xpath("div/div/div/span[2]")).getText());
                 matchDifferences1.setHigherOdds(higherOddsString);
+                matchDifferences1.setEarnings(getEarnings(matchDifferences1.getHigherOdds(),matchDifferences1.getCounterQuota()));
+
 
 
             } catch (Exception e) {
-                System.out.println("Puska" + name);
+
+                MatchDifferences matchDifferences1 = matchDifferences[i];
+
+                matchDifferences1.setCounterQuota("0");
+                matchDifferences1.setBet("0");
+                matchDifferences1.setHigherOdds("0");
+                matchDifferences1.setEarnings("0");
+                System.out.println("------------------- " + matchDifferences1.getNameForeign() + " --------------");
 
 
             }
@@ -184,7 +204,15 @@ public class Foreign {
         return matchDifferences;
     }
 
-
+    public String getEarnings(String higherOdds, String counterQuota) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        double higherOddsDouble = Double.parseDouble(higherOdds);
+        double counterQuotaDouble = Double.parseDouble(counterQuota);
+        double earnings = (85.47*higherOddsDouble/(100/(higherOddsDouble*100-100)+1))-(85.47*higherOddsDouble/counterQuotaDouble);
+        double earningsRound = Double.parseDouble(df.format(earnings));
+        System.out.println(earningsRound);
+        return String.valueOf(earningsRound);
+    }
 }
 
 
