@@ -19,7 +19,7 @@ Feature: Register
 
 
 
-#  Scenario: entering odds for bonus odds
+# Scenario: entering odds for bonus odds
 #    Given go to the address "https://www.maxbet.rs/ibet-web-client/#/home#top"
 #    When choose which period you are watching "24"
 #    When click on the page max-bet button football
@@ -35,7 +35,16 @@ Feature: Register
 #    Then send email
 
   Scenario: entering odds for bonus odds
-    Given go to the address "https://meridianbet.rs/sr/kladjenje"
-    When click on the page meridian button football
-    When click on the page meridian button ""
-    When wait for the whole page to load meridian
+#    Given go to the address "https://meridianbet.rs/sr/kladjenje"
+#    When click on the page meridian button football
+#    When click on the page meridian button "Danas"
+#    When wait for the whole page to load meridian
+#    Then write bonus match in document meridian
+#    Given go to the address "https://www.orbitxch.com/customer/sport/1"
+#   When take all the matches according to the given criteria
+    Then compare meridian odds
+    Given go to the address "https://www.orbitxch.com/customer/sport/1"
+    And clear list Meridian
+
+    Then find all the opposite odds Meridian
+    And sort data en write in excel Meridian odds

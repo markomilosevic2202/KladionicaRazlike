@@ -154,18 +154,17 @@ public class StepDef {
         writeJsonFileMatchList(matches, "foreignBetting");
     }
     @When("click on the page meridian button football")
-    public void click_on_the_page_meridian_button_football() {
+    public void click_on_the_page_meridian_button_football() throws InterruptedException {
+        Thread.sleep(2000);
         meridian.clickFootball();
     }
     @When("click on the page meridian button {string}")
-    public void click_on_the_page_meridian_button(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void click_on_the_page_meridian_button(String time) {
+        meridian.clickTime(time);
     }
     @When("wait for the whole page to load meridian")
-    public void wait_for_the_whole_page_to_load_meridian() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void wait_for_the_whole_page_to_load_meridian() throws InterruptedException {
+       meridian.waitForPageToLoad();
     }
 
     @Then("write all match in document")
@@ -178,6 +177,12 @@ public class StepDef {
     public void write_bonus_match_in_document() {
         List<Match> matches = maxBet.writeBonusMatch();
         writeJsonFileMatchList(matches, "homeBonusBetting");
+
+    }
+    @Then("write bonus match in document meridian")
+    public void write_bonus_match_in_document_meridian() {
+        List<Match> matches = meridian.writeMatch();
+        writeJsonFileMatchList(matches, "meridianBetting");
 
     }
 
@@ -201,6 +206,11 @@ public class StepDef {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sort(matchArray), "Bonus");
     }
+    @Then("sort data en write in excel Meridian odds")
+    public void sort_data_en_write_in_excel_Meridian_odds() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusMeridianBetting.json"), MatchDifferences[].class);
+        writeInExcel(sortEarnings(matchArray), "Meridian");
+    }
     @Then("sort data en write in excel bonus odds plus")
     public void sort_data_en_write_in_excel_bonus_odds_plus() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusBonusQuotaDifferences.json"), MatchDifferences[].class);
@@ -218,11 +228,25 @@ public class StepDef {
         compare(matchesHomeBettingBonus, matchesForeignBetting, "bonusQuotaDifferences");
 
     }
+    @Then("compare meridian odds")
+    public void compare_meridian_odds() throws IOException{
+        Match[] matchesHomeBettingBonus = objectMapper.readValue(new File("src/test/resources/json/meridianBetting.json"), Match[].class);
+        Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
+       // compareMeridian(matchesHomeBettingBonus, matchesForeignBetting, "meridianQuotaDifferences");
+
+    }
     @Then("find all the opposite odds")
     public void find_all_the_opposite_odds() throws IOException, InterruptedException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusBonusQuotaDifferences");
+
+    }
+    @Then("find all the opposite odds Meridian")
+    public void find_all_the_opposite_odds_Meridian() throws IOException, InterruptedException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
+
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusMeridianBetting");
 
     }
     @Then("send email")
@@ -239,11 +263,26 @@ public class StepDef {
 
 
     }
+    @Then("clear list Meridian")
+    public void clear_list_Meridian() throws IOException {
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferences.json"), MatchDifferences[].class);
+        System.out.println( "Pocetna: " + list.length);
+
+        writeJsonFileMatchDifferencesList( clearList(list),"meridianQuotaDifferencesClear");
+
+
+    }
     @Then("find all the opposite odds for ordinary match")
     public void find_all_the_opposite_odds_for_ordinary_match() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryQuotaDifferencesClear");
+    }
+    @Then("find all the opposite odds for Meridian match")
+    public void find_all_the_opposite_odds_for_Meridian_ordinary_match() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
+
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "meridianQuotaDifferencesClear");
     }
 
     static MatchDifferences differences(Match matchHomeBetting, Match matchForeignBetting, String comparison) {
@@ -743,34 +782,270 @@ public class StepDef {
     public List<MatchDifferences> clearList(MatchDifferences[] list){
         int a = 0;
         List<MatchDifferences> listaMatcheva = new ArrayList<>(Arrays.asList(list));
-        for (int i = 0; i < listaMatcheva.size(); i++) {
-
-       MatchDifferences matchDifferences = listaMatcheva.get(i);
-            Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
-            Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
-            Double quotaMax = quotaOne;
-            if (quotaTwo > quotaOne){
-                quotaMax = quotaTwo;
-
-            }
-            if (quotaOne > 0.5 && quotaTwo > 0.5){
-                listaMatcheva.remove(i);
-                i =-1;
-
-               }
-            else if(quotaMax > 1){
-                listaMatcheva.remove(i);
-                i =-1;
-            }
-            else if(quotaMax < 0.02){
-                listaMatcheva.remove(i);
-                i =-1;
-            }
-       }
-        System.out.println(listaMatcheva.size());
+//        for (int i = 0; i < listaMatcheva.size(); i++) {
+//
+//       MatchDifferences matchDifferences = listaMatcheva.get(i);
+//            Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
+//            Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
+//            Double quotaMax = quotaOne;
+//            if (quotaTwo > quotaOne){
+//                quotaMax = quotaTwo;
+//
+//            }
+//            if (quotaOne > 0.5 && quotaTwo > 0.5){
+//                listaMatcheva.remove(i);
+//                i =-1;
+//
+//               }
+//            else if(quotaMax > 1){
+//                listaMatcheva.remove(i);
+//                i =-1;
+//            }
+//            else if(quotaMax < 0.02){
+//                listaMatcheva.remove(i);
+//                i =-1;
+//            }
+//       }
+//        System.out.println(listaMatcheva.size());
 
         return listaMatcheva;
     }
+//    public void compareMeridian(Match[] matchesHomeBetting, Match[] matchsForeignBetting, String nameFile) throws IOException {
+//
+//        System.out.println(matchesHomeBetting.length);
+//        System.out.println(matchsForeignBetting.length);
+//        List<MatchDifferences> matchesBingo = new ArrayList<>();
+//        List<Match> matchesDiscard = new ArrayList<>();
+//
+//
+//        for (int i = 0; i < matchesHomeBetting.length; i++) {
+//
+//            Match matchHomeBetting = matchesHomeBetting[i];
+//            String nameHomeBetting = matchHomeBetting.getName();
+//            String dateHomeBetting = matchHomeBetting.getDate();
+//            String timeHomeBetting = matchHomeBetting.getTime();
+//            String nameHomeHomeBetting1 = nameHomeBetting.substring(0, nameHomeBetting.indexOf(" -"));
+//            String[] rijeci = nameHomeHomeBetting1.split(" ");
+//            String nameHomeHomeBetting = "";
+//            for (String rijec : rijeci) {
+//                if (rijec.length() > nameHomeHomeBetting.length()) {
+//                    nameHomeHomeBetting = rijec;
+//                }
+//            }
+//            String nameGuestHomeBetting1 = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
+//            String[] gostHome = nameGuestHomeBetting1.split(" ");
+//            String nameGuestHomeBetting = gostHome[0];
+//            for (String gostHome1 : gostHome) {
+//                if (gostHome1.length() > nameGuestHomeBetting.length()) {
+//                    nameGuestHomeBetting = gostHome1;
+//                }
+//            }
+//            Boolean bingo = false;
+//
+//
+//            for (int j = 0; j < matchsForeignBetting.length; j++) {
+//                Match matchForeignBetting = matchsForeignBetting[j];
+//                String nameForeignBetting = matchForeignBetting.getName();
+//                String nameHomeForeignBetting1 = nameForeignBetting.substring(0, nameForeignBetting.indexOf(" -"));
+//                String[] rijeci3 = nameHomeForeignBetting1.split(" ");
+//                String nameHomeForeignBetting = "";
+//                for (String rijec3 : rijeci3) {
+//                    if (rijec3.length() > nameHomeForeignBetting.length()) {
+//                        nameHomeForeignBetting = rijec3;
+//                    }
+//                }
+//                String nameGuestForeignBetting1 = nameForeignBetting.substring(nameForeignBetting.lastIndexOf("- ") + 1);
+//
+//                String[] rijeci4 = nameGuestForeignBetting1.split(" ");
+//                String nameGuestForeignBetting = "";
+//                for (String rijec4 : rijeci4) {
+//                    if (rijec4.length() > nameGuestForeignBetting.length()) {
+//                        nameGuestForeignBetting = rijec4;
+//                    }
+//                }
+//                String timeForeignBetting = matchForeignBetting.getTime();
+//                String dateForeignBetting = matchForeignBetting.getDate().substring(0, 5);
+//
+//
+//
+//                if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+////
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
+//                    bingo = true;
+//                    break;
+//                } else if (nameHomeForeignBetting.contains(nameHomeHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+////
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home"));
+//                    bingo = true;
+//                    break;
+//                } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest"));
+//                    bingo = true;
+//                    break;
+//                }
+//                try {
+//
+//
+//                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home6"));
+//                        bingo = true;
+//                        break;
+//                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest6"));
+//                        bingo = true;
+//                        break;
+//                    }
+//                } catch (Throwable t) {
+//
+//                }
+//
+//
+//                try {
+//
+//
+//                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home5"));
+//                        bingo = true;
+//                        break;
+//                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest5"));
+//                        bingo = true;
+//                        break;
+//                    }
+//                } catch (Throwable t) {
+//
+//                }
+//
+//                try {
+//
+//
+//                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4go"));
+//                        bingo = true;
+//                        break;
+//                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4go"));
+//                        bingo = true;
+//                        break;
+//                    }
+//                } catch (Throwable t) {
+//
+//                }
+//                try {
+//
+//
+//                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
+//                        bingo = true;
+//                        break;
+//                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4"));
+//                        bingo = true;
+//                        break;
+//                    }
+//                } catch (Throwable t) {
+//
+//                }
+//
+//
+//
+//
+//
+//            if (nameHomeHomeBetting.contains(nameForeignBetting) && nameGuestHomeBetting.contains(nameForeignBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+////
+//                matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
+//                bingo = true;
+//                break;
+//            } else if (nameHomeHomeBetting.contains(nameHomeForeignBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+////
+//                matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home"));
+//                bingo = true;
+//                break;
+//            } else if (nameGuestHomeBetting.contains(nameGuestForeignBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//
+//                matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest"));
+//                bingo = true;
+//                break;
+//            }
+//            try {
+//
+//
+//                if (nameHomeHomeBetting.contains(nameHomeForeignBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home6"));
+//                    bingo = true;
+//
+//                } else if (nameGuestHomeBetting.contains(nameGuestForeignBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest6"));
+//                    bingo = true;
+//                    break;
+//                }
+//            } catch (Throwable t) {
+//
+//            }
+//
+//
+//            try {
+//
+//
+//                if (nameHomeHomeBetting.contains(nameHomeForeignBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home5"));
+//                    bingo = true;
+//
+//                } else if (nameGuestHomeBetting.contains(nameGuestForeignBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest5"));
+//                    bingo = true;
+//                    break;
+//                }
+//            } catch (Throwable t) {
+//
+//            }
+//
+//            try {
+//
+//
+//                if (nameHomeHomeBetting.contains(nameHomeForeignBetting.substring(0, 4)) && nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4go"));
+//                    bingo = true;
+//                    break;
+//                } else if (nameGuestHomeBetting.contains(nameGuestForeignBetting.substring(0, 4)) && nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4go"));
+//                    bingo = true;
+//                    break;
+//                }
+//            } catch (Throwable t) {
+//
+//            }
+//            try {
+//
+//
+//                if (nameHomeHomeBetting.contains(nameHomeForeignBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
+//                    bingo = true;
+//                    break;
+//                } else if (nameGuestHomeBetting.contains(nameGuestForeignBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+//                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4"));
+//                    bingo = true;
+//                    break;
+//                }
+//            } catch (Throwable t) {
+//
+//            }
+//        }
+//
+//
+//            if (bingo.equals(false)) {
+//                matchesDiscard.add(matchHomeBetting);
+//            }
+//
+//        }
+//        numberMatchesHome = matchesHomeBetting.length;
+//        numberMatchesForeign = matchsForeignBetting.length;
+//        numberMatchesBingo = matchesBingo.size();
+//        numberMatchesNotFound = matchesDiscard.size();
+//
+//        writeJsonFileMatchDifferencesList(matchesBingo, nameFile);
+//    }
 
 
 }
