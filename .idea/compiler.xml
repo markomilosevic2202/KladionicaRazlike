@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="KladionicaRazlike" />
+        <module name="cucamber-bangie" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cucamber-bangie" target="1.8" />
       <module name="KladionicaRazlike" target="1.8" />
     </bytecodeTargetLevel>
   </component>

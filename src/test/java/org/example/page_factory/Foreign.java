@@ -105,7 +105,7 @@ public class Foreign {
         for (int i = 0; i < 20; i++) {
 
             Thread.sleep(500);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
 
             for (int j = 0; j < listMatchWeb.size(); j++) {

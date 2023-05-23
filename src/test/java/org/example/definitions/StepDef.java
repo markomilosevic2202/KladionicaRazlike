@@ -55,6 +55,8 @@ public class StepDef {
 
     private Foreign foreign;
 
+    private Meridian meridian;
+
     private ObjectMapper objectMapper;
 
     private String hours;
@@ -83,6 +85,7 @@ public class StepDef {
         actions = new Actions(driver);
         maxBet = new MaxBet(driver);
         foreign = new Foreign(driver);
+        meridian = new Meridian(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         objectMapper = new ObjectMapper();
     }
@@ -150,6 +153,20 @@ public class StepDef {
         List<Match> matches = foreign.findMatches("48");
         writeJsonFileMatchList(matches, "foreignBetting");
     }
+    @When("click on the page meridian button football")
+    public void click_on_the_page_meridian_button_football() {
+        meridian.clickFootball();
+    }
+    @When("click on the page meridian button {string}")
+    public void click_on_the_page_meridian_button(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @When("wait for the whole page to load meridian")
+    public void wait_for_the_whole_page_to_load_meridian() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
     @Then("write all match in document")
     public void write_all_match_in_document() {
@@ -186,8 +203,13 @@ public class StepDef {
     }
     @Then("sort data en write in excel bonus odds plus")
     public void sort_data_en_write_in_excel_bonus_odds_plus() throws IOException {
-        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusbonusQuotaDifferences.json"), MatchDifferences[].class);
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusBonusQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sortEarnings(matchArray), "Bonus");
+    }
+    @Then("sort data en write in excel ordinary odds plus")
+    public void sort_data_en_write_in_excel_ordinary_odds_plus() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
+        writeInExcel(sortEarnings(matchArray), "Ordinary");
     }
     @Then("compare bonus odds")
     public void compare_bonus_odds() throws IOException{
@@ -200,12 +222,28 @@ public class StepDef {
     public void find_all_the_opposite_odds() throws IOException, InterruptedException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
 
-        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusbonusQuotaDifferences");
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusBonusQuotaDifferences");
 
     }
     @Then("send email")
     public void send_email() {
         sendEmail();
+    }
+
+    @Then("clear list")
+    public void clear_list() throws IOException {
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
+        System.out.println( "Pocetna: " + list.length);
+
+        writeJsonFileMatchDifferencesList( clearList(list),"ordinaryQuotaDifferencesClear");
+
+
+    }
+    @Then("find all the opposite odds for ordinary match")
+    public void find_all_the_opposite_odds_for_ordinary_match() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
+
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryQuotaDifferencesClear");
     }
 
     static MatchDifferences differences(Match matchHomeBetting, Match matchForeignBetting, String comparison) {
@@ -583,6 +621,21 @@ public class StepDef {
                 try {
 
 
+                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4go"));
+                        bingo = true;
+                        break;
+                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
+                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4go"));
+                        bingo = true;
+                        break;
+                    }
+                } catch (Throwable t) {
+
+                }
+                try {
+
+
                     if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
                         matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
                         bingo = true;
@@ -592,28 +645,6 @@ public class StepDef {
                         bingo = true;
                         break;
                     }
-                } catch (Throwable t) {
-
-                }
-                try {
-
-//
-//                    if (nameForeignBetting.contains(nameHomeHomeBetting.substring(nameHomeHomeBetting.length() - 4, nameHomeHomeBetting.length()))  && timeForeignBetting.contains(timeHomeBetting)) {
-//                        System.out.println("8");
-//                        System.out.println("Name Home Betting:" + nameHomeBetting);
-//                        System.out.println("Name Foreign Betting:" + nameForeignBetting);
-//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
-//                        bingo = true;
-//                        break;
-//                    }
-//                    else if (nameForeignBetting.contains(nameGuestHomeBetting.substring(nameGuestHomeBetting.length() - 4, nameGuestHomeBetting.length()))  && timeForeignBetting.contains(timeHomeBetting)) {
-//                        System.out.println("9");
-//                        System.out.println("Name Home Betting:" + nameHomeBetting);
-//                        System.out.println("Name Foreign Betting:" + nameForeignBetting);
-//                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4"));
-//                        bingo = true;
-//                        break;
-//                    }
                 } catch (Throwable t) {
 
                 }
@@ -708,6 +739,37 @@ public class StepDef {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public List<MatchDifferences> clearList(MatchDifferences[] list){
+        int a = 0;
+        List<MatchDifferences> listaMatcheva = new ArrayList<>(Arrays.asList(list));
+        for (int i = 0; i < listaMatcheva.size(); i++) {
+
+       MatchDifferences matchDifferences = listaMatcheva.get(i);
+            Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
+            Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
+            Double quotaMax = quotaOne;
+            if (quotaTwo > quotaOne){
+                quotaMax = quotaTwo;
+
+            }
+            if (quotaOne > 0.5 && quotaTwo > 0.5){
+                listaMatcheva.remove(i);
+                i =-1;
+
+               }
+            else if(quotaMax > 1){
+                listaMatcheva.remove(i);
+                i =-1;
+            }
+            else if(quotaMax < 0.02){
+                listaMatcheva.remove(i);
+                i =-1;
+            }
+       }
+        System.out.println(listaMatcheva.size());
+
+        return listaMatcheva;
     }
 
 
