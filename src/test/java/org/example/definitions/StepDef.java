@@ -63,6 +63,8 @@ public class StepDef {
 
     private String hours;
 
+    static String nameFileGlobal;
+
     static int numberMatchesHome;
     static int numberMatchesForeign;
     static int  numberMatchesBingo;
@@ -470,6 +472,7 @@ public class StepDef {
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd-MM-yyyy");//format datuma
             FileOutputStream out = new FileOutputStream(new File(nameFile + date.format(formatterData) + " - " + time.format(formatter) + ".xlsx"));
+            nameFileGlobal = nameFile + date.format(formatterData) + " - " + time.format(formatter) + ".xlsx";
             workbook.write(out);
             out.close();
 
@@ -482,128 +485,52 @@ public class StepDef {
 
         static void sendEmail() {
 
-//        String host = "smtp.gmail.com";
-//        String korisnickoIme = "marko.milosevic2202@gmail.com";
-//        String lozinka = "donjevlase";
-//
-//        //Postavke primatelja
-//        String primatelj = "marko.milosevic2202@gmail.com";
-//
-//        //Postavke privitka
-//        String putanjaDoPrivitka = "/home/marko/IdeaProjects/KladionicaRazlike/12-05-2023 - 15 57 05.xlsx";
-//
-//        //Postavke poruke
-//        String naslov = "Primjer e-maila sa privitkom";
-//        String tekstPoruke = "Ovo je primjer e-maila sa privitkom.";
-//
-//        //Postavke sesije
-//        Properties properties = System.getProperties();
-//        properties.setProperty("mail.smtp.host", host);
-//        properties.put("mail.smtp.auth", "true");
-//        properties.put("mail.smtp.port", "465");
-//        properties.put("mail.smtp.socketFactory.port", "465");
-//        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//
-//        //Autentifikacija korisnika
-//        Authenticator authenticator = new Authenticator() {
-//            public PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(korisnickoIme, "Donjev.018");
-//            }
-//        };
-//
-//        //Slanje e-maila
-//        try{
-//            //Sesija
-//            Session session = Session.getDefaultInstance(properties);
-//
-//            //Nova poruka
-//            MimeMessage message = new MimeMessage(session);
-//
-//            //Postavke pošiljatelja
-//            message.setFrom(new InternetAddress(korisnickoIme));
-//
-//            //Postavke primatelja
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(primatelj));
-//
-//            //Postavke naslova i sadržaja
-//            message.setSubject(naslov);
-//            message.setText(tekstPoruke);
-//
-//            //Stvaranje privitka
-//            BodyPart attachment = new MimeBodyPart();
-//            DataSource source = new FileDataSource(putanjaDoPrivitka);
-//            attachment.setDataHandler(new DataHandler(source));
-//            attachment.setFileName(putanjaDoPrivitka);
-//
-//            //Spajanje privitka sa porukom
-//            Multipart multipart = new MimeMultipart();
-//            multipart.addBodyPart(attachment);
-//            message.setContent(multipart);
-//
-//            //Slanje poruke
-//            Transport.send(message);
-//            System.out.println("Poruka poslana!");
-//        }catch (MessagingException mex) {
-//            mex.printStackTrace();
-//        }
-//    }
-//            Properties properties = new Properties();
-//            properties.put("mail.smtp.host", "smtp.gmail.com");
-//            properties.put("mail.smtp.port", "587");
-//            properties.put("mail.smtp.auth", "true");
-//            properties.put("mail.smtp.starttls.enable", "true");
-//
-//            // E-mail korisnički podaci
-//            String username = "kraljevicmarko822@gmail.com";
-//            String password = "donjevlase";
-//
-//            // Primalac, naslov i tekst poruke
-//            String recipient = "marko.milosevic2202@gmail.com";
-//            String subject = "Test e-mail sa privicom";
-//            String messageText = "Pozdrav! Molimo pogledajte prilog.";
-//
-//            // Putanja do privitka
-//            String attachmentPath = "path_to_attachment.pdf";
-//
-//            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-//                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-//                    return new javax.mail.PasswordAuthentication(username, password);
-//                }
-//            });
-//
-//            try {
-//                // Kreiranje e-mail poruke
-//                Message message = new MimeMessage(session);
-//                message.setFrom(new InternetAddress(username));
-//                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-//                message.setSubject(subject);
-//
-//                // Kreiranje dela poruke
-//                MimeBodyPart messageBodyPart = new MimeBodyPart();
-//                messageBodyPart.setText(messageText);
-//
-//                // Kreiranje dela privitka
-//                MimeBodyPart attachmentPart = new MimeBodyPart();
-//                attachmentPart.attachFile(attachmentPath);
-//
-//                // Spajanje dela poruke i dela privitka u jednu poruku
-//                Multipart multipart = new MimeMultipart();
-//                multipart.addBodyPart(messageBodyPart);
-//                multipart.addBodyPart(attachmentPart);
-//
-//                message.setContent(multipart);
-//
-//                // Slanje e-maila
-//                Transport.send(message);
-//
-//                System.out.println("E-mail je uspešno poslat!");
-//
-//            } catch (MessagingException e) {
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+
+                String host = "mail.lumenspei.com";
+                int port = 587;
+                String username = "marko.milosevic@lumenspei.com";
+                String password = "Donjev.018";
+
+
+                Properties props = new Properties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", host);
+                props.put("mail.smtp.port", port);
+
+                // Kreiranje sesije
+                Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+                try {
+
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(username));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("pedjoni018@yahoo.com"));
+                    message.setSubject("Testna poruka");
+                    message.setText("Ovo je testna poruka poslana putem JavaMail API1.");
+
+                    Multipart multipart = new MimeMultipart();
+
+                    MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+                    String filePath = nameFileGlobal;
+                    attachmentBodyPart.attachFile(filePath);
+                    multipart.addBodyPart(attachmentBodyPart);
+                    message.setContent(multipart);
+
+                    Transport.send(message);
+
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
         }
+
+
 
     public void compare(Match[] matchesHomeBetting, Match[] matchsForeignBetting, String nameFile) throws IOException {
 
