@@ -57,6 +57,8 @@ public class StepDef {
 
     private Meridian meridian;
 
+    private Mozzart mozzart;
+
     private ObjectMapper objectMapper;
 
     private String hours;
@@ -86,6 +88,7 @@ public class StepDef {
         maxBet = new MaxBet(driver);
         foreign = new Foreign(driver);
         meridian = new Meridian(driver);
+        mozzart = new Mozzart(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         objectMapper = new ObjectMapper();
     }
@@ -166,6 +169,21 @@ public class StepDef {
     public void wait_for_the_whole_page_to_load_meridian() throws InterruptedException {
        meridian.waitForPageToLoad();
     }
+    @When("click on the page mozzart button {string}")
+    public void click_on_the_page_mozzart_button(String time) {
+       mozzart.clickTime(time);
+    }
+    @When("click on the page mozzart button football")
+    public void click_on_the_page_mozzart_button_football() {
+        mozzart.clickFootball();
+    }
+    @When("wait for the whole page to load mozzart")
+    public void wait_for_the_whole_page_to_load_mozzart() throws InterruptedException {
+       mozzart.waitForPageToLoad();
+    }
+
+
+
 
     @Then("write all match in document")
     public void write_all_match_in_document() {
@@ -283,6 +301,11 @@ public class StepDef {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "meridianQuotaDifferencesClear");
+    }
+    @Then("write bonus match in document mozzart")
+    public void write_bonus_match_in_document_mozzart() {
+        List<Match> matches = mozzart.writeMatch();
+        writeJsonFileMatchList(matches, "mozzartBetting");
     }
 
     static MatchDifferences differences(Match matchHomeBetting, Match matchForeignBetting, String comparison) {
@@ -782,31 +805,31 @@ public class StepDef {
     public List<MatchDifferences> clearList(MatchDifferences[] list){
         int a = 0;
         List<MatchDifferences> listaMatcheva = new ArrayList<>(Arrays.asList(list));
-//        for (int i = 0; i < listaMatcheva.size(); i++) {
-//
-//       MatchDifferences matchDifferences = listaMatcheva.get(i);
-//            Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
-//            Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
-//            Double quotaMax = quotaOne;
-//            if (quotaTwo > quotaOne){
-//                quotaMax = quotaTwo;
-//
-//            }
-//            if (quotaOne > 0.5 && quotaTwo > 0.5){
-//                listaMatcheva.remove(i);
-//                i =-1;
-//
-//               }
-//            else if(quotaMax > 1){
-//                listaMatcheva.remove(i);
-//                i =-1;
-//            }
-//            else if(quotaMax < 0.02){
-//                listaMatcheva.remove(i);
-//                i =-1;
-//            }
-//       }
-//        System.out.println(listaMatcheva.size());
+        for (int i = 0; i < listaMatcheva.size(); i++) {
+
+       MatchDifferences matchDifferences = listaMatcheva.get(i);
+            Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
+            Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
+            Double quotaMax = quotaOne;
+            if (quotaTwo > quotaOne){
+                quotaMax = quotaTwo;
+
+            }
+            if (quotaOne > 0.5 && quotaTwo > 0.5){
+                listaMatcheva.remove(i);
+                i =-1;
+
+               }
+            else if(quotaMax > 1){
+                listaMatcheva.remove(i);
+                i =-1;
+            }
+            else if(quotaMax < 0.02){
+                listaMatcheva.remove(i);
+                i =-1;
+            }
+       }
+        System.out.println(listaMatcheva.size());
 
         return listaMatcheva;
     }
