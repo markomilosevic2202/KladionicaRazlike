@@ -522,6 +522,7 @@ public class StepDef {
                     message.setContent(multipart);
 
                     Transport.send(message);
+                    System.out.println("Poslato");
 
                 } catch (MessagingException e) {
                     e.printStackTrace();

@@ -162,16 +162,16 @@ public class Foreign {
                 inpSearch.sendKeys(clearIfNameForeign);
 
                 driver.navigate().refresh();
-                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]")));
+                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]")));
                // Thread.sleep(1000);
                // driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
                WebElement firstMatchOnList  = driver.findElement(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]"));
                 firstMatchOnList.findElement(By.xpath(".//a")).click();
                 //Thread.sleep(2000);
-                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Correct Score')]")));
+                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Correct Score')]")));
                 btnDoubleChance.click();
                 //Thread.sleep(2000);
-                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Double Chance')]")));
+                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Double Chance')]")));
                 System.out.println(matchDifferences1.getNameForeign());
                 WebElement webElement = driver.findElements(By.xpath("//*[contains(@class, 'biab_bet biab_blue-cell js-blue-cell biab_bet-back js-bet-back biab_back-0 js-back-0')]"))
                         .get(higherOdds);
