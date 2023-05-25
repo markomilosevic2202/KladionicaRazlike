@@ -215,11 +215,25 @@ public class StepDef {
 
 
     }
+    @Then("compare odds mozzart")
+    public void compare_odds_mozzart() throws IOException {
+
+        Match[] matchesHomeBetting = objectMapper.readValue(new File("src/test/resources/json/mozzartBetting.json"), Match[].class);
+        Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
+        compare(matchesHomeBetting, matchesForeignBetting, "ordinaryMozzartQuotaDifferences");
+
+
+    }
 
     @Then("sort data en write in excel")
     public void sort_data_en_write_in_excel() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sort(matchArray), "Ordinary");
+    }
+    @Then("sort data mozzart en write in excel")
+    public void sort_data_mozzart_en_write_in_excel() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferences.json"), MatchDifferences[].class);
+        writeInExcel(sort(matchArray), "Mozzart");
     }
     @Then("sort data en write in excel bonus odds")
     public void sort_data_en_write_in_excel_bonus_odds() throws IOException {
@@ -238,8 +252,13 @@ public class StepDef {
     }
     @Then("sort data en write in excel ordinary odds plus")
     public void sort_data_en_write_in_excel_ordinary_odds_plus() throws IOException {
-        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMeridianQuotaDifferencesClear.json"), MatchDifferences[].class);
         writeInExcel(sortEarnings(matchArray), "Ordinary");
+    }
+    @Then("sort data en write in excel ordinary odds Mozzart")
+    public void sort_data_en_write_in_excel_ordinary_odds_Mozzart() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferencesClear.json"), MatchDifferences[].class);
+        writeInExcel(sortEarnings(matchArray), "Mozzart");
     }
     @Then("compare bonus odds")
     public void compare_bonus_odds() throws IOException{
@@ -285,10 +304,19 @@ public class StepDef {
     }
     @Then("clear list Meridian")
     public void clear_list_Meridian() throws IOException {
-        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferences.json"), MatchDifferences[].class);
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryMeridianQuotaDifferences.json"), MatchDifferences[].class);
         System.out.println( "Pocetna: " + list.length);
 
-        writeJsonFileMatchDifferencesList( clearList(list),"meridianQuotaDifferencesClear");
+        writeJsonFileMatchDifferencesList( clearList(list),"ordinaryMeridianQuotaDifferencesclear");
+
+
+    }
+    @Then("clear list Mozzart")
+    public void clear_list_Mozzart() throws IOException {
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferences.json"), MatchDifferences[].class);
+        System.out.println( "Pocetna: " + list.length);
+
+        writeJsonFileMatchDifferencesList( clearList(list),"ordinaryMozzartQuotaDifferencesClear");
 
 
     }
@@ -298,14 +326,20 @@ public class StepDef {
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryQuotaDifferencesClear");
     }
+    @Then("find all the opposite odds for ordinary mozzart match")
+    public void find_all_the_opposite_odds_for_ordinary_mozzart_match() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferencesClear.json"), MatchDifferences[].class);
+
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryMozzartQuotaDifferencesClear");
+    }
     @Then("find all the opposite odds for Meridian match")
     public void find_all_the_opposite_odds_for_Meridian_ordinary_match() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "meridianQuotaDifferencesClear");
     }
-    @Then("write bonus match in document mozzart")
-    public void write_bonus_match_in_document_mozzart() {
+    @Then("write match in document mozzart")
+    public void write_match_in_document_mozzart() {
         List<Match> matches = mozzart.writeMatch();
         writeJsonFileMatchList(matches, "mozzartBetting");
     }
