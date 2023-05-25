@@ -363,10 +363,10 @@ public class StepDef {
         double two = Double.parseDouble(matchHomeBetting.getTwo()) - Double.parseDouble(matchForeignBetting.getTwo());
         matchDifferences.setTwoDifferences(Double.toString(Math.round(two * 100.0) / 100.0));
 
-        matchDifferences.setXHome(matchHomeBetting.getX());
-        matchDifferences.setXForeign(matchForeignBetting.getX());
+        matchDifferences.setHomeX(matchHomeBetting.getX());
+        matchDifferences.setForeignX(matchForeignBetting.getX());
         double x = Double.parseDouble(matchHomeBetting.getX()) - Double.parseDouble(matchForeignBetting.getX());
-        matchDifferences.setXDifferences(Double.toString(Math.round(x * 100.0) / 100.0));
+        matchDifferences.setDifferencesX(Double.toString(Math.round(x * 100.0) / 100.0));
 
         return matchDifferences;
 
@@ -481,11 +481,11 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getTwoDifferences());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXHome());
+            cell1.setCellValue(match.getHomeX());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXForeign());
+            cell1.setCellValue(match.getForeignX());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXDifferences());
+            cell1.setCellValue(match.getDifferencesX());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getNameForeign());
 
@@ -700,10 +700,10 @@ public class StepDef {
                 if (iMax < iValueTwo) {
                     iMax = iValueTwo;
                 }
-//                double iValueX = Double.parseDouble(matchArray[i].getXDifferences());
-//                if (iMax < iValueX){
-//                    iMax = iValueX;
-//                }
+                double iValueX = Double.parseDouble(matchArray[i].getDifferencesX());
+                if (iMax < iValueX){
+                    iMax = iValueX;
+                }
 
                 double jValueOne = Double.parseDouble(matchArray[j].getOneDifferences());
                 double jMax = jValueOne;
@@ -711,10 +711,10 @@ public class StepDef {
                 if (jMax < jValueTwo) {
                     jMax = jValueTwo;
                 }
-//                double jValueX = Double.parseDouble(matchArray[j].getXDifferences());
-//                if (jMax < jValueX){
-//                    jMax = jValueX;
-//                }
+                double jValueX = Double.parseDouble(matchArray[j].getDifferencesX());
+                if (jMax < jValueX){
+                    jMax = jValueX;
+                }
                 //|| jValueTwo > iValue || jValueX > iValue
                 if (jMax > iMax) {
                     MatchDifferences temp = matchArray[i];

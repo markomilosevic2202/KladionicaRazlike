@@ -62,4 +62,5 @@ Feature: Register
     And clear list Mozzart
     And find all the opposite odds for ordinary mozzart match
     And sort data en write in excel ordinary odds Mozzart
-     Then send email
+#     Then send email
+  #dfbdfbdfbdfbdf
