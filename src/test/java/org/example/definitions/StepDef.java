@@ -10,7 +10,10 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -523,7 +526,12 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getEarnings());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getUrlOrbit());
+           cell1.setCellValue("Link");
+           CreationHelper creationHelper = workbook.getCreationHelper();
+            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
+           String link = match.getUrlOrbit();
+            hyperlink.setAddress(link);
+            cell1.setHyperlink(hyperlink);
             cell1 = row.createCell(cellnum1++);
 
 

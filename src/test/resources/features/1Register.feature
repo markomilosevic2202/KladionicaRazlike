@@ -61,6 +61,6 @@ Feature: Register
 #    Given go to the address "https://www.orbitxch.com/customer/sport/1"
 #    And clear list Mozzart
 #    And find all the opposite odds for ordinary mozzart match
-    And sort data en write in excel ordinary odds Mozzart
+#    And sort data en write in excel ordinary odds Mozzart
 #     Then send email
   #dfbdfbdfbdfbdfdsafcdsacdsadsafsda
