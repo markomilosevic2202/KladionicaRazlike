@@ -10,7 +10,10 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -67,7 +70,7 @@ public class StepDef {
 
     static int numberMatchesHome;
     static int numberMatchesForeign;
-    static int  numberMatchesBingo;
+    static int numberMatchesBingo;
     static int numberMatchesNotFound;
 
 
@@ -117,7 +120,7 @@ public class StepDef {
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
-       // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
         driver.navigate().refresh();
     }
@@ -158,33 +161,37 @@ public class StepDef {
         List<Match> matches = foreign.findMatches("48");
         writeJsonFileMatchList(matches, "foreignBetting");
     }
+
     @When("click on the page meridian button football")
     public void click_on_the_page_meridian_button_football() throws InterruptedException {
         Thread.sleep(2000);
         meridian.clickFootball();
     }
+
     @When("click on the page meridian button {string}")
     public void click_on_the_page_meridian_button(String time) {
         meridian.clickTime(time);
     }
+
     @When("wait for the whole page to load meridian")
     public void wait_for_the_whole_page_to_load_meridian() throws InterruptedException {
-       meridian.waitForPageToLoad();
+        meridian.waitForPageToLoad();
     }
+
     @When("click on the page mozzart button {string}")
     public void click_on_the_page_mozzart_button(String time) {
-       mozzart.clickTime(time);
+        mozzart.clickTime(time);
     }
+
     @When("click on the page mozzart button football")
     public void click_on_the_page_mozzart_button_football() {
         mozzart.clickFootball();
     }
+
     @When("wait for the whole page to load mozzart")
     public void wait_for_the_whole_page_to_load_mozzart() throws InterruptedException {
-       mozzart.waitForPageToLoad();
+        mozzart.waitForPageToLoad();
     }
-
-
 
 
     @Then("write all match in document")
@@ -199,6 +206,7 @@ public class StepDef {
         writeJsonFileMatchList(matches, "homeBonusBetting");
 
     }
+
     @Then("write bonus match in document meridian")
     public void write_bonus_match_in_document_meridian() {
         List<Match> matches = meridian.writeMatch();
@@ -216,45 +224,74 @@ public class StepDef {
 
     }
 
+    @Then("compare odds mozzart")
+    public void compare_odds_mozzart() throws IOException {
+
+        Match[] matchesHomeBetting = objectMapper.readValue(new File("src/test/resources/json/mozzartBetting.json"), Match[].class);
+        Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
+        compare(matchesHomeBetting, matchesForeignBetting, "ordinaryMozzartQuotaDifferences");
+
+
+    }
+
     @Then("sort data en write in excel")
     public void sort_data_en_write_in_excel() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sort(matchArray), "Ordinary");
     }
+
+    @Then("sort data mozzart en write in excel")
+    public void sort_data_mozzart_en_write_in_excel() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferences.json"), MatchDifferences[].class);
+        writeInExcel(sort(matchArray), "Mozzart");
+    }
+
     @Then("sort data en write in excel bonus odds")
     public void sort_data_en_write_in_excel_bonus_odds() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sort(matchArray), "Bonus");
     }
+
     @Then("sort data en write in excel Meridian odds")
     public void sort_data_en_write_in_excel_Meridian_odds() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusMeridianBetting.json"), MatchDifferences[].class);
         writeInExcel(sortEarnings(matchArray), "Meridian");
     }
+
     @Then("sort data en write in excel bonus odds plus")
     public void sort_data_en_write_in_excel_bonus_odds_plus() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/plusBonusQuotaDifferences.json"), MatchDifferences[].class);
         writeInExcel(sortEarnings(matchArray), "Bonus");
     }
+
     @Then("sort data en write in excel ordinary odds plus")
     public void sort_data_en_write_in_excel_ordinary_odds_plus() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
         writeInExcel(sortEarnings(matchArray), "Ordinary");
     }
+
+    @Then("sort data en write in excel ordinary odds Mozzart")
+    public void sort_data_en_write_in_excel_ordinary_odds_Mozzart() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferencesClear.json"), MatchDifferences[].class);
+        writeInExcel(sortEarnings(matchArray), "Mozzart");
+    }
+
     @Then("compare bonus odds")
-    public void compare_bonus_odds() throws IOException{
+    public void compare_bonus_odds() throws IOException {
         Match[] matchesHomeBettingBonus = objectMapper.readValue(new File("src/test/resources/json/homeBonusBetting.json"), Match[].class);
         Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
         compare(matchesHomeBettingBonus, matchesForeignBetting, "bonusQuotaDifferences");
 
     }
+
     @Then("compare meridian odds")
-    public void compare_meridian_odds() throws IOException{
+    public void compare_meridian_odds() throws IOException {
         Match[] matchesHomeBettingBonus = objectMapper.readValue(new File("src/test/resources/json/meridianBetting.json"), Match[].class);
         Match[] matchesForeignBetting = objectMapper.readValue(new File("src/test/resources/json/foreignBetting.json"), Match[].class);
-       // compareMeridian(matchesHomeBettingBonus, matchesForeignBetting, "meridianQuotaDifferences");
+        // compareMeridian(matchesHomeBettingBonus, matchesForeignBetting, "meridianQuotaDifferences");
 
     }
+
     @Then("find all the opposite odds")
     public void find_all_the_opposite_odds() throws IOException, InterruptedException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/bonusQuotaDifferences.json"), MatchDifferences[].class);
@@ -262,6 +299,7 @@ public class StepDef {
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusBonusQuotaDifferences");
 
     }
+
     @Then("find all the opposite odds Meridian")
     public void find_all_the_opposite_odds_Meridian() throws IOException, InterruptedException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
@@ -269,6 +307,7 @@ public class StepDef {
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "plusMeridianBetting");
 
     }
+
     @Then("send email")
     public void send_email() {
         sendEmail();
@@ -277,35 +316,56 @@ public class StepDef {
     @Then("clear list")
     public void clear_list() throws IOException {
         MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferences.json"), MatchDifferences[].class);
-        System.out.println( "Pocetna: " + list.length);
+        System.out.println("Pocetna: " + list.length);
 
-        writeJsonFileMatchDifferencesList( clearList(list),"ordinaryQuotaDifferencesClear");
+        writeJsonFileMatchDifferencesList(clearList(list), "ordinaryQuotaDifferencesClear");
 
 
     }
+
     @Then("clear list Meridian")
     public void clear_list_Meridian() throws IOException {
-        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferences.json"), MatchDifferences[].class);
-        System.out.println( "Pocetna: " + list.length);
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryMeridianQuotaDifferences.json"), MatchDifferences[].class);
+        System.out.println("Pocetna: " + list.length);
 
-        writeJsonFileMatchDifferencesList( clearList(list),"meridianQuotaDifferencesClear");
+        writeJsonFileMatchDifferencesList(clearList(list), "ordinaryMeridianQuotaDifferencesclear");
 
 
     }
+
+    @Then("clear list Mozzart")
+    public void clear_list_Mozzart() throws IOException {
+        MatchDifferences[] list = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferences.json"), MatchDifferences[].class);
+        System.out.println("Pocetna: " + list.length);
+
+        writeJsonFileMatchDifferencesList(clearList(list), "ordinaryMozzartQuotaDifferencesClear");
+
+
+    }
+
     @Then("find all the opposite odds for ordinary match")
     public void find_all_the_opposite_odds_for_ordinary_match() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryQuotaDifferencesClear.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryQuotaDifferencesClear");
     }
+
+    @Then("find all the opposite odds for ordinary mozzart match")
+    public void find_all_the_opposite_odds_for_ordinary_mozzart_match() throws IOException {
+        MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/ordinaryMozzartQuotaDifferencesClear.json"), MatchDifferences[].class);
+
+        writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "ordinaryMozzartQuotaDifferencesClear");
+    }
+
     @Then("find all the opposite odds for Meridian match")
     public void find_all_the_opposite_odds_for_Meridian_ordinary_match() throws IOException {
         MatchDifferences[] matchArray = objectMapper.readValue(new File("src/test/resources/json/meridianQuotaDifferencesClear.json"), MatchDifferences[].class);
 
         writeJsonFileMatchDifferencesList(Arrays.asList(foreign.addOppositeOdds(matchArray)), "meridianQuotaDifferencesClear");
     }
-    @Then("write bonus match in document mozzart")
-    public void write_bonus_match_in_document_mozzart() {
+
+    @Then("write match in document mozzart")
+    public void write_match_in_document_mozzart() {
         List<Match> matches = mozzart.writeMatch();
         writeJsonFileMatchList(matches, "mozzartBetting");
     }
@@ -329,10 +389,10 @@ public class StepDef {
         double two = Double.parseDouble(matchHomeBetting.getTwo()) - Double.parseDouble(matchForeignBetting.getTwo());
         matchDifferences.setTwoDifferences(Double.toString(Math.round(two * 100.0) / 100.0));
 
-        matchDifferences.setXHome(matchHomeBetting.getX());
-        matchDifferences.setXForeign(matchForeignBetting.getX());
+        matchDifferences.setHomeX(matchHomeBetting.getX());
+        matchDifferences.setForeignX(matchForeignBetting.getX());
         double x = Double.parseDouble(matchHomeBetting.getX()) - Double.parseDouble(matchForeignBetting.getX());
-        matchDifferences.setXDifferences(Double.toString(Math.round(x * 100.0) / 100.0));
+        matchDifferences.setDifferencesX(Double.toString(Math.round(x * 100.0) / 100.0));
 
         return matchDifferences;
 
@@ -416,6 +476,8 @@ public class StepDef {
         cell.setCellValue("Ulog");
         cell = row.createCell(cellnum++);
         cell.setCellValue("Zarada");
+        cell = row.createCell(cellnum++);
+        cell.setCellValue("Link Orbit");
 
 
         for (int i = 0; i < matchDifferences.length; i++) {
@@ -447,11 +509,11 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getTwoDifferences());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXHome());
+            cell1.setCellValue(match.getHomeX());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXForeign());
+            cell1.setCellValue(match.getForeignX());
             cell1 = row.createCell(cellnum1++);
-            cell1.setCellValue(match.getXDifferences());
+            cell1.setCellValue(match.getDifferencesX());
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getNameForeign());
 
@@ -464,8 +526,14 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
             cell1.setCellValue(match.getEarnings());
             cell1 = row.createCell(cellnum1++);
-
-
+           cell1.setCellValue("Link");
+           CreationHelper creationHelper = workbook.getCreationHelper();
+            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
+           String link = match.getUrlOrbit();
+            hyperlink.setAddress(link);
+            cell1.setHyperlink(hyperlink);
+            cell1 = row.createCell(cellnum1++);
+//jhkkjhkj
 
         }
         try {
@@ -483,53 +551,53 @@ public class StepDef {
     }
 
 
-        static void sendEmail() {
+    static void sendEmail() {
 
 
-                String host = "mail.lumenspei.com";
-                int port = 587;
-                String username = "marko.milosevic@lumenspei.com";
-                String password = "Donjev.018";
+        String host = "mail.lumenspei.com";
+        int port = 587;
+        String username = "marko.milosevic@lumenspei.com";
+        String password = "Donjev.018";
 
 
-                Properties props = new Properties();
-                props.put("mail.smtp.auth", "true");
-                props.put("mail.smtp.starttls.enable", "true");
-                props.put("mail.smtp.host", host);
-                props.put("mail.smtp.port", port);
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
 
-                // Kreiranje sesije
-                Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+        // Kreiranje sesije
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
-                try {
+        try {
 
-                    Message message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(username));
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("pedjoni018@yahoo.com"));
-                    message.setSubject("Testna poruka");
-                    message.setText("Ovo je testna poruka poslana putem JavaMail API1.");
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("pedjoni018@yahoo.com"));
+            message.setSubject("Testna poruka");
+            message.setText("Ovo je testna poruka poslana putem JavaMail API1.");
 
-                    Multipart multipart = new MimeMultipart();
+            Multipart multipart = new MimeMultipart();
 
-                    MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-                    String filePath = nameFileGlobal;
-                    attachmentBodyPart.attachFile(filePath);
-                    multipart.addBodyPart(attachmentBodyPart);
-                    message.setContent(multipart);
+            MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+            String filePath = nameFileGlobal;
+            attachmentBodyPart.attachFile(filePath);
+            multipart.addBodyPart(attachmentBodyPart);
+            message.setContent(multipart);
 
-                    Transport.send(message);
+            Transport.send(message);
+            System.out.println("Poslato");
 
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
+    }
 
 
     public void compare(Match[] matchesHomeBetting, Match[] matchsForeignBetting, String nameFile) throws IOException {
@@ -549,96 +617,102 @@ public class StepDef {
             String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
             Boolean bingo = false;
 
+            for (int j = 97; j < matchsForeignBetting.length; j++) {
+                try {
 
-            for (int j = 0; j < matchsForeignBetting.length; j++) {
-                Match matchForeignBetting = matchsForeignBetting[j];
-                String nameForeignBetting = matchForeignBetting.getName();
-                String nameHomeForeignBetting = nameForeignBetting.substring(0, nameForeignBetting.indexOf(" -"));
-                String nameGuestForeignBetting = nameForeignBetting.substring(nameForeignBetting.lastIndexOf("- ") + 1);
-                String timeForeignBetting = matchForeignBetting.getTime();
-                String dateForeignBetting = matchForeignBetting.getDate().substring(0, 5);
 
-                if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                    Match matchForeignBetting = matchsForeignBetting[j];
+                    String nameForeignBetting = matchForeignBetting.getName();
+                    String nameHomeForeignBetting = nameForeignBetting.substring(0, nameForeignBetting.indexOf(" -"));
+                    String nameGuestForeignBetting = nameForeignBetting.substring(nameForeignBetting.lastIndexOf("- ") + 1);
+                    String timeForeignBetting = matchForeignBetting.getTime();
+                    String dateForeignBetting = matchForeignBetting.getDate().substring(0, 5);
+
+                    if (nameForeignBetting.contains(nameHomeHomeBetting) && nameForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
 //
-                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
-                    bingo = true;
-                    break;
-                } else if (nameHomeForeignBetting.contains(nameHomeHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home guest"));
+                        bingo = true;
+                        break;
+                    } else if (nameHomeForeignBetting.contains(nameHomeHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
 //
-                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home"));
-                    bingo = true;
-                    break;
-                } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
-
-                    matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest"));
-                    bingo = true;
-                    break;
-                }
-                try {
-
-
-                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home6"));
+                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home"));
                         bingo = true;
                         break;
-                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest6"));
+                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+
+                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest"));
                         bingo = true;
                         break;
                     }
-                } catch (Throwable t) {
 
-                }
-
-
-                try {
+                    try {
 
 
-                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home5"));
-                        bingo = true;
-                        break;
-                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest5"));
-                        bingo = true;
-                        break;
+                        if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home6"));
+                            bingo = true;
+                            break;
+                        } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 6)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest6"));
+                            bingo = true;
+                            break;
+                        }
+                    } catch (Throwable t) {
+
                     }
-                } catch (Throwable t) {
-
-                }
-
-                try {
 
 
-                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4go"));
-                        bingo = true;
-                        break;
-                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0,2)) && timeForeignBetting.contains(timeHomeBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4go"));
-                        bingo = true;
-                        break;
+                    try {
+
+
+                        if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home5"));
+                            bingo = true;
+                            break;
+                        } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 5)) && timeForeignBetting.contains(timeHomeBetting) && dateHomeBetting.equals(dateForeignBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest5"));
+                            bingo = true;
+                            break;
+                        }
+                    } catch (Throwable t) {
+
                     }
-                } catch (Throwable t) {
 
-                }
-                try {
+                    try {
 
 
-                    if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
-                        bingo = true;
-                        break;
-                    } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
-                        matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4"));
-                        bingo = true;
-                        break;
+                        if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 2)) && timeForeignBetting.contains(timeHomeBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4go"));
+                            bingo = true;
+                            break;
+                        } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 2)) && timeForeignBetting.contains(timeHomeBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4go"));
+                            bingo = true;
+                            break;
+                        }
+                    } catch (Throwable t) {
+
                     }
+                    try {
+
+
+                        if (nameHomeForeignBetting.contains(nameHomeHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "home4"));
+                            bingo = true;
+                            break;
+                        } else if (nameGuestForeignBetting.contains(nameGuestHomeBetting.substring(0, 4)) && timeForeignBetting.contains(timeHomeBetting)) {
+                            matchesBingo.add(differences(matchHomeBetting, matchForeignBetting, "guest4"));
+                            bingo = true;
+                            break;
+                        }
+                    } catch (Throwable t) {
+
+                    }
+
                 } catch (Throwable t) {
 
                 }
             }
-
 
             if (bingo.equals(false)) {
                 matchesDiscard.add(matchHomeBetting);
@@ -665,10 +739,10 @@ public class StepDef {
                 if (iMax < iValueTwo) {
                     iMax = iValueTwo;
                 }
-//                double iValueX = Double.parseDouble(matchArray[i].getXDifferences());
-//                if (iMax < iValueX){
-//                    iMax = iValueX;
-//                }
+                double iValueX = Double.parseDouble(matchArray[i].getDifferencesX());
+                if (iMax < iValueX) {
+                    iMax = iValueX;
+                }
 
                 double jValueOne = Double.parseDouble(matchArray[j].getOneDifferences());
                 double jMax = jValueOne;
@@ -676,10 +750,10 @@ public class StepDef {
                 if (jMax < jValueTwo) {
                     jMax = jValueTwo;
                 }
-//                double jValueX = Double.parseDouble(matchArray[j].getXDifferences());
-//                if (jMax < jValueX){
-//                    jMax = jValueX;
-//                }
+                double jValueX = Double.parseDouble(matchArray[j].getDifferencesX());
+                if (jMax < jValueX) {
+                    jMax = jValueX;
+                }
                 //|| jValueTwo > iValue || jValueX > iValue
                 if (jMax > iMax) {
                     MatchDifferences temp = matchArray[i];
@@ -691,13 +765,14 @@ public class StepDef {
         }
         return matchArray;
     }
+
     public MatchDifferences[] sortEarnings(MatchDifferences[] matchArray) throws IOException {
 
 
         for (int i = 0; i < matchArray.length - 1; i++) {
 
             for (int j = 0; j < matchArray.length - i - 1; j++) {
-                if ( Double.parseDouble(matchArray[j].getEarnings()) <  Double.parseDouble(matchArray[j + 1].getEarnings())) {
+                if (Double.parseDouble(matchArray[j].getEarnings()) < Double.parseDouble(matchArray[j + 1].getEarnings())) {
 
                     MatchDifferences temp = matchArray[j];
                     matchArray[j] = matchArray[j + 1];
@@ -729,33 +804,32 @@ public class StepDef {
             e.printStackTrace();
         }
     }
-    public List<MatchDifferences> clearList(MatchDifferences[] list){
+
+    public List<MatchDifferences> clearList(MatchDifferences[] list) {
         int a = 0;
         List<MatchDifferences> listaMatcheva = new ArrayList<>(Arrays.asList(list));
         for (int i = 0; i < listaMatcheva.size(); i++) {
 
-       MatchDifferences matchDifferences = listaMatcheva.get(i);
+            MatchDifferences matchDifferences = listaMatcheva.get(i);
             Double quotaOne = Double.parseDouble(matchDifferences.getOneDifferences());
             Double quotaTwo = Double.parseDouble(matchDifferences.getTwoDifferences());
             Double quotaMax = quotaOne;
-            if (quotaTwo > quotaOne){
+            if (quotaTwo > quotaOne) {
                 quotaMax = quotaTwo;
 
             }
-            if (quotaOne > 0.5 && quotaTwo > 0.5){
+            if (quotaOne > 0.5 && quotaTwo > 0.5) {
                 listaMatcheva.remove(i);
-                i =-1;
+                i = -1;
 
-               }
-            else if(quotaMax > 1){
+            } else if (quotaMax > 1) {
                 listaMatcheva.remove(i);
-                i =-1;
-            }
-            else if(quotaMax < 0.02){
+                i = -1;
+            } else if (quotaMax < 0.02) {
                 listaMatcheva.remove(i);
-                i =-1;
+                i = -1;
             }
-       }
+        }
         System.out.println(listaMatcheva.size());
 
         return listaMatcheva;

@@ -23,14 +23,15 @@ public class MatchDifferences {
     private String twoHome;
     private String twoForeign;
     private String twoDifferences;
-    private String xHome;
-    private String xForeign;
-    private String xDifferences;
+    private String homeX;
+    private String foreignX;
+    private String differencesX;
     private String comparison;
     private String counterQuota;
     private String higherOdds;
     private String bet;
     private String earnings;
+    private String urlOrbit;
 
 
 }
