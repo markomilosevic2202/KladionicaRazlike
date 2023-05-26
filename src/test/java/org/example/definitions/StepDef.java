@@ -80,13 +80,13 @@ public class StepDef {
 
     @Before
 
-    public void before() throws FileNotFoundException {
+    public void before()  {
         System.setProperty("webdriver.chrome.driver",
                 "src/main/resources/chromedriver");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(40));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         actions = new Actions(driver);
@@ -120,6 +120,7 @@ public class StepDef {
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
+
         // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
         driver.navigate().refresh();
