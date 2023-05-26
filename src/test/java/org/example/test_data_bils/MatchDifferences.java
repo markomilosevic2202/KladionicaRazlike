@@ -31,6 +31,7 @@ public class MatchDifferences {
     private String higherOdds;
     private String bet;
     private String earnings;
+    private String urlOrbit;
 
 
 }

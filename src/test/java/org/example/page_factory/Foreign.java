@@ -157,6 +157,11 @@ public class Foreign {
                     higherOdds = 0;
                     higherOddsString = matchDifferences1.getTwoHome();
                 }
+               if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX()) &&
+                       Double.parseDouble(matchDifferences1.getTwoDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX())){
+                    higherOdds = 2;
+                    higherOddsString = matchDifferences1.getHomeX();
+                }
 
                 inpSearch.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
                 inpSearch.sendKeys(clearIfNameForeign);
@@ -179,6 +184,7 @@ public class Foreign {
                 matchDifferences1.setBet(webElement.findElement(By.xpath("div/div/div/span[2]")).getText());
                 matchDifferences1.setHigherOdds(higherOddsString);
                 matchDifferences1.setEarnings(getEarnings(matchDifferences1.getHigherOdds(),matchDifferences1.getCounterQuota()));
+                matchDifferences1.setUrlOrbit(driver.getCurrentUrl());
 
 
 
