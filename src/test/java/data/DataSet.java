@@ -20,5 +20,5 @@ public class DataSet {
     public String data7 = "--disable-gpu";
     public String data8 = "--disable-dev-shm-usage";
     public String data9 = "--no-sandbox";
-    public String data10 = "--no-sandbox";
+   //wwww
 }
