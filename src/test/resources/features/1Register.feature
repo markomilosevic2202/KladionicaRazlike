@@ -20,7 +20,7 @@ Feature: Register
 
 
   Scenario: Entering odds for bonus odds max-bet
-    Given go to the address "https://www.maxbet.rs/ibet-web-client/#/home#top"
+    Given go to the address "httpsgit ://www.maxbet.rs/ibet-web-client/#/home#top"
     When choose which period you are watching "3"
     When click on the page max-bet button football
     When click on the page max-bet button max bonus
