@@ -1,19 +1,17 @@
 package org.example.definitions;
 
 
+import Data.DataSetTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -28,9 +26,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -61,6 +56,7 @@ public class StepDef {
     private Meridian meridian;
 
     private Mozzart mozzart;
+    DataSetTest dataSetTest;
 
     private ObjectMapper objectMapper;
 
@@ -80,13 +76,21 @@ public class StepDef {
 
     @Before
 
-    public void before()  {
-        System.setProperty("webdriver.chrome.driver",
-                "src/main/resources/chromedriver");
+    public void before() throws FileNotFoundException {
+        dataSetTest = new DataSetTest();
+
+        System.setProperty(dataSetTest.getData1(), dataSetTest.getData2()
+               );
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments(dataSetTest.getData3());
+        chromeOptions.addArguments(dataSetTest.getData4()); // open Browser in maximized mode
+        chromeOptions.addArguments(dataSetTest.getData5()); // disabling infobars
+        chromeOptions.addArguments(dataSetTest.getData6()); // disabling extensions
+        chromeOptions.addArguments(dataSetTest.getData7()); // applicable to windows os only
+        chromeOptions.addArguments(dataSetTest.getData8()); // overcome limited resource problems
+        chromeOptions.addArguments(dataSetTest.getData9()); // Bypass OS security model
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(40));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         actions = new Actions(driver);
@@ -120,7 +124,6 @@ public class StepDef {
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
-
         // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         driver.get(address);
         driver.navigate().refresh();
@@ -529,19 +532,19 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
            cell1.setCellValue("Link");
            CreationHelper creationHelper = workbook.getCreationHelper();
-            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
-           String link = match.getUrlOrbit();
-            hyperlink.setAddress(link);
-            cell1.setHyperlink(hyperlink);
-            cell1 = row.createCell(cellnum1++);
+//            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
+//           String link = match.getUrlOrbit();
+//            hyperlink.setAddress(link);
+//            cell1.setHyperlink(hyperlink);
+//            cell1 = row.createCell(cellnum1++);
 //jhkkjhkj
 
         }
         try {
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd-MM-yyyy");//format datuma
-            FileOutputStream out = new FileOutputStream(new File(nameFile + date.format(formatterData) + " - " + time.format(formatter) + ".xlsx"));
-            nameFileGlobal = nameFile + date.format(formatterData) + " - " + time.format(formatter) + ".xlsx";
+            FileOutputStream out = new FileOutputStream(new File(nameFile + ".xlsx"));  //+ date.format(formatterData) + " - " + time.format(formatter) 
+            nameFileGlobal = nameFile + ".xlsx";//+ date.format(formatterData) + " - " + time.format(formatter) 
             workbook.write(out);
             out.close();
 
@@ -607,7 +610,8 @@ public class StepDef {
         List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchesDiscard = new ArrayList<>();
 
-
+        System.out.println(matchesHomeBetting.length);
+        System.out.println(matchsForeignBetting.length);
         for (int i = 0; i < matchesHomeBetting.length; i++) {
 
             Match matchHomeBetting = matchesHomeBetting[i];
@@ -618,7 +622,7 @@ public class StepDef {
             String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
             Boolean bingo = false;
 
-            for (int j = 97; j < matchsForeignBetting.length; j++) {
+            for (int j =0; j < matchsForeignBetting.length; j++) {
                 try {
 
 
