@@ -56,7 +56,7 @@ public class StepDef {
     private Meridian meridian;
 
     private Mozzart mozzart;
-    DataSetTest dataSetTest;
+//    DataSetTest dataSetTest;
 
     private ObjectMapper objectMapper;
 
