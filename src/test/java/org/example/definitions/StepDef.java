@@ -4,6 +4,7 @@ package org.example.definitions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import data.DataSet;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -56,7 +57,7 @@ public class StepDef {
     private Meridian meridian;
 
     private Mozzart mozzart;
-//    DataSetTest dataSetTest;
+    private DataSet dataSetTest;
 
     private ObjectMapper objectMapper;
 
@@ -77,7 +78,7 @@ public class StepDef {
     @Before
 
     public void before() throws FileNotFoundException {
-        dataSetTest = new DataSetTest();
+        dataSetTest = new DataSet();
 
         System.setProperty(dataSetTest.getData1(), dataSetTest.getData2()
                );
@@ -543,7 +544,7 @@ public class StepDef {
         try {
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd-MM-yyyy");//format datuma
-            FileOutputStream out = new FileOutputStream(new File(nameFile + ".xlsx"));  //+ date.format(formatterData) + " - " + time.format(formatter) 
+            FileOutputStream out = new FileOutputStream(new File("result/" + nameFile + ".xlsx"));  //+ date.format(formatterData) + " - " + time.format(formatter)
             nameFileGlobal = nameFile + ".xlsx";//+ date.format(formatterData) + " - " + time.format(formatter) 
             workbook.write(out);
             out.close();

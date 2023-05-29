@@ -1,4 +1,5 @@
 *.log
 
 src/main
-target
+result
+src/test/java/data/DataSet.java
