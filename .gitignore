@@ -1,2 +1,3 @@
+*.log
 src/main/
 src/test/java/org/example/definitions/DataSetTest.java
