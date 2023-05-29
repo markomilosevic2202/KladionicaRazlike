@@ -85,6 +85,12 @@ public class StepDef {
                 "src/main/resources/chromedriver");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments("start-maximized"); // open Browser in maximized mode
+        chromeOptions.addArguments("disable-infobars"); // disabling infobars
+        chromeOptions.addArguments("--disable-extensions"); // disabling extensions
+        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
+        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -528,11 +534,11 @@ public class StepDef {
             cell1 = row.createCell(cellnum1++);
            cell1.setCellValue("Link");
            CreationHelper creationHelper = workbook.getCreationHelper();
-            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
-           String link = match.getUrlOrbit();
-            hyperlink.setAddress(link);
-            cell1.setHyperlink(hyperlink);
-            cell1 = row.createCell(cellnum1++);
+//            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
+//           String link = match.getUrlOrbit();
+//            hyperlink.setAddress(link);
+//            cell1.setHyperlink(hyperlink);
+//            cell1 = row.createCell(cellnum1++);
 //jhkkjhkj
 
         }
@@ -606,7 +612,8 @@ public class StepDef {
         List<MatchDifferences> matchesBingo = new ArrayList<>();
         List<Match> matchesDiscard = new ArrayList<>();
 
-
+        System.out.println(matchesHomeBetting.length);
+        System.out.println(matchsForeignBetting.length);
         for (int i = 0; i < matchesHomeBetting.length; i++) {
 
             Match matchHomeBetting = matchesHomeBetting[i];
@@ -617,7 +624,7 @@ public class StepDef {
             String nameGuestHomeBetting = nameHomeBetting.substring(nameHomeBetting.lastIndexOf("- ") + 1);
             Boolean bingo = false;
 
-            for (int j = 97; j < matchsForeignBetting.length; j++) {
+            for (int j =0; j < matchsForeignBetting.length; j++) {
                 try {
 
 
