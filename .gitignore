@@ -1,3 +1,2 @@
-*.log
-src/main/
-src/test/java/org/example/definitions/DataSetTest.java
+KladionicaRazlike/src/test/java/org/example/definitions/DataSetTest.java
+KladionicaRazlike/src/main
