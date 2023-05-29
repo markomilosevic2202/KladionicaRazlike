@@ -538,13 +538,13 @@ public class StepDef {
 //            hyperlink.setAddress(link);
 //            cell1.setHyperlink(hyperlink);
 //            cell1 = row.createCell(cellnum1++);
-//jhkkjhkj
+
 
         }
         try {
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd-MM-yyyy");//format datuma
-            FileOutputStream out = new FileOutputStream(new File("result/" + nameFile + ".xlsx"));  //+ date.format(formatterData) + " - " + time.format(formatter)
+            FileOutputStream out = new FileOutputStream(new File("result/" + nameFile + "1.xlsx"));  //+ date.format(formatterData) + " - " + time.format(formatter)
             nameFileGlobal = nameFile + ".xlsx";//+ date.format(formatterData) + " - " + time.format(formatter) 
             workbook.write(out);
             out.close();
@@ -589,7 +589,7 @@ public class StepDef {
             Multipart multipart = new MimeMultipart();
 
             MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-            String filePath = nameFileGlobal;
+            String filePath = "result/" + nameFileGlobal;
             attachmentBodyPart.attachFile(filePath);
             multipart.addBodyPart(attachmentBodyPart);
             message.setContent(multipart);
