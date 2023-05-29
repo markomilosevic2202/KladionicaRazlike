@@ -3,3 +3,5 @@
 src/main
 result
 src/test/java/data
+target
+src/test/resources/json
