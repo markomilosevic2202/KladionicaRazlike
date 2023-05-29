@@ -50,18 +50,17 @@ Feature: Register
 #    And sort data en write in excel Meridian odds
 
   Scenario: Entering odds for mozzart
-#    Given go to the address "https://www.mozzartbet.com/sr/kladjenje-2018#/?sid=1"
-#    When click on the page mozzart button "Danas"
-#    When click on the page mozzart button football
-#    When wait for the whole page to load mozzart
-#    Then write match in document mozzart
-#    Given go to the address "https://www.orbitxch.com/customer/sport/1"
-#   When take all the matches according to the given criteria
-#    Then compare odds mozzart
-#    And sort data mozzart en write in excel
-#    Given go to the address "https://www.orbitxch.com/customer/sport/1"
-#    And clear list Mozzart
-#    And find all the opposite odds for ordinary mozzart match
+    Given go to the address "https://www.mozzartbet.com/sr/kladjenje-2018#/?sid=1"
+    When click on the page mozzart button "Danas"
+    When click on the page mozzart button football
+    When wait for the whole page to load mozzart
+    Then write match in document mozzart
+    Given go to the address "https://www.orbitxch.com/customer/sport/1"
+    When take all the matches according to the given criteria
+    Then compare odds mozzart
+    And sort data mozzart en write in excel
+    Given go to the address "https://www.orbitxch.com/customer/sport/1"
+    And clear list Mozzart
+    And find all the opposite odds for ordinary mozzart match
     And sort data en write in excel ordinary odds Mozzart
-     Then send email
-  #dfbdfbdfbdfbdfdsafcdsacdsadsafsda
+    Then send email
