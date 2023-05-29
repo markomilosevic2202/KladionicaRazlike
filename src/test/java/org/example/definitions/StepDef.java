@@ -101,6 +101,7 @@ public class StepDef {
         mozzart = new Mozzart(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         objectMapper = new ObjectMapper();
+        //pedja car
     }
 
     @After(order = 1)

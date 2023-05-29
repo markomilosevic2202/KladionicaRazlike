@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @SelectClasspathResource("features")
 
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-//@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,value = "json:target/json-report/cucumber.json")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,value = "json:target/json-report/cucumber.json")
 //mvn verify --fn
 public class RunCucumberTest {
 
