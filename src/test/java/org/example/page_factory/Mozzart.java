@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,6 +16,9 @@ public class Mozzart {
 
     @FindBy(xpath = "//span[contains(text(),'Fudbal')]")
     WebElement btnFootball;
+
+    @FindBy(xpath = "//*[contains(text(),'Sačuvaj i zatvori')]")
+    WebElement btnSave;
 
 
     WebDriver driver;
@@ -28,6 +32,10 @@ public class Mozzart {
         btnFootball.click();
 
     }
+    public void clickSave() {
+        btnSave.click();
+
+    }
 
     public void clickTime(String time) {
         Assertions.assertTrue(time.equals("1 sat") || time.equals("Danas") || time.equals("3 dana") || time.equals("Svi dani"),
@@ -37,13 +45,23 @@ public class Mozzart {
     }
 
     public void waitForPageToLoad() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement scrollBar = (WebElement) js.executeScript("return document.querySelector('body > div > div:nth-child(3) > div > div > div.slimScrollBar');");
-        boolean isScrollBarAtEnd = false;
-        Thread.sleep(5000);
 
-//        while (!isScrollBarAtEnd) {
-        for (int i = 0; i < 5; i++) {
+        WebElement element = driver.findElement(By.className("vb-dragger-styler"));
+
+        // Kreiraj JavaScriptExecutor
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Skrolovanje do kraja
+        js.executeScript("arguments[0].scrollTo(0, arguments[0].scrollHeight);", element);
+
+
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        WebElement scrollBar = (WebElement) js.executeScript("return document.querySelector('body > div > div:nth-child(3) > div > div > div.slimScrollBar');");
+//        boolean isScrollBarAtEnd = false;
+//        Thread.sleep(10000);
+//
+////        while (!isScrollBarAtEnd) {
+//        for (int i = 0; i < 5; i++) {
 
 
 //            js.executeScript("var divElement = document.getElementById(\"page-wrapper\");\n" +
@@ -66,11 +84,11 @@ public class Mozzart {
 //                    "  dodajNoviPodatak(noviPodatak);\n" +
 //                    "}, 2000);");
 
-            Thread.sleep(2000);
+            Thread.sleep(20000);
 
 
         }
-    }
+
 
 
     public List<Match> writeMatch() {

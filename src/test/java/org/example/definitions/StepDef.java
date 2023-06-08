@@ -92,7 +92,7 @@ public class StepDef {
         chromeOptions.addArguments(dataSetTest.getData9()); // Bypass OS security model
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().window().maximize();
         actions = new Actions(driver);
         maxBet = new MaxBet(driver);
@@ -126,10 +126,22 @@ public class StepDef {
 
     @Given("go to the address {string}")
     public void go_to_the_address(String address) {
-        // new WebDriverWait(driver, Duration.ofSeconds(30)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-        driver.get(address);
-        driver.navigate().refresh();
+            driver.get(address);
+            driver.navigate().refresh();
     }
+    @Given("go to the address mozzart {string}")
+    public void go_to_the_address_mozzart(String address) {
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(4));
+        try {
+            driver.get(address);
+            driver.navigate().refresh();
+        }
+        catch (Throwable t){
+
+        }
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+    }
+
 
 
     @When("choose which period you are watching {string}")
@@ -169,8 +181,8 @@ public class StepDef {
     }
 
     @When("click on the page meridian button football")
-    public void click_on_the_page_meridian_button_football() throws InterruptedException {
-        Thread.sleep(2000);
+    public void click_on_the_page_meridian_button_football()  {
+
         meridian.clickFootball();
     }
 
@@ -198,6 +210,15 @@ public class StepDef {
     public void wait_for_the_whole_page_to_load_mozzart() throws InterruptedException {
         mozzart.waitForPageToLoad();
     }
+    @When("click on the page mozzart button save")
+    public void click_on_the_page_mozzart_button_save() {
+        mozzart.clickSave();
+    }
+    @When("click on the page mozzart button cancle")
+    public void click_on_the_page_mozzart_button_cancle() {
+
+    }
+
 
 
     @Then("write all match in document")
